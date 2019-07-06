@@ -256,84 +256,24 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="MarkDown基本使用"><a href="#MarkDown基本使用" class="headerlink" title="MarkDown基本使用"></a>MarkDown基本使用</h2><h3 id="一、标题"><a href="#一、标题" class="headerlink" title="一、标题"></a>一、标题</h3><p>‘#’ 符号 + 空格 +  标题<br>      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 这是一级标题</span><br><span class="line">## 这是二级标题</span><br><span class="line">### 这是三级标题</span><br><span class="line">#### 这是四级标题</span><br><span class="line">##### 这是五级标题</span><br><span class="line">###### 这是六级标题</span><br></pre></td></tr></table></figure></p>
-<h3 id="二、字体"><a href="#二、字体" class="headerlink" title="二、字体"></a>二、字体</h3><ul>
-<li><p>斜体  </p>
-<p>要倾斜的文字左右分别用一个*号包起来</p>
-</li>
-<li><p>加粗  </p>
-<p>要加粗的文字左右分别用两个*号包起来</p>
-</li>
-<li><p>斜体加粗  </p>
-<p>要倾斜和加粗的文字左右分别用三个*号包起来</p>
-</li>
-<li><p>删除线  </p>
-<p>要加删除线的文字左右分别用两个~~号包起来</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">**这是加粗的文字**</span><br><span class="line">*这是倾斜的文字*`</span><br><span class="line">***这是斜体加粗的文字***</span><br><span class="line">~~这是加删除线的文字~~</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="三、引用"><a href="#三、引用" class="headerlink" title="三、引用"></a>三、引用</h3><p>在引用的文字前加&gt;即可。引用也可以嵌套，如加两个&gt;&gt;  三个&gt;&gt;&gt;</p>
-<blockquote>
-<p>一级引用</p>
-<blockquote>
-<p>二级引用</p>
-</blockquote>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;这是引用的内容</span><br><span class="line">&gt;&gt;这是引用的内容</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;这是引用的内容</span><br></pre></td></tr></table></figure>
-
-<h3 id="四、分割线"><a href="#四、分割线" class="headerlink" title="四、分割线"></a>四、分割线</h3><p>三个或者三个以上的 - 或者 * 都可以。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">----------------------</span><br><span class="line">**********************</span><br></pre></td></tr></table></figure>
-
-<hr>
-<hr>
-<h3 id="五、图片"><a href="#五、图片" class="headerlink" title="五、图片"></a>五、图片</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">![图片alt](图片地址 &apos;&apos;图片title&apos;&apos;)</span><br><span class="line"></span><br><span class="line">图片alt就是显示在图片下面的文字，相当于对图片内容的解释。</span><br><span class="line">图片title是图片的标题，当鼠标移到图片上时显示的内容。title可加可不加</span><br><span class="line"></span><br><span class="line">实例：</span><br><span class="line">  ！[&quot;测试图片&quot;](test.jpg)</span><br></pre></td></tr></table></figure>
-
-<p>  ！<a href="test.jpg">“测试图片”</a></p>
-<h3 id="六、超链接"><a href="#六、超链接" class="headerlink" title="六、超链接"></a>六、超链接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[超链接名](超链接地址 &quot;超链接title&quot;)</span><br><span class="line">title可加可不加</span><br><span class="line"></span><br><span class="line">实例：</span><br><span class="line"></span><br><span class="line">[百度](http://baidu.com)</span><br></pre></td></tr></table></figure>
-
-<p><a href="http://baidu.com" target="_blank" rel="noopener">百度</a></p>
-<h3 id="七、列表"><a href="#七、列表" class="headerlink" title="七、列表"></a>七、列表</h3><ul>
-<li>无序列表  </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- 列表内容</span><br><span class="line">+ 列表内容</span><br><span class="line">* 列表内容</span><br><span class="line"></span><br><span class="line">注意：- + * 跟内容之间都要有一个空格</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>有序列表</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.列表内容</span><br><span class="line">2.列表内容</span><br><span class="line">3.列表内容</span><br><span class="line"></span><br><span class="line">注意：序号跟内容之间要有空格</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>列表内容  </li>
-<li>列表内容</li>
-<li>列表内容</li>
-</ol>
-<ul>
-<li>列表嵌套</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">上一级和下一级之间敲三个空格即可</span><br></pre></td></tr></table></figure>
-
-<h3 id="八、表格"><a href="#八、表格" class="headerlink" title="八、表格"></a>八、表格</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">表头|表头|表头</span><br><span class="line">---|:--:|---:</span><br><span class="line">内容|内容|内容</span><br><span class="line">内容|内容|内容</span><br><span class="line"></span><br><span class="line">第二行分割表头和内容。</span><br><span class="line">- 有一个就行，为了对齐，多加了几个</span><br><span class="line">文字默认居左</span><br><span class="line">-两边加：表示文字居中</span><br><span class="line">-右边加：表示文字居右</span><br><span class="line">注：原生的语法两边都要用 | 包起来。此处省略</span><br></pre></td></tr></table></figure>
-
-<h3 id="九、代码"><a href="#九、代码" class="headerlink" title="九、代码"></a>九、代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(```java)</span><br><span class="line">(```)</span><br><span class="line"></span><br><span class="line">注：为了防止转义，加了小括号。</span><br></pre></td></tr></table></figure>
-
-
+              MarkDown
+          
       
     </div>
     
     <div class="article-info article-info-index">
       
       
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/markdown/">markdown</a>
-    </div>
-
 
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/">markdown</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a href="/2019/07/05/markdown1/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
