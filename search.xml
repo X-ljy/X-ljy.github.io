@@ -4,13 +4,27 @@
   
     
     <entry>
-      <title>test1</title>
+      <title>test</title>
       <link href="/2019/07/05/test/"/>
       <url>/2019/07/05/test/</url>
       
         <content type="html"><![CDATA[<p>test 11111111111111111111111111111111111111111<br>dsvbvsbd<br>bsd<br>bsddf<br>b</p>]]></content>
       
       
+      <categories>
+          
+          <category> Hexo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> go </tag>
+            
+            <tag> 编程语言 </tag>
+            
+        </tags>
       
     </entry>
     
