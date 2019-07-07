@@ -918,10 +918,10 @@ a {
   content: '\f003';
 }
 #header .header-nav .social .GitHub {
-  background: ;
+  background: #000;
 }
 #header .header-nav .social .GitHub::before {
-  content: '\120';
+  content: '\f09b';
 }
 #header .header-nav .social .Facebook {
   background: #3b5998;
