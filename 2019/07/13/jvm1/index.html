@@ -15,13 +15,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="夕的博客">
-<meta property="og:url" content="https://x-ljy.github.io/archives/index.html">
+<meta name="description" content="jvm初识">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM基本概念">
+<meta property="og:url" content="https://x-ljy.github.io/2019/07/13/jvm1/index.html">
 <meta property="og:site_name" content="夕的博客">
+<meta property="og:description" content="jvm初识">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-14T08:02:07.313Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="夕的博客">
+<meta name="twitter:title" content="JVM基本概念">
+<meta name="twitter:description" content="jvm初识">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -53,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Archives | 夕的博客</title>
+<title>JVM基本概念 | 夕的博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -63,8 +68,8 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
-        isArchive: true,
+        isPost: true,
+        isArchive: false,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -198,133 +203,210 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-jvm1" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
+    <div class="article-meta">
       
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              
-<a href="/2019/07/13/jvm1/" class="archive-article-date">
-      <time datetime="2019-07-13T07:29:14.000Z" itemprop="datePublished">07-13</time>
+<a href="/2019/07/13/jvm1/" class="article-date">
+      <time datetime="2019-07-13T07:29:14.000Z" itemprop="datePublished">2019-07-13</time>
 </a>
 
 
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/13/jvm1/">JVM基本概念</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JVM基本概念
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
+		
+			<div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">522字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+		
+      </header>
+	  
+      
+      <div class="article-entry article-info-post">
+        
     <div class="article-category tagcloud">
     <a class="article-category-link" href="/categories/Java/">Java</a>
     </div>
 
 
-          
+        
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li></ul>
     </div>
 
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+      </div>
+      
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              
-<a href="/2019/07/06/docker01/" class="archive-article-date">
-      <time datetime="2019-07-06T07:38:02.000Z" itemprop="datePublished">07-06</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/06/docker01/">docker学习(一)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
+    <div class="article-entry" itemprop="articleBody">
+      
           
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Docker/">Docker</a>
+        <p><strong>一、什么是JVM</strong>  </p>
+<p>JVM(Java Virtual Machine) ,中文名java虚拟机，是由软件技术模拟出计算机运行的一个虚拟计算机。</p>
+<p>java程序经过编译后，产生 .class 文件， jvm 才能识别并运行它，jvm 针对每个操作系统开发出对应的编译器，所以只要其操作系统有对应版本的jvm，那么java程序便能运行起来，这是java可以一次编译，到处运行的原因。</p>
+<p><strong>二、JVM基本概念</strong></p>
+<p>jvm基本结构如下:  </p>
+<p> ![jvm基本结构]{jvm1.png}</p>
+<p> 说明：方法区：线程共享的，用于存放被虚拟机加载的类的元数据信息：如常量、静态变量、即时编译器编译后的代码。也称之为永久代，有一个别名叫做Non-Heap（非堆）。  </p>
+<p>在JDK8中，永久代已经被移除，被一个称为“元数据区”（元空间）的区域取代。元空间的本质和永久代类似，都是对jvm规范中方法区的实现。不过元空间与永久代之间最大的区别在于：元空间并不在于虚拟机中，而是使用本地内存。因此，默认情况下，元空间的大小仅受本地内存限制。类的元数据放入元空间，字符串和类的静态变量放入java堆中，这样可以加载多少类的元数据就不再由MaxPermSize控制，而由系统实际可用空间控制。</p>
+<p>采用元空间代替永久代的原因：  </p>
+<ol>
+<li>字符串存在永久代中，容易出现性能和内存溢出。</li>
+<li>类及方法的信息等比较难确定其大小，因此对于永久代的大小指定比较困难，太小容易出现永久代溢出，太大容易导致老年代溢出（因为堆内存有限，此消彼长）</li>
+<li>永久代会为GC带来不必要的复杂度，并且回收效率低。</li>
+</ol>
+<p><strong>三、JVM体系</strong></p>
+<ul>
+<li>类的加载机制</li>
+<li>jvm内存结构</li>
+<li>GC算法 垃圾回收</li>
+<li>GC分析 命令调优</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/07/13/jvm1/">JVM基本概念</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
+        <p><span>发布时间:</span>2019-07-13, 15:29:14</p>
+        <p><span>最后更新:</span>2019-07-14, 16:02:07</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/13/jvm1/" title="JVM基本概念">https://x-ljy.github.io/2019/07/13/jvm1/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/13/jvm1/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
     </div>
 
 
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li></ul>
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/07/06/docker01/">
+                    docker学习(一)
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"JVM基本概念　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/07/06/docker01/" title="下一篇: docker学习(一)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
     </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              
-<a href="/2019/07/05/markdown1/" class="archive-article-date">
-      <time datetime="2019-07-05T14:59:31.000Z" itemprop="datePublished">07-05</time>
-</a>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/jvm1/">JVM基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/docker01/">docker学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
 
 
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/05/markdown1/">MarkDown的基本使用</a>
-    </h1>
-  
 
-        <div class="article-info info-on-archive">
-          
 
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/">markdown</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
