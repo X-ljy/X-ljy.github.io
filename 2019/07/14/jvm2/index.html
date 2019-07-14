@@ -15,18 +15,20 @@
 
 
 
-<meta name="description" content="docker基础指令">
-<meta name="keywords" content="Docker">
+<meta name="description" content="JVM内存结构">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="docker学习(一)">
-<meta property="og:url" content="https://x-ljy.github.io/2019/07/06/docker01/index.html">
+<meta property="og:title" content="JVM系列（二）">
+<meta property="og:url" content="https://x-ljy.github.io/2019/07/14/jvm2/index.html">
 <meta property="og:site_name" content="夕的博客">
-<meta property="og:description" content="docker基础指令">
+<meta property="og:description" content="JVM内存结构">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-06T09:28:27.466Z">
+<meta property="og:image" content="https://x-ljy.github.io/2019/07/14/jvm2/jvm2.png">
+<meta property="og:updated_time" content="2019-07-14T12:14:08.503Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="docker学习(一)">
-<meta name="twitter:description" content="docker基础指令">
+<meta name="twitter:title" content="JVM系列（二）">
+<meta name="twitter:description" content="JVM内存结构">
+<meta name="twitter:image" content="https://x-ljy.github.io/2019/07/14/jvm2/jvm2.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -58,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>docker学习(一) | 夕的博客</title>
+<title>JVM系列（二） | 夕的博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -203,12 +205,12 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-docker01" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-jvm2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       
-<a href="/2019/07/06/docker01/" class="article-date">
-      <time datetime="2019-07-06T07:38:02.000Z" itemprop="datePublished">2019-07-06</time>
+<a href="/2019/07/14/jvm2/" class="article-date">
+      <time datetime="2019-07-14T08:39:22.000Z" itemprop="datePublished">2019-07-14</time>
 </a>
 
 
@@ -223,7 +225,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      docker学习(一)
+      JVM系列（二）
     </h1>
   
 
@@ -233,7 +235,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">0字</span>
+        <span class="post-count">771字</span>
       </span>
     </span>
 
@@ -242,7 +244,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count">2分</span>
       </span>
     </span>
 </div>
@@ -253,13 +255,13 @@
       <div class="article-entry article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Docker/">Docker</a>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -269,7 +271,16 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <p><strong>经典JVM内存布局（JDK8以上）</strong>  </p>
+<p><img src="//x-ljy.github.io/2019/07/14/jvm2/jvm2.png" alt="经典JVM布局"></p>
+<p><strong>一、Heap（堆区）</strong>  </p>
+<p><strong>Heap存储着几乎所有的实例对象，堆由垃圾收集器自动回收，堆区由各个子线程共享使用。</strong> 通常情况下，它占用的空间是所有内存区域中最大的，同时也是OOM（Out Of Memory）故障最主要的发源地。  </p>
+<p>堆的内存空间既可以固定大小，也可以在运行时动态地调整。  </p>
+<p>通过如下参数设置初始值和最大值，比如-Xms256M -Xmx1024M （-X表示它是JVM运行参数，ms是memory start（最小堆容量）的简称，mx是memory max（最大堆容量）的简称）。由于服务器在不断运行过程中，堆空间不断地扩容与回缩，势必形成不必要的系统压力，所以在线上生产环境中，JVM的Xms Xmx 设置成一样大小，避免在GC调整堆大小时带来的额外压力。</p>
+<p><strong>堆分为两大块：新生代和老年代。</strong> 对象产生之初在新生代，步入暮年进入老年代，但是老年代也接纳在新生代无法容纳的超大对象。  </p>
+<p><strong>新生代 = 1个Eden区 + 2个Survivor区。</strong> 绝大部分对象在Eden区生成，当Eden区填满的时候，后触发Young Garbage Collection（YGC）。垃圾回收的时候在Eden区实现清除策略，没有被引用的对象则直接回收。仍然存活的对象会被移送到Survivor区。Survivor区被分为S0和S1两块内存空间，每次YGC的时候，他们将存活的对象复制到未使用那块空间，然后将当前正在使用的空间完全清除，交换两块空间的使用状态。如果YGC要移送的对象大于Survivor区容量的上限，则直接移交给老年代。<br><strong>每个对象都有一个计数器，每次YGC都会加1。-XX:MaxTenuringThreshold参数能配置计数器的值到达某个阈值的时候，对象从新生代晋升到老年代。默认值是15，可以在Survivor区交换14次之后，晋升至老年代。</strong> 如果参数配置为1，那么从新生代的Eden区直接移至老年代。<br>如果Survivor区无法放下，或者超大对象的阈值超过上限，则尝试在老年代进行分配；如果老年代也无法放下，则会触发Full Garbage Collection，即FGC。如果依然无法放下，则抛出OOM。可设置参数 -XX:+HeapDumpOnOutOfMemoryError,让JVM遇到OOM时输出堆内信息。  </p>
+<p><strong>二、Metaspace(元空间)</strong><br>元空间的前身为永久代（Perm），在JDK8之后被淘汰，在JDK7及之前的版本中，只有Hotspot才有Perm区，译为永久代，它在启动的时候固定大小，很难进行调优，并且FGC时会移动类元信息。<br>区别于永久代，元空间在本地内存中分配。在JDK8里，Perm区中的所有内容中  字符串常量移至堆内存，其他内容包括类元信息，字段，静态属性，方法，常量等移动至元空间内。</p>
+
       
     </div>
     
@@ -277,13 +288,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/07/06/docker01/">docker学习(一)</a></p>
+        <p><span>本文标题:</span><a href="/2019/07/14/jvm2/">JVM系列（二）</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
-        <p><span>发布时间:</span>2019-07-06, 15:38:02</p>
-        <p><span>最后更新:</span>2019-07-06, 17:28:27</p>
+        <p><span>发布时间:</span>2019-07-14, 16:39:22</p>
+        <p><span>最后更新:</span>2019-07-14, 20:14:08</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/07/06/docker01/" title="docker学习(一)">https://x-ljy.github.io/2019/07/06/docker01/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/06/docker01/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/14/jvm2/" title="JVM系列（二）">https://x-ljy.github.io/2019/07/14/jvm2/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/14/jvm2/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -295,16 +306,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/07/13/jvm1/">
-                    JVM系列（一）
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/07/05/markdown1/">
-                    MarkDown的基本使用
+                <a href="/2019/07/13/jvm1/">
+                    JVM系列（一）
                 </a>
             </div>
         
@@ -352,7 +357,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"docker学习(一)　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"JVM系列（二）　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -372,15 +377,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/07/13/jvm1/" title="上一篇: JVM系列（一）">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/07/05/markdown1/" title="下一篇: MarkDown的基本使用">
+            <a href="/2019/07/13/jvm1/" title="下一篇: JVM系列（一）">
                 <i class="fa fa-angle-right"></i>
             </a>
         

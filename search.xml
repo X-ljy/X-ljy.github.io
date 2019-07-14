@@ -4,7 +4,32 @@
   
     
     <entry>
-      <title>JVM基本概念</title>
+      <title>JVM系列（二）</title>
+      <link href="/2019/07/14/jvm2/"/>
+      <url>/2019/07/14/jvm2/</url>
+      
+        <content type="html"><![CDATA[<p><strong>经典JVM内存布局（JDK8以上）</strong>  </p><p><img src="//x-ljy.github.io/2019/07/14/jvm2/jvm2.png" alt="经典JVM布局"></p><p><strong>一、Heap（堆区）</strong>  </p><p><strong>Heap存储着几乎所有的实例对象，堆由垃圾收集器自动回收，堆区由各个子线程共享使用。</strong> 通常情况下，它占用的空间是所有内存区域中最大的，同时也是OOM（Out Of Memory）故障最主要的发源地。  </p><p>堆的内存空间既可以固定大小，也可以在运行时动态地调整。  </p><p>通过如下参数设置初始值和最大值，比如-Xms256M -Xmx1024M （-X表示它是JVM运行参数，ms是memory start（最小堆容量）的简称，mx是memory max（最大堆容量）的简称）。由于服务器在不断运行过程中，堆空间不断地扩容与回缩，势必形成不必要的系统压力，所以在线上生产环境中，JVM的Xms Xmx 设置成一样大小，避免在GC调整堆大小时带来的额外压力。</p><p><strong>堆分为两大块：新生代和老年代。</strong> 对象产生之初在新生代，步入暮年进入老年代，但是老年代也接纳在新生代无法容纳的超大对象。  </p><p><strong>新生代 = 1个Eden区 + 2个Survivor区。</strong> 绝大部分对象在Eden区生成，当Eden区填满的时候，后触发Young Garbage Collection（YGC）。垃圾回收的时候在Eden区实现清除策略，没有被引用的对象则直接回收。仍然存活的对象会被移送到Survivor区。Survivor区被分为S0和S1两块内存空间，每次YGC的时候，他们将存活的对象复制到未使用那块空间，然后将当前正在使用的空间完全清除，交换两块空间的使用状态。如果YGC要移送的对象大于Survivor区容量的上限，则直接移交给老年代。<br><strong>每个对象都有一个计数器，每次YGC都会加1。-XX:MaxTenuringThreshold参数能配置计数器的值到达某个阈值的时候，对象从新生代晋升到老年代。默认值是15，可以在Survivor区交换14次之后，晋升至老年代。</strong> 如果参数配置为1，那么从新生代的Eden区直接移至老年代。<br>如果Survivor区无法放下，或者超大对象的阈值超过上限，则尝试在老年代进行分配；如果老年代也无法放下，则会触发Full Garbage Collection，即FGC。如果依然无法放下，则抛出OOM。可设置参数 -XX:+HeapDumpOnOutOfMemoryError,让JVM遇到OOM时输出堆内信息。  </p><p><strong>二、Metaspace(元空间)</strong><br>元空间的前身为永久代（Perm），在JDK8之后被淘汰，在JDK7及之前的版本中，只有Hotspot才有Perm区，译为永久代，它在启动的时候固定大小，很难进行调优，并且FGC时会移动类元信息。<br>区别于永久代，元空间在本地内存中分配。在JDK8里，Perm区中的所有内容中  字符串常量移至堆内存，其他内容包括类元信息，字段，静态属性，方法，常量等移动至元空间内。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JVM </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JVM系列（一）</title>
       <link href="/2019/07/13/jvm1/"/>
       <url>/2019/07/13/jvm1/</url>
       
