@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Git基本操作</title>
+      <link href="/2019/07/20/git/"/>
+      <url>/2019/07/20/git/</url>
+      
+        <content type="html"><![CDATA[<h2 id="一、基本操作"><a href="#一、基本操作" class="headerlink" title="一、基本操作"></a>一、基本操作</h2><p><strong>1. 仓库操作</strong></p><ul><li>git init   (创建一个Git仓库)</li><li>git clone [url]  （拷贝一个git仓库到本地）</li></ul><blockquote><p>工作流 ：<br>本地仓库由git维护的三棵“树”组成。第一个是你的工作目录，它持有实际文件；第二个是缓存区（Index）,它像个缓存区域，临时保存你的改动；最后是HEAD，指向你最近一次提交后的结果。  </p></blockquote><p><strong>2. 将文件添加到缓存区</strong></p><ul><li><p>git add [filename]  </p></li><li><p>git add .  </p><p>不加参数默认为将修改操作的文件和未跟踪新添加的文件添加到git系统的暂存区，注意不包括删除</p></li><li><p>git add -u .  </p><p>-u  == –update ，表示将已跟踪文件中的修改和删除的文件添加到暂存区，不包括新增加的文件，注意这些被删除的文件被加入到暂存区再被提交并推送到服务器的版本库之后这个文件就会从git系统中消失了。</p></li><li><p>git add -A .  </p><p>-A == –all  ， 表示将所有的已跟踪的文件的修改与删除和新增的未跟踪的文件都添加到暂存区。  </p></li></ul><p><strong>3. 将改动提交到 HEAD，但是不到远端仓库</strong>  </p><ul><li>git commit -m “代码提交信息”</li></ul><p><strong>4. 推送改动</strong></p><ul><li><p>git push origin master  </p><p>git commit 之后，你的改动已经在本地仓库的HEAD中了，执行此上命令，可提交至远端仓库，master 可换成你想推送的任何分支。</p></li><li><p>git remote add origin [url]  </p><p>使用此命令可将你的仓库连接到某个远程服务器，此后你就可以将改动推送到添加的服务器中了。</p></li></ul><p><strong>5. 分支</strong></p><ul><li><p>git checkout -b [分支名称]  </p><p>新建分支并切换到该分支</p></li><li><p>git checkout master<br>切换到指定分支  </p></li><li><p>git branch -d [分支命称]<br>将新建分支删掉  </p></li></ul><p><strong>6. 更新与合并</strong>  </p><ul><li><p>git pull<br>按照git branch 设置的默认跟踪的服务器和分支来拉取  </p></li><li><p>git pull origin master<br>拉取远程服务器origin 的master分支  </p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>JVM系列（二）</title>
       <link href="/2019/07/14/jvm2/"/>
       <url>/2019/07/14/jvm2/</url>
