@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="docker基础指令">
+<meta name="description" content="Dockerfile基础指令">
 <meta name="keywords" content="Docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker学习(一)">
 <meta property="og:url" content="https://x-ljy.github.io/2019/07/06/docker01/index.html">
 <meta property="og:site_name" content="夕的博客">
-<meta property="og:description" content="docker基础指令">
+<meta property="og:description" content="Dockerfile基础指令">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-20T02:44:30.865Z">
+<meta property="og:updated_time" content="2019-07-21T00:58:24.870Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker学习(一)">
-<meta name="twitter:description" content="docker基础指令">
+<meta name="twitter:description" content="Dockerfile基础指令">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">0字</span>
+        <span class="post-count">621字</span>
       </span>
     </span>
 
@@ -242,7 +242,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count">2分</span>
       </span>
     </span>
 </div>
@@ -269,7 +269,26 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <p><strong>一、Dockerfile简介</strong>  </p>
+<p>  Dockfile是一种被Docker程序解释的脚本，Dockerfile由一条一条的指令组成，每条指令对应Linux下面的一条命令，Docker程序将这些Dockerfile指令翻译真正的Linux命令；Dockerfile有自己书写格式和支持的命令，Docker程序解决这些命令间的依赖关系，类似于Makefile，Docker程序将读取Dockerfile，根据指令生成定制的image。</p>
+<p>  Dockerfile的指令是忽略大小写的，建议使用大写，使用#作为注释，每一行只支持一条指令，每条指令可以携带多个参数。</p>
+<p>  Dockerfile 是一个文本文件，其内包含了一条条的指令(Instruction)，每一条指令构建一层， 因此每一条指令的内容，就是描述该层应当如何构建。  </p>
+<p><strong>二、dockerfile指令详解</strong>   </p>
+<p><strong>1. FROM</strong>  </p>
+<p>  功能为指定基础镜像，并且必须是第一条指令。  </p>
+<p>  除了选择现有镜像为基础镜像外，Docker 还存在一个特殊的镜像，名为scratch。这个镜像 是虚拟的概念，并不实际存在，它表示一个空白的镜像。<br>  如果你以scratch为基础镜像的话，意味着你不以任何镜像为基础，接下来所写的指令将作为镜像第一层开始构建。  </p>
+<p>  不以任何系统为基础，直接将可执行文件复制进镜像的做法并不罕见，比如swarm、coreos/etcd 。对于Linux 下静态编译的程序来说，并不需要有操作系统提供运行时支持，所需的一切库都已经在可执行文件里了，因此直接 FROM scratch 会让镜像体积更加小 巧。使用Go语言开发的应用很多会使用这种方式来制作镜像，这也是为什么有人认为 Go 是特别适合容器微服务架构的语言的原因之一。</p>
+<p><strong>2. RUN</strong>  </p>
+<p>  用来执行命令行命令  </p>
+<ul>
+<li><p>shell格式：RUN &lt;命令&gt; ，就像直接在命令行中输入的命令一样  </p>
+</li>
+<li><p>exec格式：RUN [“可执行文件”, “参数1”, “参数2”]，这更像是函数调用中的格式  </p>
+<p>使用 &amp;&amp; 符连接多个命令； \ 符进行换行。</p>
+<p>为防止镜像臃肿，一定要确保每一层只添加真正需要添加的东西，任何无关的东西都应该清理掉（编译构建所需要的软件，所有下载、展开的文件，apt缓存文件等）。  </p>
+</li>
+</ul>
+
       
     </div>
     
@@ -280,7 +299,7 @@
         <p><span>本文标题:</span><a href="/2019/07/06/docker01/">docker学习(一)</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-07-06, 15:38:02</p>
-        <p><span>最后更新:</span>2019-07-20, 10:44:30</p>
+        <p><span>最后更新:</span>2019-07-21, 08:58:24</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/07/06/docker01/" title="docker学习(一)">https://x-ljy.github.io/2019/07/06/docker01/</a>
             <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/06/docker01/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
