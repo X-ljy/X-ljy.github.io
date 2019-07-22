@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="夕的博客">
 <meta property="og:description" content="Dockerfile基础指令">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-22T02:18:43.737Z">
+<meta property="og:updated_time" content="2019-07-22T03:31:39.739Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker学习(一)">
 <meta name="twitter:description" content="Dockerfile基础指令">
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.5k字</span>
+        <span class="post-count">2.3k字</span>
       </span>
     </span>
 
@@ -242,7 +242,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">5分</span>
+        <span class="post-count">8分</span>
       </span>
     </span>
 </div>
@@ -323,8 +323,56 @@
 <p><strong>7. ENV</strong>  </p>
 <ol>
 <li>ENV &lt;键&gt; &lt;值&gt;</li>
-<li>ENV <key>=<value> …  </value></key></li>
+<li>ENV &lt;键&gt;=&lt;值&gt; …  </li>
 </ol>
+<p>两者的区别就是第一种是一次设置一个，第二种是一次设置多个  </p>
+<p>下列指令可以支持环境变量展开：<br><strong>ADD、COPY 、ENV、EXPOSE 、LABEL 、USER 、WORKDIR 、VOLUME 、STOPSIGNAL、ONBU ILD</strong>  </p>
+<p><strong>使用环境变量方式： $环境变量</strong>  </p>
+<p><strong>8. COPY</strong></p>
+<p>将从构建上下文目录中&lt;源路径&gt;的文件或者目录复制到新的一层的镜像内的&lt;目标路径&gt;位置。<br>&lt;目标路径&gt;可以是容器内的绝对路径，也可以是相对于工作目录的相对路径（工作目录可以用WORKDIR指令来指定）。目标路径不需要事先创建，如果目录不存在会在复制文件前先行创建缺失目录。  </p>
+<p>此外，还需要注意一点，使用COPY指令，源文件的各种元数据都会保留。比如读、写、执 行权限、文件变更时间等。这个特性对于镜像定制很有用。特别是构建相关文件都在使用Git 进行管理的时候。  </p>
+<ul>
+<li>COPY：&lt;源路径&gt;… &lt;目标路径&gt;   </li>
+<li>COPY： [“&lt;源路径1&gt;”,… “&lt;目标路径&gt;”]</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">COPY src1 \</span><br><span class="line">     src2 \</span><br><span class="line">     WORKDIR/</span><br></pre></td></tr></table></figure>
+
+<p>执行上述操作会发现将src1 src2 下的文件全部复制到WORKDIR下，并没有复制目录src1 src2，官方对于COPY解释是：</p>
+<blockquote>
+<p>Note: The directory itself is not copied, just its contents.</p>
+</blockquote>
+<p>即：COPY指令拷贝一个文件夹只会拷贝文件夹的内容。  </p>
+<p>上述指令可以这样写：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">COPY src1 \</span><br><span class="line">     src2 \</span><br><span class="line">     WORKDIR/src</span><br></pre></td></tr></table></figure>
+
+<p>这样将COPY的文件，放在了新创建的src目录下。  </p>
+<p><strong>9. ADD</strong>  </p>
+<p>ADD指令和COPY的格式和性质基本一致，不过&lt;源文件&gt;可以是一个URL,同时如果源文件是一个压缩文件，ADD会自动执行解压缩。  </p>
+<p>因此在COPY 和ADD指令中选择的时候，可以遵循这样的原则，所有的文件复制均使用COPY指令，仅在需要自动解压缩的场合使用ADD 。  </p>
+<p><strong>10. VOLUME</strong>  </p>
+<ul>
+<li>VOLUME [“&lt;路径1&gt;”, “&lt;路径2&gt;”…]   </li>
+</ul>
+<p>容器运行时应该尽量保持容器存储层不发生写操作，对于数据库类需要保存 动态数据的应用，其数据库文件应该保存于卷(volume)中。  </p>
+<p>为了防止运行时用户忘记将动态文件所保存目录挂载为卷，在 Dockerfile中，我们可以事先指定某些目录挂载为匿名卷，这样在运行时如果用户不指定挂载，其应用也可以正常运行，不会向容器存储层写入大量数据。  </p>
+<p><strong>如何使用：</strong><br>在Dockerfile中定义匿名卷，运行容器时，使用参数 <strong>-v 宿主机目录:匿名卷</strong>  进行挂载，实现了数据持久化。  </p>
+<p><strong>11. WORKDIR</strong>  </p>
+<ul>
+<li>WORKDIR &lt;工作目录路径&gt;   </li>
+</ul>
+<p>使用WORKDIR指令可以来指定工作目录（或者称为当前目录），以后各层的当前目录就被改为指定的目录，如该目录不存在，WORKDIR 会帮你建立目录。  </p>
+<p>可以使用多个 WORKDIR 指令，后续命令如果参数是相对路径，则会基于之前命令指定的路径。  </p>
+<pre><code>WORKDIR /a
+WORKDIR b
+WORKDIR c
+RUN pwd  
+
+则最终路径为 /a/b/c。</code></pre><p><strong>12. USER</strong></p>
+<ul>
+<li>USER &lt;用户名&gt;   </li>
+</ul>
+<p>USER是改变之后层的执行RUN ,CMD以及ENTRYPOINT这类命令的身份。USER只是帮助你切换到指定用户而已，这个用户必须是事先建立好的，否则无法切换。  </p>
+<p><strong>13. ONBUILD</strong>  </p>
 
       
     </div>
@@ -336,7 +384,7 @@
         <p><span>本文标题:</span><a href="/2019/07/06/docker01/">docker学习(一)</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-07-06, 15:38:02</p>
-        <p><span>最后更新:</span>2019-07-22, 10:18:43</p>
+        <p><span>最后更新:</span>2019-07-22, 11:31:39</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/07/06/docker01/" title="docker学习(一)">https://x-ljy.github.io/2019/07/06/docker01/</a>
             <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/06/docker01/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
