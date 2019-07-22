@@ -24,7 +24,7 @@
 <meta property="og:description" content="JVM内存结构">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://x-ljy.github.io/2019/07/14/jvm2/jvm2.png">
-<meta property="og:updated_time" content="2019-07-21T05:35:18.043Z">
+<meta property="og:updated_time" content="2019-07-21T05:42:35.883Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM系列（二）">
 <meta name="twitter:description" content="JVM内存结构">
@@ -300,7 +300,8 @@
 </ul>
 <p><strong>四、本地方法栈</strong>  </p>
 <p>本地方法栈在JVM内存布局中，也是线程对象私有的，但是虚拟机栈“主内”，而本地方法栈“主外”。本地方法栈为Native方法服务。<br>线程开始调用本地方法时，会进入一个不再受JVM约束的世界。本地方法可以通过JNI(Java Native Interface)来访问虚拟机运行时的数据区，甚至可以调用寄存器，具有和JVM相同的能力和权限。当大量本地方法出现时，势必会削弱JVM对系统的控制力，因为他的出错信息比较黑盒。对于内存不足的情况，本地方法栈还是会抛出native heap OutOfMemory。  </p>
-<p><strong>五、程序计数器（Program Counter Register，PC）</strong><br>  每个线程创建后，都会产生自己的程序计数器和栈帧，程序计数器都用来存放执行指令的偏移量和行号指示器等，线程执行和恢复都要依赖程序计数器。程序计数器在各个线程之间互不影响，此区域也不会发生内存溢出异常。  </p>
+<p><strong>五、程序计数器（Program Counter Register，PC）</strong>  </p>
+<p>  每个线程创建后，都会产生自己的程序计数器和栈帧，程序计数器都用来存放执行指令的偏移量和行号指示器等，线程执行和恢复都要依赖程序计数器。程序计数器在各个线程之间互不影响，此区域也不会发生内存溢出异常。  </p>
 <p><strong>从线程共享的角度来看，堆和元空间是所有线程共享的，而虚拟机栈、本地方法栈、程序计数器是线程内部私有的。</strong></p>
 
       
@@ -313,7 +314,7 @@
         <p><span>本文标题:</span><a href="/2019/07/14/jvm2/">JVM系列（二）</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-07-14, 16:39:22</p>
-        <p><span>最后更新:</span>2019-07-21, 13:35:18</p>
+        <p><span>最后更新:</span>2019-07-21, 13:42:35</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/07/14/jvm2/" title="JVM系列（二）">https://x-ljy.github.io/2019/07/14/jvm2/</a>
             <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/14/jvm2/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
