@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="夕的博客">
 <meta property="og:description" content="Dockerfile基础指令">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-22T03:31:39.739Z">
+<meta property="og:updated_time" content="2019-07-22T03:54:28.458Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker学习(一)">
 <meta name="twitter:description" content="Dockerfile基础指令">
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.3k字</span>
+        <span class="post-count">2.5k字</span>
       </span>
     </span>
 
@@ -373,6 +373,10 @@ RUN pwd
 </ul>
 <p>USER是改变之后层的执行RUN ,CMD以及ENTRYPOINT这类命令的身份。USER只是帮助你切换到指定用户而已，这个用户必须是事先建立好的，否则无法切换。  </p>
 <p><strong>13. ONBUILD</strong>  </p>
+<ul>
+<li>ONBUILD &lt;其它指令&gt;   </li>
+</ul>
+<p>ONBUILD是一个特殊的指令，它后面跟的是其它指令，比如RUN ,COPY等，而这些指令，在当前镜像构建时并不会被执行。只有当以当前镜像为基础镜像，去构建下一级镜像的时候才会被执行。<br>Dockerfile中的其它指令都是为了定制当前镜像而准备的，唯有ONBUILD是为了帮助别人定制自己而准备的。</p>
 
       
     </div>
@@ -384,7 +388,7 @@ RUN pwd
         <p><span>本文标题:</span><a href="/2019/07/06/docker01/">docker学习(一)</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-07-06, 15:38:02</p>
-        <p><span>最后更新:</span>2019-07-22, 11:31:39</p>
+        <p><span>最后更新:</span>2019-07-22, 11:54:28</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/07/06/docker01/" title="docker学习(一)">https://x-ljy.github.io/2019/07/06/docker01/</a>
             <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/06/docker01/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
