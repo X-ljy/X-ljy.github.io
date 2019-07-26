@@ -4,20 +4,32 @@
   
     
     <entry>
-      <title></title>
+      <title>docker学习(三)</title>
       <link href="/2019/07/26/docker03/"/>
       <url>/2019/07/26/docker03/</url>
       
-        <content type="html"><![CDATA[<hr><p>title: docker学习(三)<br>categories: Docker<br>date: 2019-07-26 10:50:58<br>tags: [Docker]</p><h2 id="description-“Docker-网络详解”"><a href="#description-“Docker-网络详解”" class="headerlink" title="description: “Docker 网络详解”"></a>description: “Docker 网络详解”</h2><h2 id="Docker-网络详解"><a href="#Docker-网络详解" class="headerlink" title="Docker 网络详解"></a>Docker 网络详解</h2>]]></content>
+        <content type="html"><![CDATA[<p>title: docker学习(三)<br>categories: Docker<br>date: 2019-07-26 10:50:58<br>tags: [Docker]<br>description: “Docker 网络详解”</p><h2 id="Docker-网络详解"><a href="#Docker-网络详解" class="headerlink" title="Docker 网络详解"></a>Docker 网络详解</h2>]]></content>
       
       
+      <categories>
+          
+          <category> Docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Docker </tag>
+            
+        </tags>
       
     </entry>
     
     
     
     <entry>
-      <title>mysql01</title>
+      <title>k8s学习(一)</title>
       <link href="/2019/07/24/k8s001/"/>
       <url>/2019/07/24/k8s001/</url>
       
@@ -26,14 +38,14 @@
       
       <categories>
           
-          <category> 数据库 </category>
+          <category> Kubernetes </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> mysql </tag>
+            <tag> Kubernetes </tag>
             
         </tags>
       

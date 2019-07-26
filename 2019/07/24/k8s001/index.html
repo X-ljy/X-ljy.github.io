@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="mysql基本使用">
-<meta name="keywords" content="mysql">
+<meta name="description" content="k8s高可用集群部署">
+<meta name="keywords" content="Kubernetes">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql01">
+<meta property="og:title" content="k8s学习(一)">
 <meta property="og:url" content="https://x-ljy.github.io/2019/07/24/k8s001/index.html">
 <meta property="og:site_name" content="夕的博客">
-<meta property="og:description" content="mysql基本使用">
+<meta property="og:description" content="k8s高可用集群部署">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-26T04:33:51.664Z">
+<meta property="og:updated_time" content="2019-07-26T04:38:38.466Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql01">
-<meta name="twitter:description" content="mysql基本使用">
+<meta name="twitter:title" content="k8s学习(一)">
+<meta name="twitter:description" content="k8s高可用集群部署">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>mysql01 | 夕的博客</title>
+<title>k8s学习(一) | 夕的博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -223,7 +223,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      mysql01
+      k8s学习(一)
     </h1>
   
 
@@ -253,13 +253,13 @@
       <div class="article-entry article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/数据库/">数据库</a>
+    <a class="article-category-link" href="/categories/Kubernetes/">Kubernetes</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kubernetes/">Kubernetes</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -286,12 +286,12 @@ description: "k8s高可用集群部署"
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/07/24/k8s001/">mysql01</a></p>
+        <p><span>本文标题:</span><a href="/2019/07/24/k8s001/">k8s学习(一)</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-07-24, 12:38:26</p>
-        <p><span>最后更新:</span>2019-07-26, 12:33:51</p>
+        <p><span>最后更新:</span>2019-07-26, 12:38:38</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/07/24/k8s001/" title="mysql01">https://x-ljy.github.io/2019/07/24/k8s001/</a>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/24/k8s001/" title="k8s学习(一)">https://x-ljy.github.io/2019/07/24/k8s001/</a>
             <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/24/k8s001/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -306,7 +306,7 @@ description: "k8s高可用集群部署"
         
             <div id="article-nav-newer" class="article-nav-title">
                 <a href="/2019/07/26/docker03/">
-                    
+                    docker学习(三)
                 </a>
             </div>
         
@@ -361,7 +361,7 @@ description: "k8s高可用集群部署"
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"mysql01　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"k8s学习(一)　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -381,7 +381,7 @@ description: "k8s高可用集群部署"
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/07/26/docker03/" title="上一篇: ">
+            <a href="/2019/07/26/docker03/" title="上一篇: docker学习(三)">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -395,7 +395,7 @@ description: "k8s高可用集群部署"
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/docker03/">docker03</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/k8s001/">mysql01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/mysql01/">mysql01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/23/docker02/">docker学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/jvm2/">JVM系列（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/jvm1/">JVM系列（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/docker01/">docker学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/docker03/">docker学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/k8s001/">k8s学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/mysql01/">mysql01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/23/docker02/">docker学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/jvm2/">JVM系列（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/jvm1/">JVM系列（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/docker01/">docker学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
 
 
 
