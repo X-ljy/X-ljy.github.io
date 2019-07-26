@@ -29,31 +29,6 @@
     
     
     <entry>
-      <title>mysql01</title>
-      <link href="/2019/07/24/mysql01/"/>
-      <url>/2019/07/24/mysql01/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      <categories>
-          
-          <category> 数据库 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> mysql </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>k8s学习(一)</title>
       <link href="/2019/07/24/k8s001/"/>
       <url>/2019/07/24/k8s001/</url>
@@ -71,6 +46,31 @@
         <tags>
             
             <tag> Kubernetes </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>mysql01</title>
+      <link href="/2019/07/24/mysql01/"/>
+      <url>/2019/07/24/mysql01/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
             
         </tags>
       
