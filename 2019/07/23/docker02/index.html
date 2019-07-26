@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="夕的博客">
 <meta property="og:description" content="Docker基础命令">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-23T11:58:24.203Z">
+<meta property="og:updated_time" content="2019-07-26T03:04:50.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker学习(二)">
 <meta name="twitter:description" content="Docker基础命令">
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">891字</span>
+        <span class="post-count">716字</span>
       </span>
     </span>
 
@@ -242,7 +242,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
+        <span class="post-count">2分</span>
       </span>
     </span>
 </div>
@@ -269,8 +269,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>一、基本概念</strong>  </p>
-<p><strong>- 镜像</strong>  </p>
+        <h2 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h2><p><strong>- 镜像</strong>  </p>
 <p>  Docker 镜像是一个特殊的文件系统，除了提供容器运行时所需的程序、库、资源、配置等文 件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）。镜像 不包含任何动态数据，其内容在构建之后也不会被改变。  </p>
 <p>  镜像构建时，会一层层构建，前一层是后一层的基础。每一层构建完就不会再发生改变，后 一层上的任何改变只发生在自己这一层。  </p>
 <p><strong>- 容器</strong>  </p>
@@ -280,19 +279,19 @@
 <p>  数据卷的生存周期独立于容器，容器消亡，数据卷不会。使用数据卷后，容器删除或者重新运行，数据不会丢失。  </p>
 <p><strong>- 仓库</strong>  </p>
 <p>  一个集中地存储、分发镜像的服务，叫做docker仓库(Docker Registry)<br>  仓库可以是私有的，也可以是公开的。</p>
-<p><strong>二、Docker环境信息相关命令</strong>  </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#登录docker hub</span></span><br><span class="line">docker login</span><br><span class="line"></span><br><span class="line">Username: username</span><br><span class="line">Password: ****</span><br><span class="line">Email: user@domain.com</span><br><span class="line">Login Succeeded</span><br></pre></td></tr></table></figure>
+<h2 id="二、Docker环境信息相关命令"><a href="#二、Docker环境信息相关命令" class="headerlink" title="二、Docker环境信息相关命令"></a>二、Docker环境信息相关命令</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#登录docker hub</span></span><br><span class="line">docker login</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#运行后从指定服务器登出，默认为官方服务器。</span></span><br><span class="line"> docker <span class="built_in">logout</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看docker详细信息</span></span><br><span class="line">docker info</span><br><span class="line"></span><br><span class="line">Containers: 0</span><br><span class="line"> Running: 0</span><br><span class="line"> Paused: 0</span><br><span class="line"> Stopped: 0</span><br><span class="line">Images: 36</span><br><span class="line">Server Version: 18.06.0-ce</span><br><span class="line">Storage Driver: devicemapper</span><br><span class="line"> Pool Name: docker-253:0-806156874-pool</span><br><span class="line"> Pool Blocksize: 65.54kB</span><br><span class="line"> Base Device Size: 10.74GB</span><br><span class="line"> ......</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">```sh</span><br><span class="line"><span class="comment">#查看docker 版本信息</span></span><br><span class="line">docker version  </span><br><span class="line"></span><br><span class="line">Client:</span><br><span class="line"> Version:           18.06.0-ce</span><br><span class="line"> API version:       1.38</span><br><span class="line"> Go version:        go1.10.3</span><br><span class="line"> Git commit:        0ffa825</span><br><span class="line"> Built:             Wed Jul 18 19:08:18 2018</span><br><span class="line"> OS/Arch:           linux/amd64</span><br><span class="line"> Experimental:      <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">Server:</span><br><span class="line"> Engine:</span><br><span class="line">  Version:          18.06.0-ce</span><br><span class="line">  API version:      1.38 (minimum version 1.12)</span><br><span class="line">  Go version:       go1.10.3</span><br><span class="line">  Git commit:       0ffa825</span><br><span class="line">  Built:            Wed Jul 18 19:10:42 2018</span><br><span class="line">  OS/Arch:          linux/amd64</span><br><span class="line">  Experimental:     <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看docker详细信息</span></span><br><span class="line">docker info</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">```sh</span><br><span class="line"><span class="comment">#查看docker 版本信息</span></span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
 
-<p><strong>三、Docker镜像相关命令</strong>  </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在镜像仓库中搜索</span></span><br><span class="line">docker search [OPTIONS] ImageName  </span><br><span class="line"></span><br><span class="line">OPTIONS说明：</span><br><span class="line"></span><br><span class="line">--automated :只列出 automated build类型的镜像；</span><br><span class="line"></span><br><span class="line">--no-trunc :显示完整的镜像描述；</span><br><span class="line"></span><br><span class="line">-s :列出收藏数不小于指定值的镜像。</span><br><span class="line"></span><br><span class="line">NAME                              DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED</span><br><span class="line">node                              Node.js is a JavaScript-based platform <span class="keyword">for</span> s…   7650                [OK]                </span><br><span class="line">tomcat                            Apache Tomcat is an open <span class="built_in">source</span> implementati…   2467                [OK]                </span><br><span class="line">java                              Java is a concurrent, class-based, and objec…   1976                [OK]                </span><br><span class="line">openjdk                           OpenJDK is an open-source implementation of …   1803                [OK]                </span><br><span class="line">ghost                             Ghost is a free and open <span class="built_in">source</span> blogging pla…   1006                [OK]                </span><br><span class="line">jetty                             Jetty provides a Web server and javax.servle…   308                 [OK]                </span><br><span class="line">groovy                            Apache Groovy is a multi-faceted language fo…   73                  [OK]</span><br></pre></td></tr></table></figure>
+<h2 id="三、Docker镜像相关命令"><a href="#三、Docker镜像相关命令" class="headerlink" title="三、Docker镜像相关命令"></a>三、Docker镜像相关命令</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在镜像仓库中搜索</span></span><br><span class="line">docker search [OPTIONS] ImageName  </span><br><span class="line"></span><br><span class="line">OPTIONS说明：</span><br><span class="line"></span><br><span class="line">--automated :只列出 automated build类型的镜像；</span><br><span class="line"></span><br><span class="line">--no-trunc :显示完整的镜像描述；</span><br><span class="line"></span><br><span class="line">-s :列出收藏数不小于指定值的镜像。</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#镜像拉取</span></span><br><span class="line">docker pull [OPTIONS]  NAME[:TAG|@DIGEST]</span><br><span class="line"></span><br><span class="line">OPTIONS说明：</span><br><span class="line"></span><br><span class="line">-a :拉取所有 tagged 镜像</span><br><span class="line"></span><br><span class="line">--<span class="built_in">disable</span>-content-trust :忽略镜像的校验,默认开启</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#镜像拉取</span></span><br><span class="line">docker pull [选项] [Docker Registry 地址[:端口号]/]仓库名[:标签]</span><br><span class="line"></span><br><span class="line">选项说明：</span><br><span class="line"></span><br><span class="line">-a :拉取所有 tagged 镜像</span><br><span class="line"></span><br><span class="line">--<span class="built_in">disable</span>-content-trust :忽略镜像的校验,默认开启</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#列出镜像列表</span></span><br><span class="line">docker images [OPTIONS] [REPOSITORY[:TAG]]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">```sh</span><br></pre></td></tr></table></figure>
 
 
       
@@ -305,7 +304,7 @@
         <p><span>本文标题:</span><a href="/2019/07/23/docker02/">docker学习(二)</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-07-23, 11:21:47</p>
-        <p><span>最后更新:</span>2019-07-23, 19:58:24</p>
+        <p><span>最后更新:</span>2019-07-26, 11:04:50</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/07/23/docker02/" title="docker学习(二)">https://x-ljy.github.io/2019/07/23/docker02/</a>
             <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/23/docker02/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -319,6 +318,12 @@
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/07/24/mysql01/">
+                    mysql01
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -335,7 +340,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、基本概念"><span class="toc-number">1.</span> <span class="toc-text">一、基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Docker环境信息相关命令"><span class="toc-number">2.</span> <span class="toc-text">二、Docker环境信息相关命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、Docker镜像相关命令"><span class="toc-number">3.</span> <span class="toc-text">三、Docker镜像相关命令</span></a></li></ol>
         
     </div>
     <style>
@@ -391,7 +396,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2019/07/24/mysql01/" title="上一篇: mysql01">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -403,7 +410,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/23/docker02/">docker学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/jvm2/">JVM系列（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/jvm1/">JVM系列（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/docker01/">docker学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/docker03/">docker03</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/k8s001/">k8s001</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/mysql01/">mysql01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/23/docker02/">docker学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/jvm2/">JVM系列（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/jvm1/">JVM系列（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/docker01/">docker学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
 
 
 

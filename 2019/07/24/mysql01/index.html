@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="Git基本操作">
-<meta name="keywords" content="git">
+<meta name="description" content="mysql基本使用">
+<meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git基本操作">
-<meta property="og:url" content="https://x-ljy.github.io/2019/07/20/git/index.html">
+<meta property="og:title" content="mysql01">
+<meta property="og:url" content="https://x-ljy.github.io/2019/07/24/mysql01/index.html">
 <meta property="og:site_name" content="夕的博客">
-<meta property="og:description" content="Git基本操作">
+<meta property="og:description" content="mysql基本使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-20T23:27:00.606Z">
+<meta property="og:updated_time" content="2019-07-24T04:39:09.834Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git基本操作">
-<meta name="twitter:description" content="Git基本操作">
+<meta name="twitter:title" content="mysql01">
+<meta name="twitter:description" content="mysql基本使用">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Git基本操作 | 夕的博客</title>
+<title>mysql01 | 夕的博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -203,12 +203,12 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-git" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-mysql01" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       
-<a href="/2019/07/20/git/" class="article-date">
-      <time datetime="2019-07-20T02:41:53.000Z" itemprop="datePublished">2019-07-20</time>
+<a href="/2019/07/24/mysql01/" class="article-date">
+      <time datetime="2019-07-24T04:38:26.000Z" itemprop="datePublished">2019-07-24</time>
 </a>
 
 
@@ -223,7 +223,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Git基本操作
+      mysql01
     </h1>
   
 
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">498字</span>
+        <span class="post-count">0字</span>
       </span>
     </span>
 
@@ -253,13 +253,13 @@
       <div class="article-entry article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Git/">Git</a>
+    <a class="article-category-link" href="/categories/数据库/">数据库</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -269,59 +269,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>1. 仓库操作</strong></p>
-<ul>
-<li>git init   (创建一个Git仓库)</li>
-<li>git clone [url]  （拷贝一个git仓库到本地）</li>
-</ul>
-<blockquote>
-<p>工作流 ：<br>本地仓库由git维护的三棵“树”组成。第一个是你的工作目录，它持有实际文件；第二个是缓存区（Index）,它像个缓存区域，临时保存你的改动；最后是HEAD，指向你最近一次提交后的结果。  </p>
-</blockquote>
-<p><strong>2. 将文件添加到缓存区</strong></p>
-<ul>
-<li><p>git add [filename]  </p>
-</li>
-<li><p>git add .  </p>
-<p>不加参数默认为将修改操作的文件和未跟踪新添加的文件添加到git系统的暂存区，注意不包括删除</p>
-</li>
-<li><p>git add -u .  </p>
-<p>-u  == –update ，表示将已跟踪文件中的修改和删除的文件添加到暂存区，不包括新增加的文件，注意这些被删除的文件被加入到暂存区再被提交并推送到服务器的版本库之后这个文件就会从git系统中消失了。</p>
-</li>
-<li><p>git add -A .  </p>
-<p>-A == –all  ， 表示将所有的已跟踪的文件的修改与删除和新增的未跟踪的文件都添加到暂存区。  </p>
-</li>
-</ul>
-<p><strong>3. 将改动提交到 HEAD，但是不到远端仓库</strong>  </p>
-<ul>
-<li>git commit -m “代码提交信息”</li>
-</ul>
-<p><strong>4. 推送改动</strong></p>
-<ul>
-<li><p>git push origin master  </p>
-<p>git commit 之后，你的改动已经在本地仓库的HEAD中了，执行此上命令，可提交至远端仓库，master 可换成你想推送的任何分支。</p>
-</li>
-<li><p>git remote add origin [url]  </p>
-<p>使用此命令可将你的仓库连接到某个远程服务器，此后你就可以将改动推送到添加的服务器中了。</p>
-</li>
-</ul>
-<p><strong>5. 分支</strong></p>
-<ul>
-<li><p>git checkout -b [分支名称]  </p>
-<p>新建分支并切换到该分支</p>
-</li>
-<li><p>git checkout master<br>切换到指定分支  </p>
-</li>
-<li><p>git branch -d [分支命称]<br>将新建分支删掉  </p>
-</li>
-</ul>
-<p><strong>6. 更新与合并</strong>  </p>
-<ul>
-<li><p>git pull<br>按照git branch 设置的默认跟踪的服务器和分支来拉取  </p>
-</li>
-<li><p>git pull origin master<br>拉取远程服务器origin 的master分支  </p>
-</li>
-</ul>
-
+        
       
     </div>
     
@@ -329,13 +277,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/07/20/git/">Git基本操作</a></p>
+        <p><span>本文标题:</span><a href="/2019/07/24/mysql01/">mysql01</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
-        <p><span>发布时间:</span>2019-07-20, 10:41:53</p>
-        <p><span>最后更新:</span>2019-07-21, 07:27:00</p>
+        <p><span>发布时间:</span>2019-07-24, 12:38:26</p>
+        <p><span>最后更新:</span>2019-07-24, 12:39:09</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/07/20/git/" title="Git基本操作">https://x-ljy.github.io/2019/07/20/git/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/20/git/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/24/mysql01/" title="mysql01">https://x-ljy.github.io/2019/07/24/mysql01/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/24/mysql01/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -348,15 +296,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/07/23/docker02/">
-                    docker学习(二)
+                <a href="/2019/07/25/k8s001/">
+                    
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/07/14/jvm2/">
-                    JVM系列（二）
+                <a href="/2019/07/23/docker02/">
+                    docker学习(二)
                 </a>
             </div>
         
@@ -404,7 +352,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Git基本操作　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"mysql01　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -424,7 +372,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/07/23/docker02/" title="上一篇: docker学习(二)">
+            <a href="/2019/07/25/k8s001/" title="上一篇: ">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -432,7 +380,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/07/14/jvm2/" title="下一篇: JVM系列（二）">
+            <a href="/2019/07/23/docker02/" title="下一篇: docker学习(二)">
                 <i class="fa fa-angle-right"></i>
             </a>
         
