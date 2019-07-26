@@ -17,13 +17,25 @@
     
     
     <entry>
-      <title></title>
-      <link href="/2019/07/25/k8s001/"/>
-      <url>/2019/07/25/k8s001/</url>
+      <title>mysql01</title>
+      <link href="/2019/07/24/k8s001/"/>
+      <url>/2019/07/24/k8s001/</url>
       
-        <content type="html"><![CDATA[<hr><p>title: k8s学习（一）<br>categories: Kubernetes<br>date: 2019-07-25 13:37:04<br>tags: [Kubernetes]</p><h2 id="description-“k8s高可用集群部署”"><a href="#description-“k8s高可用集群部署”" class="headerlink" title="description: “k8s高可用集群部署”"></a>description: “k8s高可用集群部署”</h2><h2 id="k8s高可用集群部署"><a href="#k8s高可用集群部署" class="headerlink" title="k8s高可用集群部署"></a>k8s高可用集群部署</h2>]]></content>
+        <content type="html"><![CDATA[<!-- ---title: k8s学习（一）categories: Kubernetesdate: 2019-07-25 13:37:04tags: [Kubernetes]description: "k8s高可用集群部署"---  ## k8s高可用集群部署 -->]]></content>
       
       
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+        </tags>
       
     </entry>
     

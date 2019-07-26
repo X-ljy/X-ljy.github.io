@@ -15,20 +15,18 @@
 
 
 
-<meta name="description" content="JVM内存结构">
-<meta name="keywords" content="JVM">
+<meta name="description" content="mysql基本使用">
+<meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JVM系列（二）">
-<meta property="og:url" content="https://x-ljy.github.io/2019/07/14/jvm2/index.html">
+<meta property="og:title" content="mysql01">
+<meta property="og:url" content="https://x-ljy.github.io/2019/07/24/k8s001/index.html">
 <meta property="og:site_name" content="夕的博客">
-<meta property="og:description" content="JVM内存结构">
+<meta property="og:description" content="mysql基本使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://x-ljy.github.io/2019/07/14/jvm2/jvm2.png">
-<meta property="og:updated_time" content="2019-07-21T05:42:35.883Z">
+<meta property="og:updated_time" content="2019-07-26T04:33:51.664Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JVM系列（二）">
-<meta name="twitter:description" content="JVM内存结构">
-<meta name="twitter:image" content="https://x-ljy.github.io/2019/07/14/jvm2/jvm2.png">
+<meta name="twitter:title" content="mysql01">
+<meta name="twitter:description" content="mysql基本使用">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -60,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>JVM系列（二） | 夕的博客</title>
+<title>mysql01 | 夕的博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -205,12 +203,12 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-jvm2" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-k8s001" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       
-<a href="/2019/07/14/jvm2/" class="article-date">
-      <time datetime="2019-07-14T08:39:22.000Z" itemprop="datePublished">2019-07-14</time>
+<a href="/2019/07/24/k8s001/" class="article-date">
+      <time datetime="2019-07-24T04:38:26.000Z" itemprop="datePublished">2019-07-24</time>
 </a>
 
 
@@ -225,7 +223,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      JVM系列（二）
+      mysql01
     </h1>
   
 
@@ -235,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.5k字</span>
+        <span class="post-count">0字</span>
       </span>
     </span>
 
@@ -244,7 +242,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">5分</span>
+        <span class="post-count">1分</span>
       </span>
     </span>
 </div>
@@ -255,13 +253,13 @@
       <div class="article-entry article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Java/">Java</a>
+    <a class="article-category-link" href="/categories/数据库/">数据库</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -271,38 +269,15 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>经典JVM内存布局（JDK8以上）</strong>  </p>
-<p><img src="//x-ljy.github.io/2019/07/14/jvm2/jvm2.png" alt="经典JVM布局"></p>
-<p><strong>一、Heap（堆区）</strong>  </p>
-<p><strong>Heap存储着几乎所有的实例对象，堆由垃圾收集器自动回收，堆区由各个子线程共享使用。</strong> 通常情况下，它占用的空间是所有内存区域中最大的，同时也是OOM（Out Of Memory）故障最主要的发源地。  </p>
-<p>堆的内存空间既可以固定大小，也可以在运行时动态地调整。  </p>
-<p>通过如下参数设置初始值和最大值，比如-Xms256M -Xmx1024M （-X表示它是JVM运行参数，ms是memory start（最小堆容量）的简称，mx是memory max（最大堆容量）的简称）。由于服务器在不断运行过程中，堆空间不断地扩容与回缩，势必形成不必要的系统压力，所以在线上生产环境中，JVM的Xms Xmx 设置成一样大小，避免在GC调整堆大小时带来的额外压力。</p>
-<p><strong>堆分为两大块：新生代和老年代。</strong> 对象产生之初在新生代，步入暮年进入老年代，但是老年代也接纳在新生代无法容纳的超大对象。  </p>
-<p><strong>新生代 = 1个Eden区 + 2个Survivor区。</strong> 绝大部分对象在Eden区生成，当Eden区填满的时候，后触发Young Garbage Collection（YGC）。垃圾回收的时候在Eden区实现清除策略，没有被引用的对象则直接回收。仍然存活的对象会被移送到Survivor区。Survivor区被分为S0和S1两块内存空间，每次YGC的时候，他们将存活的对象复制到未使用那块空间，然后将当前正在使用的空间完全清除，交换两块空间的使用状态。如果YGC要移送的对象大于Survivor区容量的上限，则直接移交给老年代。<br><strong>每个对象都有一个计数器，每次YGC都会加1。-XX:MaxTenuringThreshold参数能配置计数器的值到达某个阈值的时候，对象从新生代晋升到老年代。默认值是15，可以在Survivor区交换14次之后，晋升至老年代。</strong> 如果参数配置为1，那么从新生代的Eden区直接移至老年代。<br>如果Survivor区无法放下，或者超大对象的阈值超过上限，则尝试在老年代进行分配；如果老年代也无法放下，则会触发Full Garbage Collection，即FGC。如果依然无法放下，则抛出OOM。可设置参数 -XX:+HeapDumpOnOutOfMemoryError,让JVM遇到OOM时输出堆内信息。  </p>
-<p><strong>二、Metaspace(元空间)</strong>  </p>
-<p>  元空间的前身为永久代（Perm），在JDK8之后被淘汰，在JDK7及之前的版本中，只有Hotspot才有Perm区，译为永久代，它在启动的时候固定大小，很难进行调优，并且FGC时会移动类元信息。  </p>
-<p>  区别于永久代，元空间在本地内存中分配。在JDK8里，Perm区中的所有内容中  字符串常量移至堆内存，其他内容包括类元信息，字段，静态属性，方法，常量等移动至元空间内。</p>
-<p><strong>三、JVM Stack（虚拟机栈）</strong>  </p>
-<p>  虚拟机栈通过压栈和出栈的方式，对每个方法对应的活动栈帧进行运算处理，方法正常执行结束，肯定会跳转到另一个栈帧上。在执行过程中，如果出现异常，会进行异常回溯，返回地址通过异常处理表确定。  </p>
-<p><strong>1. 局部变量表</strong>  </p>
-<p>  局部变量表是存放方法参数和局部变量的区域。相对于类属性变量的准备阶段和初始化阶段，局部变量没有准备阶段，必须显式化初始化。如果是非静态方法，则在index[0]位置上存储的是方法所属对象的实例引用，随后存储的是参数和局部变量。  </p>
-<p><strong>2. 操作栈</strong>  </p>
-<p>操作栈是一个初始状态为空的桶式结构栈。JVM的执行引擎是基于栈的执行引擎，其中的栈指的就是操作栈。字节码指令集的定义都是基于栈类型的，栈的深度在方法元信息的stack属性中。</p>
-<p><strong>3. 动态连接</strong>  </p>
-<p>每个栈帧中包含一个在常量池中对当前方法的引用，目的就是支持方法调用过程的动态连接。  </p>
-<p><strong>4. 方法返回地址</strong>  </p>
-<p>方法执行有两种退出情况：第一，正常退出；第二，异常退出。无论哪种退出情况，都将返回至方法当前被调用的位置。方法退出相当于弹出当前栈帧。</p>
-<p><strong>退出的三种方式：</strong>  </p>
-<ul>
-<li>返回值压入上层调用栈帧</li>
-<li>异常信息抛给能够处理的栈帧</li>
-<li>PC计数器指向方法调用后的下一条指令  </li>
-</ul>
-<p><strong>四、本地方法栈</strong>  </p>
-<p>本地方法栈在JVM内存布局中，也是线程对象私有的，但是虚拟机栈“主内”，而本地方法栈“主外”。本地方法栈为Native方法服务。<br>线程开始调用本地方法时，会进入一个不再受JVM约束的世界。本地方法可以通过JNI(Java Native Interface)来访问虚拟机运行时的数据区，甚至可以调用寄存器，具有和JVM相同的能力和权限。当大量本地方法出现时，势必会削弱JVM对系统的控制力，因为他的出错信息比较黑盒。对于内存不足的情况，本地方法栈还是会抛出native heap OutOfMemory。  </p>
-<p><strong>五、程序计数器（Program Counter Register，PC）</strong>  </p>
-<p>  每个线程创建后，都会产生自己的程序计数器和栈帧，程序计数器都用来存放执行指令的偏移量和行号指示器等，线程执行和恢复都要依赖程序计数器。程序计数器在各个线程之间互不影响，此区域也不会发生内存溢出异常。  </p>
-<p><strong>从线程共享的角度来看，堆和元空间是所有线程共享的，而虚拟机栈、本地方法栈、程序计数器是线程内部私有的。</strong></p>
+        <!-- ---
+title: k8s学习（一）
+categories: Kubernetes
+date: 2019-07-25 13:37:04
+tags: [Kubernetes]
+description: "k8s高可用集群部署"
+---  
+
+## k8s高可用集群部署 -->
 
       
     </div>
@@ -311,13 +286,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/07/14/jvm2/">JVM系列（二）</a></p>
+        <p><span>本文标题:</span><a href="/2019/07/24/k8s001/">mysql01</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
-        <p><span>发布时间:</span>2019-07-14, 16:39:22</p>
-        <p><span>最后更新:</span>2019-07-21, 13:42:35</p>
+        <p><span>发布时间:</span>2019-07-24, 12:38:26</p>
+        <p><span>最后更新:</span>2019-07-26, 12:33:51</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/07/14/jvm2/" title="JVM系列（二）">https://x-ljy.github.io/2019/07/14/jvm2/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/14/jvm2/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/24/k8s001/" title="mysql01">https://x-ljy.github.io/2019/07/24/k8s001/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/24/k8s001/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -330,15 +305,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/07/20/git/">
-                    Git基本操作
+                <a href="/2019/07/26/docker03/">
+                    
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/07/13/jvm1/">
-                    JVM系列（一）
+                <a href="/2019/07/24/mysql01/">
+                    mysql01
                 </a>
             </div>
         
@@ -386,7 +361,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"JVM系列（二）　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"mysql01　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -406,7 +381,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/07/20/git/" title="上一篇: Git基本操作">
+            <a href="/2019/07/26/docker03/" title="上一篇: ">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -414,7 +389,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/07/13/jvm1/" title="下一篇: JVM系列（一）">
+            <a href="/2019/07/24/mysql01/" title="下一篇: mysql01">
                 <i class="fa fa-angle-right"></i>
             </a>
         
