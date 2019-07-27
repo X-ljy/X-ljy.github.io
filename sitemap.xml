@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://x-ljy.github.io/2019/07/26/docker03/</loc>
+    
+    <lastmod>2019-07-27T10:30:18.424Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://x-ljy.github.io/2019/07/06/docker01/</loc>
     
     <lastmod>2019-07-27T03:51:52.839Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://x-ljy.github.io/2019/07/24/k8s001/</loc>
     
     <lastmod>2019-07-26T15:15:57.416Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://x-ljy.github.io/2019/07/26/docker03/</loc>
-    
-    <lastmod>2019-07-26T04:39:21.316Z</lastmod>
     
   </url>
   
