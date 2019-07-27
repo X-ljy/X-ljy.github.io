@@ -23,10 +23,12 @@
 <meta property="og:site_name" content="夕的博客">
 <meta property="og:description" content="Docker 网络详解">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-27T10:35:23.818Z">
+<meta property="og:image" content="https://x-ljy.github.io/2019/07/26/docker03/nginx.png">
+<meta property="og:updated_time" content="2019-07-27T11:05:38.535Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker学习(三)">
 <meta name="twitter:description" content="Docker 网络详解">
+<meta name="twitter:image" content="https://x-ljy.github.io/2019/07/26/docker03/nginx.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -234,7 +236,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">568字</span>
+        <span class="post-count">1.3k字</span>
       </span>
     </span>
 
@@ -243,7 +245,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
+        <span class="post-count">4分</span>
       </span>
     </span>
 </div>
@@ -284,10 +286,24 @@
 <p>当Docker进程启动时，会在主机上创建一个名为docker0的虚拟网桥，此主机启动的Docker容器会连接到这个虚拟网桥上，默认分配网段为172.17.0.0/16，实际上是 Linux 的一个 bridge，可以理解为一个软件交换机，附加在其上的任何网卡之间都能自动转发数据包。  </p>
 <p>从docker0子网中分配一个IP给容器使用，并设置docker0的IP地址为容器的默认网关。在主机创建一对虚拟网卡<a href="https:/www.cnblogs.com/bakari/p/10613710.html" target="_blank" rel="noopener">veth pair 设备</a>,Docker将veth pair 设备的一端放在新创建的容器中，并命名为eth0（容器的网卡），另一端放在主句中，以vethxxx这样的名字命名，并将这个网络设备加入到docker0网桥中。  </p>
 <p>veth 是 Virtual ETHernet 的缩写，是一种虚拟网络设备。它的特点是：当它被创建以后，总是以两张虚拟网卡（Veth peer）形式成对出现，并且在一个网卡上的数据包可直接转发给另一个与之对应的网卡上，即使这两个网卡不在同一个namespace中。</p>
-<p><strong>容器与容器间的通信</strong>  </p>
+<p><strong>2. 容器与容器间的通信</strong>  </p>
 <p>容器1（172.17.0.2）ping 容器2（172.17.0.3）；<br>根据路由规则，数据包从容器1（172.17.0.2）的eth0转发至与之对应的veth上，该veth桥接在了docker0上，此时数据包到达了docker0,docker0扮演交换机的角色，并广播ARP请求寻找容器2（172.17.0.3）的mac地址，而此时容器2的另一个veth 设备桥接在了docker0，并收到ARP请求，发现自己是172.17.0.3 ，故将其mac地址回复给容器1，此时容器1和容器2就可以进行通信了，并且在容器1可以查看到缓存的容器2的mac地址。</p>
-<p><strong>容器与外部网络通讯</strong></p>
-<p>同理，如果容器ping另一个主机，它发出去的数据包经过docker0网桥流向宿主机的</p>
+<p><strong>3. 容器与外部网络通讯</strong></p>
+<p>同理，如果容器ping另一个主机，它发出去的数据包经过docker0网桥流向宿主机的eth0网卡，eth0再将数据包转发给与之相通的主机，于是，容器便可以跟其它主机通信了。（主要宿主机eth0能到达，容器都可以与之通信）  </p>
+<p><strong>4. 宿主机与容器通讯</strong></p>
+<p>当宿主机访问容器时，数据包从docker0流入到与容器的eth0对应的veth设备，veth与容器的eth0相通信。  </p>
+<p><strong>5. 外部访问容器</strong>  </p>
+<p>默认情况，其他外部网络（宿主机以外）无法访问到容器内的端口，通常的做法是使用-p或者-P选项，来暴露容器中的端口到宿主机上，外部网络通过访问宿主机的端口从而访问到容器端口。本质上来说，该方式是通过iptables规则转发实现的。  </p>
+<p><strong>6. 自定义网桥</strong>  </p>
+<p>除了使用默认docker0作网桥以为还可以使用docker network 相关命令自定义网桥，以下将创建一个br1的网络，子网是172.30.0.0/16，网关为172.30.0.1。  </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建br1网桥</span></span><br><span class="line">docker network create -d bridge --subnet <span class="string">'172.30.0.0/16'</span> --gateway <span class="string">'172.30.0.1'</span> br1</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看docker网络</span></span><br><span class="line"> docker network ls</span><br><span class="line"></span><br><span class="line"> NETWORK ID          NAME                    DRIVER              SCOPE</span><br><span class="line"> b9c01f82c16b        br1                     bridge              <span class="built_in">local</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">#自定义网桥的使用</span></span><br><span class="line"> docker run -it --network br1 镜像名称 bash</span><br></pre></td></tr></table></figure>
+
+<h2 id="Host（开放式网络模式）"><a href="#Host（开放式网络模式）" class="headerlink" title="Host（开放式网络模式）"></a>Host（开放式网络模式）</h2><p>Host模式使用是在容器启动时候指明–network host，此时容器共享宿主机的Network Namespace，容器内启动的端口直接是宿主机的端口，并且容器不会创建网卡和IP，直接使用宿主机的网卡和IP，但是容器内的其他资源是隔离的，如文件系统、用户和用户组。这种模式的好处就是效率高，因为不需要额外的网络开始，直接使用宿主机网络。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name nginx --network host nginx:latest</span><br></pre></td></tr></table></figure>
+
+<p><img src="//x-ljy.github.io/2019/07/26/docker03/nginx.png" alt></p>
+<h2 id="Container-联合挂载式网络模式"><a href="#Container-联合挂载式网络模式" class="headerlink" title="Container(联合挂载式网络模式)"></a>Container(联合挂载式网络模式)</h2><p>这个模式指定新创建的容器和已经存在的一个容器共享一个 Network Namespace，而不是和宿主机共享。新创建的容器不会创建自己的网卡，配置自己的 IP，而是和一个指定的容器共享 IP、端口范围等。同样，两个容器除了网络方面，其他的如文件系统、进程列表等还是隔离的。两个容器的进程可以通过 lo回环 通信。同样，kubernetes中的pod的话，pod内的网络也是靠这样的共享方式来实现的。</p>
+<h2 id="None（封闭式网络模式）"><a href="#None（封闭式网络模式）" class="headerlink" title="None（封闭式网络模式）"></a>None（封闭式网络模式）</h2><p>使用–network none选项指定其网络模式，在该模式下虽然容器有着自己的Network Namespace，但是容器内没有网卡、IP、路由信息，只有一个lo回环接口。如果需要网络配置则需要用户手动进行配置网卡、ip以及路由信息，通常这样的容器用于承担某些无需网络介入的工作，如离线任务、备份等。</p>
 
       
     </div>
@@ -299,7 +315,7 @@
         <p><span>本文标题:</span><a href="/2019/07/26/docker03/">docker学习(三)</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-07-26, 10:50:58</p>
-        <p><span>最后更新:</span>2019-07-27, 18:35:23</p>
+        <p><span>最后更新:</span>2019-07-27, 19:05:38</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/07/26/docker03/" title="docker学习(三)">https://x-ljy.github.io/2019/07/26/docker03/</a>
             <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/26/docker03/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -329,7 +345,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-网络详解"><span class="toc-number">1.</span> <span class="toc-text">Docker 网络详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bridge-桥接式网络模式"><span class="toc-number">2.</span> <span class="toc-text">Bridge(桥接式网络模式)</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-网络详解"><span class="toc-number">1.</span> <span class="toc-text">Docker 网络详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bridge-桥接式网络模式"><span class="toc-number">2.</span> <span class="toc-text">Bridge(桥接式网络模式)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Host（开放式网络模式）"><span class="toc-number">3.</span> <span class="toc-text">Host（开放式网络模式）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Container-联合挂载式网络模式"><span class="toc-number">4.</span> <span class="toc-text">Container(联合挂载式网络模式)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#None（封闭式网络模式）"><span class="toc-number">5.</span> <span class="toc-text">None（封闭式网络模式）</span></a></li></ol>
         
     </div>
     <style>
