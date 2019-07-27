@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="夕的博客">
 <meta property="og:description" content="Dockerfile基础指令">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-27T00:55:18.188Z">
+<meta property="og:updated_time" content="2019-07-27T02:11:52.659Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker学习(一)">
 <meta name="twitter:description" content="Dockerfile基础指令">
@@ -282,7 +282,7 @@
 <p><strong>3. RUN</strong>  </p>
 <p>  用来执行命令行命令  </p>
 <ul>
-<li><p>shell格式：RUN &lt;命令&gt; ，就像直接在命令行中输入的命令一样  </p>
+<li><p>shell格式：RUN &lt;命令&gt; ，就像直接在命令行中输入的命令一样</p>
 </li>
 <li><p>exec格式：RUN [“可执行文件”, “参数1”, “参数2”]，这更像是函数调用中的格式  </p>
 <p>使用 &amp;&amp; 符连接多个命令； \ 符进行换行。</p>
@@ -293,7 +293,7 @@
 <ul>
 <li>shell格式：CMD &lt;命令&gt;</li>
 <li>exec 格式：CMD [“可执行文件”, “参数1”, “参数2”…]</li>
-<li>参数列表格式：CMD [“参数1”, “参数2”…]，提供给 ENTRYPOINT 的默认参数  </li>
+<li>参数列表格式：CMD [“参数1”, “参数2”…]，提供给 ENTRYPOINT 的默认参数</li>
 </ul>
 <p>指定启动容器时执行的命令，每个 Dockerfile 只能有一条 CMD 命令。如果指定了多条命令，只有最后一条会被执行。</p>
 <p>如果用户启动容器时候指定了运行的命令，则会覆盖掉 CMD 指定的命令。</p>
@@ -369,7 +369,7 @@ Dockerfile中的其它指令都是为了定制当前镜像而准备的，唯有O
         <p><span>本文标题:</span><a href="/2019/07/06/docker01/">docker学习(一)</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-07-06, 15:38:02</p>
-        <p><span>最后更新:</span>2019-07-27, 08:55:18</p>
+        <p><span>最后更新:</span>2019-07-27, 10:11:52</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/07/06/docker01/" title="docker学习(一)">https://x-ljy.github.io/2019/07/06/docker01/</a>
             <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/06/docker01/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
