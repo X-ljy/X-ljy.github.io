@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="夕的博客">
 <meta property="og:description" content="Dockerfile基础指令">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-23T03:34:17.980Z">
+<meta property="og:updated_time" content="2019-07-27T00:55:18.188Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker学习(一)">
 <meta name="twitter:description" content="Dockerfile基础指令">
@@ -270,12 +270,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>一、Dockerfile简介</strong>  </p>
-<p>  Dockfile是一种被Docker程序解释的脚本，Dockerfile由一条一条的指令组成，每条指令对应Linux下面的一条命令，Docker程序将这些Dockerfile指令翻译真正的Linux命令；Dockerfile有自己书写格式和支持的命令，Docker程序解决这些命令间的依赖关系，类似于Makefile，Docker程序将读取Dockerfile，根据指令生成定制的image。</p>
+        <h2 id="一、Dockerfile简介"><a href="#一、Dockerfile简介" class="headerlink" title="一、Dockerfile简介"></a>一、Dockerfile简介</h2><p>  Dockfile是一种被Docker程序解释的脚本，Dockerfile由一条一条的指令组成，每条指令对应Linux下面的一条命令，Docker程序将这些Dockerfile指令翻译真正的Linux命令；Dockerfile有自己书写格式和支持的命令，Docker程序解决这些命令间的依赖关系，类似于Makefile，Docker程序将读取Dockerfile，根据指令生成定制的image。</p>
 <p>  Dockerfile的指令是忽略大小写的，建议使用大写，使用#作为注释，每一行只支持一条指令，每条指令可以携带多个参数。</p>
 <p>  Dockerfile 是一个文本文件，其内包含了一条条的指令(Instruction)，每一条指令构建一层， 因此每一条指令的内容，就是描述该层应当如何构建。  </p>
-<p><strong>二、dockerfile指令详解</strong>   </p>
-<p><strong>1. FROM</strong>  </p>
+<h2 id="二、dockerfile指令详解"><a href="#二、dockerfile指令详解" class="headerlink" title="二、dockerfile指令详解"></a>二、dockerfile指令详解</h2><p><strong>1. FROM</strong>  </p>
 <p>  功能为指定基础镜像，并且必须是第一条指令。  </p>
 <p>  除了选择现有镜像为基础镜像外，Docker 还存在一个特殊的镜像，名为scratch。这个镜像 是虚拟的概念，并不实际存在，它表示一个空白的镜像。<br>  如果你以scratch为基础镜像的话，意味着你不以任何镜像为基础，接下来所写的指令将作为镜像第一层开始构建。  </p>
 <p>  不以任何系统为基础，直接将可执行文件复制进镜像的做法并不罕见，比如swarm、coreos/etcd 。对于Linux 下静态编译的程序来说，并不需要有操作系统提供运行时支持，所需的一切库都已经在可执行文件里了，因此直接 FROM scratch 会让镜像体积更加小 巧。使用Go语言开发的应用很多会使用这种方式来制作镜像，这也是为什么有人认为 Go 是特别适合容器微服务架构的语言的原因之一。</p>
@@ -293,7 +291,7 @@
 </ul>
 <p><strong>4. CMD</strong>  </p>
 <ul>
-<li>shell格式：CMD &lt;命令&gt;  </li>
+<li>shell格式：CMD &lt;命令&gt;</li>
 <li>exec 格式：CMD [“可执行文件”, “参数1”, “参数2”…]</li>
 <li>参数列表格式：CMD [“参数1”, “参数2”…]，提供给 ENTRYPOINT 的默认参数  </li>
 </ul>
@@ -344,41 +342,23 @@
 </blockquote>
 <p>即：COPY指令拷贝一个文件夹只会拷贝文件夹的内容。  </p>
 <p>上述指令可以这样写：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">COPY src1 \</span><br><span class="line">     src2 \</span><br><span class="line">     WORKDIR/src</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">COPY src1 \</span><br><span class="line">     src2 \</span><br><span class="line">     WORKDIR/src</span><br><span class="line">```  </span><br><span class="line">这样将COPY的文件，放在了新创建的src目录下。  </span><br><span class="line"></span><br><span class="line">**9. ADD**  </span><br><span class="line"></span><br><span class="line">ADD指令和COPY的格式和性质基本一致，不过&lt;源文件&gt;可以是一个URL,同时如果源文件是一个压缩文件，ADD会自动执行解压缩。  </span><br><span class="line"></span><br><span class="line">因此在COPY 和ADD指令中选择的时候，可以遵循这样的原则，所有的文件复制均使用COPY指令，仅在需要自动解压缩的场合使用ADD 。  </span><br><span class="line"></span><br><span class="line">**10. VOLUME**  </span><br><span class="line"></span><br><span class="line">- VOLUME [&quot;&lt;路径1&gt;&quot;, &quot;&lt;路径2&gt;&quot;...]   </span><br><span class="line"></span><br><span class="line">容器运行时应该尽量保持容器存储层不发生写操作，对于数据库类需要保存 动态数据的应用，其数据库文件应该保存于卷(volume)中。  </span><br><span class="line"></span><br><span class="line">为了防止运行时用户忘记将动态文件所保存目录挂载为卷，在 Dockerfile中，我们可以事先指定某些目录挂载为匿名卷，这样在运行时如果用户不指定挂载，其应用也可以正常运行，不会向容器存储层写入大量数据。  </span><br><span class="line"></span><br><span class="line">**如何使用：**  </span><br><span class="line">在Dockerfile中定义匿名卷，运行容器时，使用参数 **-v 宿主机目录:匿名卷**  进行挂载，实现了数据持久化。  </span><br><span class="line"></span><br><span class="line">**11. WORKDIR**  </span><br><span class="line"></span><br><span class="line">- WORKDIR &lt;工作目录路径&gt;   </span><br><span class="line"></span><br><span class="line">使用WORKDIR指令可以来指定工作目录（或者称为当前目录），以后各层的当前目录就被改为指定的目录，如该目录不存在，WORKDIR 会帮你建立目录。  </span><br><span class="line"></span><br><span class="line">可以使用多个 WORKDIR 指令，后续命令如果参数是相对路径，则会基于之前命令指定的路径。</span><br></pre></td></tr></table></figure>
 
-<p>这样将COPY的文件，放在了新创建的src目录下。  </p>
-<p><strong>9. ADD</strong>  </p>
-<p>ADD指令和COPY的格式和性质基本一致，不过&lt;源文件&gt;可以是一个URL,同时如果源文件是一个压缩文件，ADD会自动执行解压缩。  </p>
-<p>因此在COPY 和ADD指令中选择的时候，可以遵循这样的原则，所有的文件复制均使用COPY指令，仅在需要自动解压缩的场合使用ADD 。  </p>
-<p><strong>10. VOLUME</strong>  </p>
-<ul>
-<li>VOLUME [“&lt;路径1&gt;”, “&lt;路径2&gt;”…]   </li>
-</ul>
-<p>容器运行时应该尽量保持容器存储层不发生写操作，对于数据库类需要保存 动态数据的应用，其数据库文件应该保存于卷(volume)中。  </p>
-<p>为了防止运行时用户忘记将动态文件所保存目录挂载为卷，在 Dockerfile中，我们可以事先指定某些目录挂载为匿名卷，这样在运行时如果用户不指定挂载，其应用也可以正常运行，不会向容器存储层写入大量数据。  </p>
-<p><strong>如何使用：</strong><br>在Dockerfile中定义匿名卷，运行容器时，使用参数 <strong>-v 宿主机目录:匿名卷</strong>  进行挂载，实现了数据持久化。  </p>
-<p><strong>11. WORKDIR</strong>  </p>
-<ul>
-<li>WORKDIR &lt;工作目录路径&gt;   </li>
-</ul>
-<p>使用WORKDIR指令可以来指定工作目录（或者称为当前目录），以后各层的当前目录就被改为指定的目录，如该目录不存在，WORKDIR 会帮你建立目录。  </p>
-<p>可以使用多个 WORKDIR 指令，后续命令如果参数是相对路径，则会基于之前命令指定的路径。  </p>
-<pre><code>WORKDIR /a
-WORKDIR b
-WORKDIR c
-RUN pwd  
+<p>WORKDIR /a<br>WORKDIR b<br>WORKDIR c<br>RUN pwd  </p>
+<p>则最终路径为 /a/b/c。</p>
+<pre><code>
+**12. USER**
 
-则最终路径为 /a/b/c。</code></pre><p><strong>12. USER</strong></p>
-<ul>
-<li>USER &lt;用户名&gt;   </li>
-</ul>
-<p>USER是改变之后层的执行RUN ,CMD以及ENTRYPOINT这类命令的身份。USER只是帮助你切换到指定用户而已，这个用户必须是事先建立好的，否则无法切换。  </p>
-<p><strong>13. ONBUILD</strong>  </p>
-<ul>
-<li>ONBUILD &lt;其它指令&gt;   </li>
-</ul>
-<p>ONBUILD是一个特殊的指令，它后面跟的是其它指令，比如RUN ,COPY等，而这些指令，在当前镜像构建时并不会被执行。只有当以当前镜像为基础镜像，去构建下一级镜像的时候才会被执行。<br>Dockerfile中的其它指令都是为了定制当前镜像而准备的，唯有ONBUILD是为了帮助别人定制自己而准备的。</p>
+- USER &lt;用户名&gt;   
 
+USER是改变之后层的执行RUN ,CMD以及ENTRYPOINT这类命令的身份。USER只是帮助你切换到指定用户而已，这个用户必须是事先建立好的，否则无法切换。  
+
+**13. ONBUILD**  
+
+- ONBUILD &lt;其它指令&gt;   
+
+ONBUILD是一个特殊的指令，它后面跟的是其它指令，比如RUN ,COPY等，而这些指令，在当前镜像构建时并不会被执行。只有当以当前镜像为基础镜像，去构建下一级镜像的时候才会被执行。
+Dockerfile中的其它指令都是为了定制当前镜像而准备的，唯有ONBUILD是为了帮助别人定制自己而准备的。</code></pre>
       
     </div>
     
@@ -389,7 +369,7 @@ RUN pwd
         <p><span>本文标题:</span><a href="/2019/07/06/docker01/">docker学习(一)</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-07-06, 15:38:02</p>
-        <p><span>最后更新:</span>2019-07-23, 11:34:17</p>
+        <p><span>最后更新:</span>2019-07-27, 08:55:18</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/07/06/docker01/" title="docker学习(一)">https://x-ljy.github.io/2019/07/06/docker01/</a>
             <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/06/docker01/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -425,7 +405,7 @@ RUN pwd
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Dockerfile简介"><span class="toc-number">1.</span> <span class="toc-text">一、Dockerfile简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、dockerfile指令详解"><span class="toc-number">2.</span> <span class="toc-text">二、dockerfile指令详解</span></a></li></ol>
         
     </div>
     <style>
