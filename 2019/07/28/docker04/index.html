@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="夕">
+
+
+
+<meta name="description" content="docker-compose.yml V3.x 指令详解">
+<meta name="keywords" content="Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker学习(四)">
+<meta property="og:url" content="https://x-ljy.github.io/2019/07/28/docker04/index.html">
+<meta property="og:site_name" content="夕的博客">
+<meta property="og:description" content="docker-compose.yml V3.x 指令详解">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://x-ljy.github.io/2019/07/28/docker04/001.png">
+<meta property="og:updated_time" content="2019-07-28T16:01:26.799Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker学习(四)">
+<meta name="twitter:description" content="docker-compose.yml V3.x 指令详解">
+<meta name="twitter:image" content="https://x-ljy.github.io/2019/07/28/docker04/001.png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="夕的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>docker学习(四) | 夕的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">夕</a></h1>
+        </hgroup>
+
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="#17637938901@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/X-ljy" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                
+                
+
+                
+                
+                <section class="switch-part switch-part3">
+                
+                    <div id="js-aboutme">专注于后台架构设计</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">夕</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">夕</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="#17637938901@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/X-ljy" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap">
+  <i class="fa fa-thumb-tack"></i>
+  <font color=7D26CD>置顶</font>
+  <span class="post-meta-divider">|</span>
+
+<article id="post-docker04" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      
+<a href="/2019/07/28/docker04/" class="article-date">
+      <time datetime="2019-07-28T13:53:42.000Z" itemprop="datePublished">2019-07-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      docker学习(四)
+    </h1>
+  
+
+		
+			<div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.3k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">5分</span>
+      </span>
+    </span>
+</div>
+		
+      </header>
+	  
+      
+      <div class="article-entry article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Docker/">Docker</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="docker-compopse-yml-版本和Docker兼容性表"><a href="#docker-compopse-yml-版本和Docker兼容性表" class="headerlink" title="docker-compopse.yml 版本和Docker兼容性表"></a>docker-compopse.yml 版本和Docker兼容性表</h2><p><img src="//x-ljy.github.io/2019/07/28/docker04/001.png" alt>  </p>
+<p><strong>详情请看<a href="https://docs.docker.com/compose/compose-file/#reference-and-guidelines" target="_blank" rel="noopener">官网文档</a></strong>  </p>
+<h2 id="顶级配置项"><a href="#顶级配置项" class="headerlink" title="顶级配置项"></a>顶级配置项</h2><ul>
+<li><p>version 定义了版本信息</p>
+</li>
+<li><p>services 定义了服务的配置信息</p>
+</li>
+<li><p>networks 定义了网络信息，提供给 services 中的 具体容器使用</p>
+</li>
+<li><p>volumes 定义了卷信息，提供给 services 中的 具体容器使用</p>
+</li>
+</ul>
+<p><strong>示例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3&quot;</span><br><span class="line">services:</span><br><span class="line"></span><br><span class="line">  redis:</span><br><span class="line">    image: redis:alpine</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;6379&quot;</span><br><span class="line">    networks:</span><br><span class="line">      - frontend</span><br><span class="line">    deploy:</span><br><span class="line">      replicas: 2</span><br><span class="line">      update_config:</span><br><span class="line">        parallelism: 2</span><br><span class="line">        delay: 10s</span><br><span class="line">      restart_policy:</span><br><span class="line">        condition: on-failure</span><br><span class="line"></span><br><span class="line">  db:</span><br><span class="line">    image: postgres:9.4</span><br><span class="line">    volumes:</span><br><span class="line">      - db-data:/var/lib/postgresql/data</span><br><span class="line">    networks:</span><br><span class="line">      - backend</span><br><span class="line">    deploy:</span><br><span class="line">      placement:</span><br><span class="line">        constraints: [node.role == manager]</span><br><span class="line"></span><br><span class="line">  result:</span><br><span class="line">    image: dockersamples/examplevotingapp_result:before</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;5001:80&quot;</span><br><span class="line">    networks:</span><br><span class="line">      - backend</span><br><span class="line">    depends_on:</span><br><span class="line">      - db</span><br><span class="line">    deploy:</span><br><span class="line">      replicas: 1</span><br><span class="line">      update_config:</span><br><span class="line">        parallelism: 2</span><br><span class="line">        delay: 10s</span><br><span class="line">      restart_policy:</span><br><span class="line">        condition: on-failure</span><br><span class="line"></span><br><span class="line">  worker:</span><br><span class="line">    image: dockersamples/examplevotingapp_worker</span><br><span class="line">    networks:</span><br><span class="line">      - frontend</span><br><span class="line">      - backend</span><br><span class="line">    deploy:</span><br><span class="line">      mode: replicated</span><br><span class="line">      replicas: 1</span><br><span class="line">      labels: [APP=VOTING]</span><br><span class="line">      restart_policy:</span><br><span class="line">        condition: on-failure</span><br><span class="line">        delay: 10s</span><br><span class="line">        max_attempts: 3</span><br><span class="line">        window: 120s</span><br><span class="line">      placement:</span><br><span class="line">        constraints: [node.role == manager]</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  frontend:</span><br><span class="line">  backend:</span><br><span class="line"></span><br><span class="line">volumes:</span><br><span class="line">  db-data:</span><br></pre></td></tr></table></figure>
+
+<h2 id="services配置指令"><a href="#services配置指令" class="headerlink" title="services配置指令"></a>services配置指令</h2><p><strong>1. container_name</strong>  </p>
+<p>指定容器名称</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">"3"</span></span><br><span class="line">services:</span><br><span class="line"></span><br><span class="line">  redis:</span><br><span class="line">    image: redis:alpine</span><br><span class="line">    container_name: redis_test</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. image</strong>  </p>
+<p>指定为镜像名称或镜像 ID。如果镜像在本地不存在，Compose 将会尝试拉取这个镜像。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">"3"</span></span><br><span class="line">services:</span><br><span class="line"></span><br><span class="line">  redis:</span><br><span class="line">    image: redis:alpine</span><br></pre></td></tr></table></figure>
+
+<p><strong>3. build</strong>  </p>
+<p>指定 Dockerfile 所在文件夹的路径（可以是绝对路径，或者相对 docker-compose.yml 文件的路径）。 Compose 将会利用它自动构建这个镜像，然后使用这个镜像。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">'3'</span></span><br><span class="line">services:</span><br><span class="line">  webapp:</span><br><span class="line">    build: ./dir</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">也可以使用 context 指令指定 Dockerfile 所在文件夹的路径（或者是git仓库的URL）。同时使用 dockerfile 指令指定 Dockerfile 文件名。</span><br><span class="line"></span><br><span class="line">```sh</span><br><span class="line">version: <span class="string">'3'</span></span><br><span class="line">services:</span><br><span class="line"></span><br><span class="line">  webapp:</span><br><span class="line">    build:</span><br><span class="line">      context: ./dir</span><br><span class="line">      dockerfile: Dockerfile-name</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：<br>如果同时指定了 image和 build， image 不在具有单独使用它的意义，而是指定了目前要构建的镜像的名称。 也就是说 Compose 会使用 build 指令中指定的 Dockerfile  构建的镜像，之后构建的镜像名称使用 image 中指定的名字 webapp:tag命名。</strong></p>
+<p><strong>4. command</strong>  </p>
+<p>使用 command 可以覆盖容器启动后默认执行的命令。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#写成shell形式</span></span><br><span class="line"><span class="built_in">command</span>: bundle <span class="built_in">exec</span> thin -p 3000</span><br><span class="line"><span class="comment">#写成Dockerfile中的exec格式</span></span><br><span class="line"><span class="built_in">command</span>: [bundle, <span class="built_in">exec</span>, thin, -p, 3000]</span><br></pre></td></tr></table></figure>
+
+<p><strong>5. depends_on</strong>   </p>
+<p>解决容器的依赖、启动先后的问题。  </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  web:</span><br><span class="line">    image: redis:alpine</span><br><span class="line">    container_name: redis_test</span><br><span class="line">    depends_on:</span><br><span class="line">      - db</span><br></pre></td></tr></table></figure>
+
+<p><strong>6. environment</strong>  </p>
+<p>设置环境变量。可以使用数组或字典两种格式。</p>
+<p>只给定名称的变量会自动获取运行 Compose 主机上的对应变量的信息。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">environment:</span><br><span class="line">  RACK_ENV: development</span><br><span class="line">  SHOW: <span class="string">'true'</span></span><br><span class="line">  SESSION_SECRET:</span><br><span class="line"></span><br><span class="line">environment:</span><br><span class="line">  - RACK_ENV=development</span><br><span class="line">  - SHOW=<span class="literal">true</span></span><br><span class="line">  - SESSION_SECRET</span><br></pre></td></tr></table></figure>
+
+<p>如果变量名称或者值中用到 true|false，yes|no 等表达 布尔 含义的词汇，最好放到引号里，避免 YAML 自动解析某些内容为对应的布尔语义。这些特定词汇。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">y|Y|yes|Yes|YES|n|N|no|No|NO|<span class="literal">true</span>|True|TRUE|<span class="literal">false</span>|False|FALSE|on|On|ON|off|Off|OFF</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">**7. expose**  </span><br><span class="line"></span><br><span class="line">暴露端口，但不映射到宿主机，只被连接的服务访问。</span><br><span class="line"></span><br><span class="line">仅可以指定容器内部的端口为参数</span><br><span class="line"></span><br><span class="line">```sh</span><br><span class="line">expose:</span><br><span class="line"> - <span class="string">"3000"</span></span><br><span class="line"> - <span class="string">"8000"</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>8. ports</strong></p>
+<p>映射端口信息。</p>
+<p>宿主端口：容器端口 (即：HOST:CONTAINER) 的格式格式，或者仅仅指定容器的端口（宿主将会随机选择端口）。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ports:</span><br><span class="line"> - <span class="string">"3000"</span></span><br><span class="line"> - <span class="string">"3000-3005"</span></span><br><span class="line"> - <span class="string">"8000:8000"</span></span><br><span class="line"> - <span class="string">"9090-9091:8080-8081"</span></span><br><span class="line"> - <span class="string">"49100:22"</span></span><br><span class="line"> - <span class="string">"127.0.0.1:8001:8001"</span></span><br><span class="line"> - <span class="string">"127.0.0.1:5000-5010:5000-5010"</span></span><br><span class="line"> - <span class="string">"6060:6060/udp"</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：当使用 HOST:CONTAINER 格式来映射端口时，如果你使用的容器端口小于 60 并且没放到引号里，可能会得到错误结果，因为 YAML 会自动解析 xx:yy 这种数字格式为 60 进制。为避免出现这种问题，建议数字串都采用引号包括起来的字符串格式。</p>
+</blockquote>
+<p><strong>9. extra_hosts</strong>  </p>
+<p>类似 Docker 中的 –add-host 参数，指定额外的 host 名称映射信息。会在启动后的服务容器中 /etc/hosts 文件中添加host映射信息。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">extra_hosts:</span><br><span class="line"> - <span class="string">"somehost:162.242.195.82"</span></span><br><span class="line"> - <span class="string">"otherhost:50.31.209.229"</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>10. networks</strong>  </p>
+<p>要加入的网络，使用顶级 networks 定义下的条目 。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">services:</span><br><span class="line">  some-service:</span><br><span class="line">    networks:</span><br><span class="line">     - some-network</span><br><span class="line">     - other-network</span><br><span class="line">networks:</span><br><span class="line">  some-network:</span><br><span class="line">  other-network:</span><br></pre></td></tr></table></figure>
+
+<p><strong>11. entrypoint</strong>  </p>
+<p>指定服务容器启动后执行的入口文件。</p>
+<p><strong>12. user</strong>  </p>
+<p>指定容器中运行应用的用户名。</p>
+<p><strong>13. working_dir</strong>  </p>
+<p>指定容器中工作目录。</p>
+<p><strong>14. restart</strong></p>
+<p>指定容器退出后的重启策略为始终重启。该命令对保持服务始终运行十分有效，在生产环境 中推荐配置为 always 或者 unless-stopped 。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">restart: always</span><br></pre></td></tr></table></figure>
+
+<p><strong>15. alias</strong>  </p>
+<p>网络上此服务的别名（备用主机名）。同一网络上的其他容器可以使用服务名称或此别名连接到其中一个服务的容器。<br>由于aliases是网络范围的，因此相同的服务可以在不同的网络上具有不同的别名。<br>注意：网络范围的别名可以由多个容器共享，甚至可以由多个服务共享。如果是，则无法保证名称解析为的容器。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">services:</span><br><span class="line">  some-service:</span><br><span class="line">    networks:</span><br><span class="line">      some-network:</span><br><span class="line">        aliases:</span><br><span class="line">         - alias1</span><br><span class="line">         - alias3</span><br><span class="line">      other-network:</span><br><span class="line">        aliases:</span><br><span class="line">         - alias2</span><br></pre></td></tr></table></figure>
+
+<h2 id="volumes配置指令"><a href="#volumes配置指令" class="headerlink" title="volumes配置指令"></a>volumes配置指令</h2><p>数据卷所挂载路径设置。可以设置宿主机路径 （HOST:CONTAINER） 或加上访问模式 （HOST:CONTAINER:ro）。</p>
+<p>该指令中路径支持相对路径。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">volumes:</span><br><span class="line"> - /var/lib/mysql</span><br><span class="line"> - cache/:/tmp/cache</span><br><span class="line"> - ~/configs:/etc/configs/:ro</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/07/28/docker04/">docker学习(四)</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
+        <p><span>发布时间:</span>2019-07-28, 21:53:42</p>
+        <p><span>最后更新:</span>2019-07-29, 00:01:26</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/28/docker04/" title="docker学习(四)">https://x-ljy.github.io/2019/07/28/docker04/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/28/docker04/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/07/26/docker03/">
+                    docker学习(三)
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-compopse-yml-版本和Docker兼容性表"><span class="toc-number">1.</span> <span class="toc-text">docker-compopse.yml 版本和Docker兼容性表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#顶级配置项"><span class="toc-number">2.</span> <span class="toc-text">顶级配置项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#services配置指令"><span class="toc-number">3.</span> <span class="toc-text">services配置指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#volumes配置指令"><span class="toc-number">4.</span> <span class="toc-text">volumes配置指令</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"docker学习(四)　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/07/26/docker03/" title="下一篇: docker学习(三)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/docker04/">docker学习(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/docker03/">docker学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/k8s001/">k8s学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/mysql01/">mysql01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/23/docker02/">docker学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/jvm2/">JVM系列（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/jvm1/">JVM系列（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/docker01/">docker学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2019 夕
+            </div>
+            <div class="footer-right">
+                <a href="https://github.com/X-ljy" target="_blank" title="快速、简洁且高效的博客框架"></a>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span></span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+	<br>
+	
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+                本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("07/05/2019 00:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+	setInterval("createtime()",250);
+</script>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"superSample":2,"width":150,"height":320,"position":"left","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"tagMode":false});</script></body>
+</html>

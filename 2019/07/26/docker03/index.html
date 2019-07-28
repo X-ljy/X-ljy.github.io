@@ -24,7 +24,7 @@
 <meta property="og:description" content="Docker 网络详解">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://x-ljy.github.io/2019/07/26/docker03/nginx.png">
-<meta property="og:updated_time" content="2019-07-27T11:05:38.535Z">
+<meta property="og:updated_time" content="2019-07-28T14:17:18.120Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker学习(三)">
 <meta name="twitter:description" content="Docker 网络详解">
@@ -299,8 +299,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建br1网桥</span></span><br><span class="line">docker network create -d bridge --subnet <span class="string">'172.30.0.0/16'</span> --gateway <span class="string">'172.30.0.1'</span> br1</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看docker网络</span></span><br><span class="line"> docker network ls</span><br><span class="line"></span><br><span class="line"> NETWORK ID          NAME                    DRIVER              SCOPE</span><br><span class="line"> b9c01f82c16b        br1                     bridge              <span class="built_in">local</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">#自定义网桥的使用</span></span><br><span class="line"> docker run -it --network br1 镜像名称 bash</span><br></pre></td></tr></table></figure>
 
 <h2 id="Host（开放式网络模式）"><a href="#Host（开放式网络模式）" class="headerlink" title="Host（开放式网络模式）"></a>Host（开放式网络模式）</h2><p>Host模式使用是在容器启动时候指明–network host，此时容器共享宿主机的Network Namespace，容器内启动的端口直接是宿主机的端口，并且容器不会创建网卡和IP，直接使用宿主机的网卡和IP，但是容器内的其他资源是隔离的，如文件系统、用户和用户组。这种模式的好处就是效率高，因为不需要额外的网络开始，直接使用宿主机网络。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name nginx --network host nginx:latest</span><br></pre></td></tr></table></figure>
-
+<pre><code class="sh">docker run -d --name nginx --network host nginx:latest</code></pre>
 <p><img src="//x-ljy.github.io/2019/07/26/docker03/nginx.png" alt></p>
 <h2 id="Container-联合挂载式网络模式"><a href="#Container-联合挂载式网络模式" class="headerlink" title="Container(联合挂载式网络模式)"></a>Container(联合挂载式网络模式)</h2><p>这个模式指定新创建的容器和已经存在的一个容器共享一个 Network Namespace，而不是和宿主机共享。新创建的容器不会创建自己的网卡，配置自己的 IP，而是和一个指定的容器共享 IP、端口范围等。同样，两个容器除了网络方面，其他的如文件系统、进程列表等还是隔离的。两个容器的进程可以通过 lo回环 通信。同样，kubernetes中的pod的话，pod内的网络也是靠这样的共享方式来实现的。</p>
 <h2 id="None（封闭式网络模式）"><a href="#None（封闭式网络模式）" class="headerlink" title="None（封闭式网络模式）"></a>None（封闭式网络模式）</h2><p>使用–network none选项指定其网络模式，在该模式下虽然容器有着自己的Network Namespace，但是容器内没有网卡、IP、路由信息，只有一个lo回环接口。如果需要网络配置则需要用户手动进行配置网卡、ip以及路由信息，通常这样的容器用于承担某些无需网络介入的工作，如离线任务、备份等。</p>
@@ -315,7 +314,7 @@
         <p><span>本文标题:</span><a href="/2019/07/26/docker03/">docker学习(三)</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-07-26, 10:50:58</p>
-        <p><span>最后更新:</span>2019-07-27, 19:05:38</p>
+        <p><span>最后更新:</span>2019-07-28, 22:17:18</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/07/26/docker03/" title="docker学习(三)">https://x-ljy.github.io/2019/07/26/docker03/</a>
             <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/26/docker03/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -329,6 +328,12 @@
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/07/28/docker04/">
+                    docker学习(四)
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -401,7 +406,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2019/07/28/docker04/" title="上一篇: docker学习(四)">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -413,7 +420,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/docker03/">docker学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/k8s001/">k8s学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/mysql01/">mysql01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/23/docker02/">docker学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/jvm2/">JVM系列（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/jvm1/">JVM系列（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/docker01/">docker学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/docker04/">docker学习(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/docker03/">docker学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/k8s001/">k8s学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/mysql01/">mysql01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/23/docker02/">docker学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/jvm2/">JVM系列（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/jvm1/">JVM系列（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/docker01/">docker学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
 
 
 
