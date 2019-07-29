@@ -24,7 +24,7 @@
 <meta property="og:description" content="docker-compose.yml V3.x 指令详解">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://x-ljy.github.io/2019/07/28/docker04/001.png">
-<meta property="og:updated_time" content="2019-07-28T16:01:26.799Z">
+<meta property="og:updated_time" content="2019-07-29T14:47:18.743Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker学习(四)">
 <meta name="twitter:description" content="docker-compose.yml V3.x 指令详解">
@@ -240,7 +240,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.3k字</span>
+        <span class="post-count">1.5k字</span>
       </span>
     </span>
 
@@ -249,7 +249,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">5分</span>
+        <span class="post-count">6分</span>
       </span>
     </span>
 </div>
@@ -354,6 +354,20 @@
 <p>该指令中路径支持相对路径。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">volumes:</span><br><span class="line"> - /var/lib/mysql</span><br><span class="line"> - cache/:/tmp/cache</span><br><span class="line"> - ~/configs:/etc/configs/:ro</span><br></pre></td></tr></table></figure>
 
+<h2 id="volumes配置指令-1"><a href="#volumes配置指令-1" class="headerlink" title="volumes配置指令"></a>volumes配置指令</h2><p><strong>1. 未显式声明网络环境的docker-compose.yml</strong>  </p>
+<p><strong>使用docker-compose up启动容器后，这些容器都会被加入app_default网络中。使用docker network ls可以查看网络列表，docker network inspect <container id>可以查看对应网络的配置。</container></strong>  </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">'3'</span></span><br><span class="line">services:</span><br><span class="line">  web:</span><br><span class="line">    mage: nginx:latest</span><br><span class="line">    container_name: web</span><br><span class="line">    depends_on:</span><br><span class="line">      - db</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">"9090:80"</span></span><br><span class="line">    links:</span><br><span class="line">      - db</span><br><span class="line">  db:</span><br><span class="line">    image: mysql</span><br><span class="line">    container_name: db</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. networks关键字指定自定义网络</strong>  </p>
+<p>例如下面的docker-compose.yml文件，定义了front和back网络，实现了网络隔离。其中proxy和db之间只能通过app来实现通信。其中，custom-driver-1并不能直接使用，你应该替换为host, bridge, overlay等选项中的一种。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  proxy:</span><br><span class="line">    build: ./proxy</span><br><span class="line">    networks:</span><br><span class="line">      - front</span><br><span class="line">  app:</span><br><span class="line">    build: ./app</span><br><span class="line">    networks:</span><br><span class="line">      - front</span><br><span class="line">      - back</span><br><span class="line">  db:</span><br><span class="line">    image: postgres</span><br><span class="line">    networks:</span><br><span class="line">      - back</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  front:</span><br><span class="line">    <span class="comment"># Use a custom driver</span></span><br><span class="line">    driver: custom-driver-1</span><br><span class="line">  back:</span><br><span class="line">    <span class="comment"># Use a custom driver which takes special options</span></span><br><span class="line">    driver: custom-driver-2</span><br><span class="line">    driver_opts:</span><br><span class="line">      foo: <span class="string">"1"</span></span><br><span class="line">      bar: <span class="string">"2"</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 配置默认网络</strong>  </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">'2'</span></span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  web:</span><br><span class="line">    build: .</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">"8000:8000"</span></span><br><span class="line">  db:</span><br><span class="line">    image: postgres</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  default:</span><br><span class="line">    <span class="comment"># Use a custom driver</span></span><br><span class="line">    driver: custom-driver-1</span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 使用已存在的网络</strong>  </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">networks:</span><br><span class="line">  default:</span><br><span class="line">    external:</span><br><span class="line">      name: my-pre-existing-network</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -365,7 +379,7 @@
         <p><span>本文标题:</span><a href="/2019/07/28/docker04/">docker学习(四)</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-07-28, 21:53:42</p>
-        <p><span>最后更新:</span>2019-07-29, 00:01:26</p>
+        <p><span>最后更新:</span>2019-07-29, 22:47:18</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/07/28/docker04/" title="docker学习(四)">https://x-ljy.github.io/2019/07/28/docker04/</a>
             <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/28/docker04/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -379,6 +393,12 @@
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/07/29/springboot-shiro01/">
+                    springboot-shiro01
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -395,7 +415,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-compopse-yml-版本和Docker兼容性表"><span class="toc-number">1.</span> <span class="toc-text">docker-compopse.yml 版本和Docker兼容性表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#顶级配置项"><span class="toc-number">2.</span> <span class="toc-text">顶级配置项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#services配置指令"><span class="toc-number">3.</span> <span class="toc-text">services配置指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#volumes配置指令"><span class="toc-number">4.</span> <span class="toc-text">volumes配置指令</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-compopse-yml-版本和Docker兼容性表"><span class="toc-number">1.</span> <span class="toc-text">docker-compopse.yml 版本和Docker兼容性表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#顶级配置项"><span class="toc-number">2.</span> <span class="toc-text">顶级配置项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#services配置指令"><span class="toc-number">3.</span> <span class="toc-text">services配置指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#volumes配置指令"><span class="toc-number">4.</span> <span class="toc-text">volumes配置指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#volumes配置指令-1"><span class="toc-number">5.</span> <span class="toc-text">volumes配置指令</span></a></li></ol>
         
     </div>
     <style>
@@ -451,7 +471,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2019/07/29/springboot-shiro01/" title="上一篇: springboot-shiro01">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -463,7 +485,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/docker04/">docker学习(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/docker03/">docker学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/k8s001/">k8s学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/mysql01/">mysql01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/23/docker02/">docker学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/jvm2/">JVM系列（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/jvm1/">JVM系列（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/docker01/">docker学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/29/springboot-shiro01/">springboot-shiro01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/docker04/">docker学习(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/docker03/">docker学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/k8s001/">k8s学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/mysql01/">mysql01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/23/docker02/">docker学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/jvm2/">JVM系列（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/jvm1/">JVM系列（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/docker01/">docker学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
 
 
 
