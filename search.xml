@@ -31,7 +31,7 @@
     
     
     <entry>
-      <title>docker学习(四)</title>
+      <title>docker学习(四)----docker-compose.yml V3.x 指令详解</title>
       <link href="/2019/07/28/docker04/"/>
       <url>/2019/07/28/docker04/</url>
       
@@ -56,7 +56,7 @@
     
     
     <entry>
-      <title>docker学习(三)</title>
+      <title>docker学习(三)----Docker 网络详解</title>
       <link href="/2019/07/26/docker03/"/>
       <url>/2019/07/26/docker03/</url>
       
@@ -81,7 +81,7 @@
     
     
     <entry>
-      <title>k8s学习(一)</title>
+      <title>k8s学习(一)----k8s集群部署</title>
       <link href="/2019/07/24/k8s001/"/>
       <url>/2019/07/24/k8s001/</url>
       
@@ -131,7 +131,7 @@
     
     
     <entry>
-      <title>docker学习(二)</title>
+      <title>docker学习(二)----Docker基础命令</title>
       <link href="/2019/07/23/docker02/"/>
       <url>/2019/07/23/docker02/</url>
       
@@ -181,7 +181,7 @@
     
     
     <entry>
-      <title>JVM系列（二）</title>
+      <title>JVM系列(二)----JVM内存结构</title>
       <link href="/2019/07/14/jvm2/"/>
       <url>/2019/07/14/jvm2/</url>
       
@@ -206,7 +206,7 @@
     
     
     <entry>
-      <title>JVM系列（一）</title>
+      <title>JVM系列(一)----JVM基本概念</title>
       <link href="/2019/07/13/jvm1/"/>
       <url>/2019/07/13/jvm1/</url>
       
@@ -231,7 +231,7 @@
     
     
     <entry>
-      <title>docker学习(一)</title>
+      <title>docker学习(一)----Dockerfile基础指令</title>
       <link href="/2019/07/06/docker01/"/>
       <url>/2019/07/06/docker01/</url>
       

@@ -15,19 +15,19 @@
 
 
 
-<meta name="description" content="JVM内存结构">
+<meta name="description" content="经典JVM内存布局（JDK8以上）    一、Heap（堆区）   Heap存储着几乎所有的实例对象，堆由垃圾收集器自动回收，堆区由各个子线程共享使用。 通常情况下，它占用的空间是所有内存区域中最大的，同时也是OOM（Out Of Memory）故障最主要的发源地。   堆的内存空间既可以固定大小，也可以在运行时动态地调整。   通过如下参数设置初始值和最大值，比如-Xms256M -Xmx102">
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JVM系列（二）">
+<meta property="og:title" content="JVM系列(二)----JVM内存结构">
 <meta property="og:url" content="https://x-ljy.github.io/2019/07/14/jvm2/index.html">
 <meta property="og:site_name" content="夕的博客">
-<meta property="og:description" content="JVM内存结构">
+<meta property="og:description" content="经典JVM内存布局（JDK8以上）    一、Heap（堆区）   Heap存储着几乎所有的实例对象，堆由垃圾收集器自动回收，堆区由各个子线程共享使用。 通常情况下，它占用的空间是所有内存区域中最大的，同时也是OOM（Out Of Memory）故障最主要的发源地。   堆的内存空间既可以固定大小，也可以在运行时动态地调整。   通过如下参数设置初始值和最大值，比如-Xms256M -Xmx102">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://x-ljy.github.io/2019/07/14/jvm2/jvm2.png">
-<meta property="og:updated_time" content="2019-07-21T05:42:35.883Z">
+<meta property="og:updated_time" content="2019-07-30T04:25:32.557Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JVM系列（二）">
-<meta name="twitter:description" content="JVM内存结构">
+<meta name="twitter:title" content="JVM系列(二)----JVM内存结构">
+<meta name="twitter:description" content="经典JVM内存布局（JDK8以上）    一、Heap（堆区）   Heap存储着几乎所有的实例对象，堆由垃圾收集器自动回收，堆区由各个子线程共享使用。 通常情况下，它占用的空间是所有内存区域中最大的，同时也是OOM（Out Of Memory）故障最主要的发源地。   堆的内存空间既可以固定大小，也可以在运行时动态地调整。   通过如下参数设置初始值和最大值，比如-Xms256M -Xmx102">
 <meta name="twitter:image" content="https://x-ljy.github.io/2019/07/14/jvm2/jvm2.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -60,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>JVM系列（二） | 夕的博客</title>
+<title>JVM系列(二)----JVM内存结构 | 夕的博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -226,7 +226,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      JVM系列（二）
+      JVM系列(二)----JVM内存结构
     </h1>
   
 
@@ -312,12 +312,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/07/14/jvm2/">JVM系列（二）</a></p>
+        <p><span>本文标题:</span><a href="/2019/07/14/jvm2/">JVM系列(二)----JVM内存结构</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-07-14, 16:39:22</p>
-        <p><span>最后更新:</span>2019-07-21, 13:42:35</p>
+        <p><span>最后更新:</span>2019-07-30, 12:25:32</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/07/14/jvm2/" title="JVM系列（二）">https://x-ljy.github.io/2019/07/14/jvm2/</a>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/14/jvm2/" title="JVM系列(二)----JVM内存结构">https://x-ljy.github.io/2019/07/14/jvm2/</a>
             <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/14/jvm2/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -339,7 +339,7 @@
         
             <div id="article-nav-older" class="article-nav-title">
                 <a href="/2019/07/13/jvm1/">
-                    JVM系列（一）
+                    JVM系列(一)----JVM基本概念
                 </a>
             </div>
         
@@ -387,7 +387,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"JVM系列（二）　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"JVM系列(二)----JVM内存结构　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -415,13 +415,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/07/13/jvm1/" title="下一篇: JVM系列（一）">
+            <a href="/2019/07/13/jvm1/" title="下一篇: JVM系列(一)----JVM基本概念">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/29/springboot-shiro01/">springboot-shiro01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/docker04/">docker学习(四)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/docker03/">docker学习(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/k8s001/">k8s学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/mysql01/">mysql01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/23/docker02/">docker学习(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/jvm2/">JVM系列（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/jvm1/">JVM系列（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/docker01/">docker学习(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/29/springboot-shiro01/">springboot-shiro01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/docker04/">docker学习(四)----docker-compose.yml V3.x 指令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/docker03/">docker学习(三)----Docker 网络详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/k8s001/">k8s学习(一)----k8s集群部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/mysql01/">mysql01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/23/docker02/">docker学习(二)----Docker基础命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/jvm2/">JVM系列(二)----JVM内存结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/jvm1/">JVM系列(一)----JVM基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/docker01/">docker学习(一)----Dockerfile基础指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
 
 
 
