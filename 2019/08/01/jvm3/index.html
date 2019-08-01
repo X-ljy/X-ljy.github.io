@@ -16,16 +16,16 @@
 
 
 <meta name="description" content="Talk is cheap. Show me the code.">
-<meta name="keywords" content="Docker">
+<meta name="keywords" content="标签">
 <meta property="og:type" content="article">
-<meta property="og:title" content="docker学习(二)----Docker基础命令">
-<meta property="og:url" content="https://x-ljy.github.io/2019/07/23/docker02/index.html">
+<meta property="og:title" content="jvm3">
+<meta property="og:url" content="https://x-ljy.github.io/2019/08/01/jvm3/index.html">
 <meta property="og:site_name" content="夕的博客">
 <meta property="og:description" content="Talk is cheap. Show me the code.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-30T04:45:19.136Z">
+<meta property="og:updated_time" content="2019-08-01T10:18:25.355Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="docker学习(二)----Docker基础命令">
+<meta name="twitter:title" content="jvm3">
 <meta name="twitter:description" content="Talk is cheap. Show me the code.">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>docker学习(二)----Docker基础命令 | 夕的博客</title>
+<title>jvm3 | 夕的博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -204,12 +204,16 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
-<article id="post-docker02" class="article article-type-post" itemscope itemprop="blogPost">
+  <i class="fa fa-thumb-tack"></i>
+  <font color=7D26CD>置顶</font>
+  <span class="post-meta-divider">|</span>
+
+<article id="post-jvm3" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       
-<a href="/2019/07/23/docker02/" class="article-date">
-      <time datetime="2019-07-23T03:21:47.000Z" itemprop="datePublished">2019-07-23</time>
+<a href="/2019/08/01/jvm3/" class="article-date">
+      <time datetime="2019-08-01T10:18:25.000Z" itemprop="datePublished">2019-08-01</time>
 </a>
 
 
@@ -224,7 +228,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      docker学习(二)----Docker基础命令
+      jvm3
     </h1>
   
 
@@ -234,7 +238,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">736字</span>
+        <span class="post-count">0字</span>
       </span>
     </span>
 
@@ -243,7 +247,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
+        <span class="post-count">1分</span>
       </span>
     </span>
 </div>
@@ -254,13 +258,13 @@
       <div class="article-entry article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Docker/">Docker</a>
+    <a class="article-category-link" href="/categories/分类/">分类</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/标签/">标签</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -270,37 +274,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h2><p><strong>- 镜像</strong>  </p>
-<p>  Docker 镜像是一个特殊的文件系统，除了提供容器运行时所需的程序、库、资源、配置等文 件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）。镜像 不包含任何动态数据，其内容在构建之后也不会被改变。  </p>
-<p>  镜像构建时，会一层层构建，前一层是后一层的基础。每一层构建完就不会再发生改变，后 一层上的任何改变只发生在自己这一层。  </p>
-<p><strong>- 容器</strong>  </p>
-<p>  镜像（ Image ）和容器（ Container ）的关系，就像 类 和 实例 的关系一样。容器的实质是进程，但与宿主机执行的进程不一样。容器进程运行于属于自己的独立的命名空间（容器可以拥有自己的 root 文件系统，网络配置，进程空间，甚至自己的用户ID空间）。</p>
-<p>  每一个容器运行时，是以镜像为基础层， 在其上创建一个当前容器的存储层，我们可以称这个为容器运行时读写而准备的存储层为容器存储层。容器存储层的生存周期和容器一样，容器消亡时，容器存储层也随之消亡。因此，任何保存 于容器存储层的信息都会随容器删除而丢失。  </p>
-<p>  <strong>注意：</strong> 容器不应该向其存储层内写入任何数据，容器存储层要保持无状态化。所有文件的写入操作，都应该使用 数据卷（VOLUME），或者绑定宿主机目录，在这些位置的读写会跳过容器存储层，直接对宿主（或网络存储）发生读写，其性能和稳定性更高。  </p>
-<p>  数据卷的生存周期独立于容器，容器消亡，数据卷不会。使用数据卷后，容器删除或者重新运行，数据不会丢失。  </p>
-<p><strong>- 仓库</strong>  </p>
-<p>  一个集中地存储、分发镜像的服务，叫做docker仓库(Docker Registry)<br>  仓库可以是私有的，也可以是公开的。</p>
-<h2 id="二、Docker环境信息相关命令"><a href="#二、Docker环境信息相关命令" class="headerlink" title="二、Docker环境信息相关命令"></a>二、Docker环境信息相关命令</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#登录docker hub</span></span><br><span class="line">docker login</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#运行后从指定服务器登出，默认为官方服务器。</span></span><br><span class="line"> docker <span class="built_in">logout</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看docker详细信息</span></span><br><span class="line">docker info</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">```sh</span><br><span class="line"><span class="comment">#查看docker 版本信息</span></span><br><span class="line">docker version</span><br></pre></td></tr></table></figure>
-
-<h2 id="三、Docker镜像相关命令"><a href="#三、Docker镜像相关命令" class="headerlink" title="三、Docker镜像相关命令"></a>三、Docker镜像相关命令</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在镜像仓库中搜索</span></span><br><span class="line">docker search [OPTIONS] ImageName  </span><br><span class="line"></span><br><span class="line">OPTIONS说明：</span><br><span class="line"></span><br><span class="line">--automated :只列出 automated build类型的镜像；</span><br><span class="line"></span><br><span class="line">--no-trunc :显示完整的镜像描述；</span><br><span class="line"></span><br><span class="line">-s :列出收藏数不小于指定值的镜像。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#镜像拉取</span></span><br><span class="line">docker pull [选项] [Docker Registry 地址[:端口号]/]仓库名[:标签]</span><br><span class="line"></span><br><span class="line">选项说明：</span><br><span class="line"></span><br><span class="line">-a :拉取所有 tagged 镜像</span><br><span class="line"></span><br><span class="line">--<span class="built_in">disable</span>-content-trust :忽略镜像的校验,默认开启</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#列出镜像列表</span></span><br><span class="line">docker images ls</span><br><span class="line"></span><br><span class="line">docker images</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看镜像、容器、数据卷所占用的空间</span></span><br><span class="line">docker system df</span><br><span class="line"></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">```sh</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
+        
       
     </div>
     
@@ -308,13 +282,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/07/23/docker02/">docker学习(二)----Docker基础命令</a></p>
+        <p><span>本文标题:</span><a href="/2019/08/01/jvm3/">jvm3</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
-        <p><span>发布时间:</span>2019-07-23, 11:21:47</p>
-        <p><span>最后更新:</span>2019-07-30, 12:45:19</p>
+        <p><span>发布时间:</span>2019-08-01, 18:18:25</p>
+        <p><span>最后更新:</span>2019-08-01, 18:18:25</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/07/23/docker02/" title="docker学习(二)----Docker基础命令">https://x-ljy.github.io/2019/07/23/docker02/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/23/docker02/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/08/01/jvm3/" title="jvm3">https://x-ljy.github.io/2019/08/01/jvm3/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/08/01/jvm3/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -326,16 +300,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/07/24/mysql01/">
-                    mysql必知必会（一）----常用的数据类型
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/07/20/git/">
-                    Git基本操作
+                <a href="/2019/07/29/springboot-shiro01/">
+                    springboot-shiro01
                 </a>
             </div>
         
@@ -347,7 +315,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、基本概念"><span class="toc-number">1.</span> <span class="toc-text">一、基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Docker环境信息相关命令"><span class="toc-number">2.</span> <span class="toc-text">二、Docker环境信息相关命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、Docker镜像相关命令"><span class="toc-number">3.</span> <span class="toc-text">三、Docker镜像相关命令</span></a></li></ol>
+            
         
     </div>
     <style>
@@ -383,7 +351,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"docker学习(二)----Docker基础命令　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"jvm3　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -403,15 +371,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/07/24/mysql01/" title="上一篇: mysql必知必会（一）----常用的数据类型">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/07/20/git/" title="下一篇: Git基本操作">
+            <a href="/2019/07/29/springboot-shiro01/" title="下一篇: springboot-shiro01">
                 <i class="fa fa-angle-right"></i>
             </a>
         

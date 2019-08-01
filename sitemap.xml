@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://x-ljy.github.io/2019/08/01/jvm3/</loc>
+    
+    <lastmod>2019-08-01T10:18:25.355Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://x-ljy.github.io/2019/07/14/jvm2/</loc>
+    
+    <lastmod>2019-08-01T10:14:10.670Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://x-ljy.github.io/2019/07/24/mysql01/</loc>
     
     <lastmod>2019-08-01T02:39:25.831Z</lastmod>
@@ -54,13 +68,6 @@
     <loc>https://x-ljy.github.io/2019/07/06/docker01/</loc>
     
     <lastmod>2019-07-30T04:45:15.279Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://x-ljy.github.io/2019/07/14/jvm2/</loc>
-    
-    <lastmod>2019-07-30T04:41:21.644Z</lastmod>
     
   </url>
   
