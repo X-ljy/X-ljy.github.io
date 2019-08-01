@@ -24,7 +24,7 @@
 <meta property="og:description" content="世界上并没有完美的程序，但我们并不因此而沮丧，因为写程序本来就是一个不断追求完美的过程。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://x-ljy.github.io/2019/07/14/jvm2/jvm2.png">
-<meta property="og:updated_time" content="2019-08-01T10:14:10.670Z">
+<meta property="og:updated_time" content="2019-08-01T10:20:39.627Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM系列(二)----JVM内存结构">
 <meta name="twitter:description" content="世界上并没有完美的程序，但我们并不因此而沮丧，因为写程序本来就是一个不断追求完美的过程。">
@@ -274,14 +274,12 @@
           
         <p><strong>经典JVM内存布局（JDK8以上）</strong>  </p>
 <p><img src="//x-ljy.github.io/2019/07/14/jvm2/jvm2.png" alt></p>
-<p><strong>一、Heap（堆区）</strong>  </p>
-<p><strong>Heap存储着几乎所有的实例对象，堆由垃圾收集器自动回收，堆区由各个子线程共享使用。</strong> 通常情况下，它占用的空间是所有内存区域中最大的，同时也是OOM（Out Of Memory）故障最主要的发源地。  </p>
+<h2 id="一、Heap（堆区）"><a href="#一、Heap（堆区）" class="headerlink" title="一、Heap（堆区）"></a>一、Heap（堆区）</h2><p><strong>Heap存储着几乎所有的实例对象，堆由垃圾收集器自动回收，堆区由各个子线程共享使用。</strong> 通常情况下，它占用的空间是所有内存区域中最大的，同时也是OOM（Out Of Memory）故障最主要的发源地。  </p>
 <p>堆的内存空间既可以固定大小，也可以在运行时动态地调整。  </p>
 <p>通过如下参数设置初始值和最大值，比如-Xms256M -Xmx1024M （-X表示它是JVM运行参数，ms是memory start（最小堆容量）的简称，mx是memory max（最大堆容量）的简称）。由于服务器在不断运行过程中，堆空间不断地扩容与回缩，势必形成不必要的系统压力，所以在线上生产环境中，JVM的Xms Xmx 设置成一样大小，避免在GC调整堆大小时带来的额外压力。</p>
 <p><strong>堆分为两大块：新生代和老年代。</strong> 对象产生之初在新生代，步入暮年进入老年代，但是老年代也接纳在新生代无法容纳的超大对象。  </p>
 <p><strong>新生代 = 1个Eden区 + 2个Survivor区。</strong> 绝大部分对象在Eden区生成，当Eden区填满的时候，后触发Young Garbage Collection（YGC）。垃圾回收的时候在Eden区实现清除策略，没有被引用的对象则直接回收。仍然存活的对象会被移送到Survivor区。Survivor区被分为S0和S1两块内存空间，每次YGC的时候，他们将存活的对象复制到未使用那块空间，然后将当前正在使用的空间完全清除，交换两块空间的使用状态。如果YGC要移送的对象大于Survivor区容量的上限，则直接移交给老年代。<br><strong>每个对象都有一个计数器，每次YGC都会加1。-XX:MaxTenuringThreshold参数能配置计数器的值到达某个阈值的时候，对象从新生代晋升到老年代。默认值是15，可以在Survivor区交换14次之后，晋升至老年代。</strong> 如果参数配置为1，那么从新生代的Eden区直接移至老年代。<br>如果Survivor区无法放下，或者超大对象的阈值超过上限，则尝试在老年代进行分配；如果老年代也无法放下，则会触发Full Garbage Collection，即FGC。如果依然无法放下，则抛出OOM。可设置参数 -XX:+HeapDumpOnOutOfMemoryError,让JVM遇到OOM时输出堆内信息。  </p>
-<p><strong>二、方法区</strong>  </p>
-<ul>
+<h2 id="二、方法区"><a href="#二、方法区" class="headerlink" title="二、方法区"></a>二、方法区</h2><ul>
 <li><p>方法区与Java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</p>
 </li>
 <li><p>元空间的前身为永久代（Perm），在JDK8之后被淘汰，在JDK7及之前的版本中，只有Hotspot才有Perm区，译为永久代，它在启动的时候固定大小，很难进行调优，并且FGC时会移动类元信息。  </p>
@@ -289,8 +287,7 @@
 <li><p>区别于永久代，元空间在本地内存中分配。在JDK8里，Perm区中的所有内容中  字符串常量移至堆内存，其他内容包括类元信息，字段，静态属性，方法，常量等移动至元空间内。</p>
 </li>
 </ul>
-<p><strong>三、JVM Stack（虚拟机栈）</strong>  </p>
-<ul>
+<h2 id="三、JVM-Stack（虚拟机栈）"><a href="#三、JVM-Stack（虚拟机栈）" class="headerlink" title="三、JVM Stack（虚拟机栈）"></a>三、JVM Stack（虚拟机栈）</h2><ul>
 <li><p>java虚拟机栈是线程私有的，生命周期与线程相同。  </p>
 </li>
 <li><p>虚拟机栈描述的是Java方法执行的内存模型：每个方法在执行的同时会创建一个栈帧用于存储局部变量表，操作数栈，动态连接，方法出口等信息。每个方法从调用到执行完成的过程，都对应着一个栈帧在虚拟机栈入栈到出栈的过程。</p>
@@ -317,16 +314,14 @@
 <li>异常信息抛给能够处理的栈帧</li>
 <li>PC计数器指向方法调用后的下一条指令  </li>
 </ul>
-<p><strong>四、本地方法栈</strong>  </p>
-<ul>
+<h2 id="四、本地方法栈"><a href="#四、本地方法栈" class="headerlink" title="四、本地方法栈"></a>四、本地方法栈</h2><ul>
 <li><p>本地方法栈描述的是Native方法执行的内存模型  </p>
 </li>
 <li><p>可能抛出的异常：与 Java 虚拟机栈一样。  </p>
 </li>
 </ul>
 <p>本地方法栈在JVM内存布局中，也是线程对象私有的，但是虚拟机栈“主内”，而本地方法栈“主外”。本地方法栈为Native方法服务。<br>线程开始调用本地方法时，会进入一个不再受JVM约束的世界。本地方法可以通过JNI(Java Native Interface)来访问虚拟机运行时的数据区，甚至可以调用寄存器，具有和JVM相同的能力和权限。当大量本地方法出现时，势必会削弱JVM对系统的控制力，因为他的出错信息比较黑盒。对于内存不足的情况，本地方法栈还是会抛出native heap OutOfMemory。  </p>
-<p><strong>五、程序计数器（Program Counter Register，PC）</strong>  </p>
-<ul>
+<h2 id="五、程序计数器（Program-Counter-Register，PC）"><a href="#五、程序计数器（Program-Counter-Register，PC）" class="headerlink" title="五、程序计数器（Program Counter Register，PC）"></a>五、程序计数器（Program Counter Register，PC）</h2><ul>
 <li><p>程序计数器是一块较小的内存空间，可以看做是当前线程所执行的字节码的行号指示器。</p>
 </li>
 <li><p>字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支，循环，跳转，异常处理，线程恢复等基础功能都需要依赖这个计数器来完成。</p>
@@ -351,7 +346,7 @@
         <p><span>本文标题:</span><a href="/2019/07/14/jvm2/">JVM系列(二)----JVM内存结构</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-07-14, 16:39:22</p>
-        <p><span>最后更新:</span>2019-08-01, 18:14:10</p>
+        <p><span>最后更新:</span>2019-08-01, 18:20:39</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/07/14/jvm2/" title="JVM系列(二)----JVM内存结构">https://x-ljy.github.io/2019/07/14/jvm2/</a>
             <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/14/jvm2/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -387,7 +382,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Heap（堆区）"><span class="toc-number">1.</span> <span class="toc-text">一、Heap（堆区）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、方法区"><span class="toc-number">2.</span> <span class="toc-text">二、方法区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、JVM-Stack（虚拟机栈）"><span class="toc-number">3.</span> <span class="toc-text">三、JVM Stack（虚拟机栈）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、本地方法栈"><span class="toc-number">4.</span> <span class="toc-text">四、本地方法栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、程序计数器（Program-Counter-Register，PC）"><span class="toc-number">5.</span> <span class="toc-text">五、程序计数器（Program Counter Register，PC）</span></a></li></ol>
         
     </div>
     <style>
