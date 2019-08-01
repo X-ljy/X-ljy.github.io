@@ -81,6 +81,19 @@
     
     
     <entry>
+      <title></title>
+      <link href="/2019/07/24/mysql01/"/>
+      <url>/2019/07/24/mysql01/</url>
+      
+        <content type="html"><![CDATA[<hr><p>title: mysql必知必会（一）—-常用的数据类型<br>categories: 数据库<br>date: 2019-07-24 12:38:26<br>tags: [mysql]</p><h2 id="description-Talk-is-cheap-Show-me-the-code"><a href="#description-Talk-is-cheap-Show-me-the-code" class="headerlink" title="description: Talk is cheap. Show me the code."></a>description: Talk is cheap. Show me the code.</h2><h2 id="串数据类型"><a href="#串数据类型" class="headerlink" title="串数据类型"></a>串数据类型</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">CHAR</td><td align="left">1~255个字符的定长串。它的长度必须在创建时指定，否则Mysql假定为CHAR(1)</td></tr><tr><td align="left">ENUM</td><td align="left">接受最多64K个串组成的有个预定义集合的某个串</td></tr><tr><td align="left">LONGTEXT</td><td align="left">与TEXT相同，但最大长度为4GB</td></tr><tr><td align="left">MEDIUMTEXT</td><td align="left">与TEXT相同，但最大长度为16K</td></tr><tr><td align="left">SET</td><td align="left">接受最多64个串组成的一个预定义集合的零个或多个串</td></tr><tr><td align="left">TEXT</td><td align="left">最大长度为64K的变长文本</td></tr><tr><td align="left">TINYTEXT</td><td align="left">与TEXT相同，但最大长度为256字节</td></tr><tr><td align="left">VARCHAR</td><td align="left">长度可变，最多不超过255个字节。如果在创建时指定为VARCHAR(n),则可存储0-n个字符的变长串（其中 n &lt;= 255 ）</td></tr></tbody></table><p><strong>注意：<br>无论使用何种串数据类型，串值都必须在引号内（通常单引号更好）。</strong></p><h2 id="数值数据类型"><a href="#数值数据类型" class="headerlink" title="数值数据类型"></a>数值数据类型</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">BIT</td><td align="left">位字段，1～64位。（在MySQL 5之前，BIT在功能上等价于TINYINT</td></tr><tr><td align="left">BIGINT</td><td align="left">整数值，支持-9223372036854775808～9223372036854775807（如果是UNSIGNED，为0～18446744073709551615）的数</td></tr><tr><td align="left">BOOLEAN（或BOOL）</td><td align="left">布尔标志，或者为0或者为1，主要用于开/关（on/off）标志</td></tr><tr><td align="left">DECIMAL（或DEC）</td><td align="left">精度可变的浮点值</td></tr><tr><td align="left">DOUBLE</td><td align="left">双精度浮点值</td></tr><tr><td align="left">FLOAT</td><td align="left">单精度浮点值</td></tr><tr><td align="left">INT（或INTEGER）</td><td align="left">整数值，支持 -2147483648～2147483647（如果是UNSIGNED为0～4294967295）的数</td></tr><tr><td align="left">MEDIUMINT</td><td align="left">整数值，支持 -8388608～8388607（如果是UNSIGNED，为0～16777215）的数</td></tr><tr><td align="left">REAL</td><td align="left">4字节的浮点值</td></tr><tr><td align="left">SMALLINT</td><td align="left">整数值，支持 -32768～32767（如果是UNSIGNED，为0～65535）的数</td></tr><tr><td align="left">TINYINT</td><td align="left">整数值，支持 -128～127（如果为UNSIGNED，为0～255）的数</td></tr></tbody></table><h2 id="日期和时间数据类型"><a href="#日期和时间数据类型" class="headerlink" title="日期和时间数据类型"></a>日期和时间数据类型</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">DATE</td><td align="left">表示1000-01-01～9999-12-31的日期，格式为YYYY-MM-DD</td></tr><tr><td align="left">DATETIME</td><td align="left">DATE和TIME的组合</td></tr><tr><td align="left">TIMESTAMP</td><td align="left">功能和DATETIME相同（但范围较小）</td></tr><tr><td align="left">TIME</td><td align="left">格式为HH:MM:SS</td></tr><tr><td align="left">YEAR</td><td align="left">用2位数字表示，范围是70（1970年）～69（2069年），用4位数字表示，范围是1901年～2155年</td></tr></tbody></table><h2 id="二进制数据"><a href="#二进制数据" class="headerlink" title="二进制数据"></a>二进制数据</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">BLOB</td><td align="left">Blob最大长度为64 KB</td></tr><tr><td align="left">MEDIUMBLOB</td><td align="left">Blob最大长度为16 MB</td></tr><tr><td align="left">LONGBLOB</td><td align="left">Blob最大长度为4 GB</td></tr><tr><td align="left">TINYBLOB</td><td align="left">Blob最大长度为255字节</td></tr></tbody></table>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>k8s学习(一)----k8s集群部署</title>
       <link href="/2019/07/24/k8s001/"/>
       <url>/2019/07/24/k8s001/</url>
@@ -98,31 +111,6 @@
         <tags>
             
             <tag> Kubernetes </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>mysql01</title>
-      <link href="/2019/07/24/mysql01/"/>
-      <url>/2019/07/24/mysql01/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      <categories>
-          
-          <category> 数据库 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> mysql </tag>
             
         </tags>
       

@@ -15,18 +15,17 @@
 
 
 
-<meta name="description" content="Talk is cheap. Show me the code.">
-<meta name="keywords" content="mysql">
+<meta name="description" content="title: mysql必知必会（一）—-常用的数据类型categories: 数据库date: 2019-07-24 12:38:26tags: [mysql] description: Talk is cheap. Show me the code.串数据类型   数据类型 说明    CHAR 1~255个字符的定长串。它的长度必须在创建时指定，否则Mysql假定为CHAR(1)   EN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql01">
+<meta property="og:title" content="夕的博客">
 <meta property="og:url" content="https://x-ljy.github.io/2019/07/24/mysql01/index.html">
 <meta property="og:site_name" content="夕的博客">
-<meta property="og:description" content="Talk is cheap. Show me the code.">
+<meta property="og:description" content="title: mysql必知必会（一）—-常用的数据类型categories: 数据库date: 2019-07-24 12:38:26tags: [mysql] description: Talk is cheap. Show me the code.串数据类型   数据类型 说明    CHAR 1~255个字符的定长串。它的长度必须在创建时指定，否则Mysql假定为CHAR(1)   EN">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-30T04:45:43.533Z">
+<meta property="og:updated_time" content="2019-08-01T02:30:44.149Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql01">
-<meta name="twitter:description" content="Talk is cheap. Show me the code.">
+<meta name="twitter:title" content="夕的博客">
+<meta name="twitter:description" content="title: mysql必知必会（一）—-常用的数据类型categories: 数据库date: 2019-07-24 12:38:26tags: [mysql] description: Talk is cheap. Show me the code.串数据类型   数据类型 说明    CHAR 1~255个字符的定长串。它的长度必须在创建时指定，否则Mysql假定为CHAR(1)   EN">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -58,7 +57,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>mysql01 | 夕的博客</title>
+<title>夕的博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -209,7 +208,7 @@
     <div class="article-meta">
       
 <a href="/2019/07/24/mysql01/" class="article-date">
-      <time datetime="2019-07-24T04:38:26.000Z" itemprop="datePublished">2019-07-24</time>
+      <time datetime="2019-07-24T04:38:26.300Z" itemprop="datePublished">2019-07-24</time>
 </a>
 
 
@@ -220,57 +219,157 @@
       <input type="hidden" class="isFancy" />
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      mysql01
-    </h1>
-  
-
-		
-			<div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">0字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
-      </span>
-    </span>
-</div>
-		
-      </header>
-	  
-      
-      <div class="article-entry article-info-post">
-        
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/数据库/">数据库</a>
-    </div>
-
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
-    </div>
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <hr>
+<p>title: mysql必知必会（一）—-常用的数据类型<br>categories: 数据库<br>date: 2019-07-24 12:38:26<br>tags: [mysql]</p>
+<h2 id="description-Talk-is-cheap-Show-me-the-code"><a href="#description-Talk-is-cheap-Show-me-the-code" class="headerlink" title="description: Talk is cheap. Show me the code."></a>description: Talk is cheap. Show me the code.</h2><h2 id="串数据类型"><a href="#串数据类型" class="headerlink" title="串数据类型"></a>串数据类型</h2><table>
+<thead>
+<tr>
+<th align="left">数据类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">CHAR</td>
+<td align="left">1~255个字符的定长串。它的长度必须在创建时指定，否则Mysql假定为CHAR(1)</td>
+</tr>
+<tr>
+<td align="left">ENUM</td>
+<td align="left">接受最多64K个串组成的有个预定义集合的某个串</td>
+</tr>
+<tr>
+<td align="left">LONGTEXT</td>
+<td align="left">与TEXT相同，但最大长度为4GB</td>
+</tr>
+<tr>
+<td align="left">MEDIUMTEXT</td>
+<td align="left">与TEXT相同，但最大长度为16K</td>
+</tr>
+<tr>
+<td align="left">SET</td>
+<td align="left">接受最多64个串组成的一个预定义集合的零个或多个串</td>
+</tr>
+<tr>
+<td align="left">TEXT</td>
+<td align="left">最大长度为64K的变长文本</td>
+</tr>
+<tr>
+<td align="left">TINYTEXT</td>
+<td align="left">与TEXT相同，但最大长度为256字节</td>
+</tr>
+<tr>
+<td align="left">VARCHAR</td>
+<td align="left">长度可变，最多不超过255个字节。如果在创建时指定为VARCHAR(n),则可存储0-n个字符的变长串（其中 n &lt;= 255 ）</td>
+</tr>
+</tbody></table>
+<p><strong>注意：<br>无论使用何种串数据类型，串值都必须在引号内（通常单引号更好）。</strong></p>
+<h2 id="数值数据类型"><a href="#数值数据类型" class="headerlink" title="数值数据类型"></a>数值数据类型</h2><table>
+<thead>
+<tr>
+<th align="left">数据类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">BIT</td>
+<td align="left">位字段，1～64位。（在MySQL 5之前，BIT在功能上等价于TINYINT</td>
+</tr>
+<tr>
+<td align="left">BIGINT</td>
+<td align="left">整数值，支持-9223372036854775808～9223372036854775807（如果是UNSIGNED，为0～18446744073709551615）的数</td>
+</tr>
+<tr>
+<td align="left">BOOLEAN（或BOOL）</td>
+<td align="left">布尔标志，或者为0或者为1，主要用于开/关（on/off）标志</td>
+</tr>
+<tr>
+<td align="left">DECIMAL（或DEC）</td>
+<td align="left">精度可变的浮点值</td>
+</tr>
+<tr>
+<td align="left">DOUBLE</td>
+<td align="left">双精度浮点值</td>
+</tr>
+<tr>
+<td align="left">FLOAT</td>
+<td align="left">单精度浮点值</td>
+</tr>
+<tr>
+<td align="left">INT（或INTEGER）</td>
+<td align="left">整数值，支持 -2147483648～2147483647（如果是UNSIGNED为0～4294967295）的数</td>
+</tr>
+<tr>
+<td align="left">MEDIUMINT</td>
+<td align="left">整数值，支持 -8388608～8388607（如果是UNSIGNED，为0～16777215）的数</td>
+</tr>
+<tr>
+<td align="left">REAL</td>
+<td align="left">4字节的浮点值</td>
+</tr>
+<tr>
+<td align="left">SMALLINT</td>
+<td align="left">整数值，支持 -32768～32767（如果是UNSIGNED，为0～65535）的数</td>
+</tr>
+<tr>
+<td align="left">TINYINT</td>
+<td align="left">整数值，支持 -128～127（如果为UNSIGNED，为0～255）的数</td>
+</tr>
+</tbody></table>
+<h2 id="日期和时间数据类型"><a href="#日期和时间数据类型" class="headerlink" title="日期和时间数据类型"></a>日期和时间数据类型</h2><table>
+<thead>
+<tr>
+<th align="left">数据类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">DATE</td>
+<td align="left">表示1000-01-01～9999-12-31的日期，格式为YYYY-MM-DD</td>
+</tr>
+<tr>
+<td align="left">DATETIME</td>
+<td align="left">DATE和TIME的组合</td>
+</tr>
+<tr>
+<td align="left">TIMESTAMP</td>
+<td align="left">功能和DATETIME相同（但范围较小）</td>
+</tr>
+<tr>
+<td align="left">TIME</td>
+<td align="left">格式为HH:MM:SS</td>
+</tr>
+<tr>
+<td align="left">YEAR</td>
+<td align="left">用2位数字表示，范围是70（1970年）～69（2069年），用4位数字表示，范围是1901年～2155年</td>
+</tr>
+</tbody></table>
+<h2 id="二进制数据"><a href="#二进制数据" class="headerlink" title="二进制数据"></a>二进制数据</h2><table>
+<thead>
+<tr>
+<th align="left">数据类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">BLOB</td>
+<td align="left">Blob最大长度为64 KB</td>
+</tr>
+<tr>
+<td align="left">MEDIUMBLOB</td>
+<td align="left">Blob最大长度为16 MB</td>
+</tr>
+<tr>
+<td align="left">LONGBLOB</td>
+<td align="left">Blob最大长度为4 GB</td>
+</tr>
+<tr>
+<td align="left">TINYBLOB</td>
+<td align="left">Blob最大长度为255字节</td>
+</tr>
+</tbody></table>
+
       
     </div>
     
@@ -278,12 +377,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/07/24/mysql01/">mysql01</a></p>
+        <p><span>本文标题:</span><a href="/2019/07/24/mysql01/"></a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-07-24, 12:38:26</p>
-        <p><span>最后更新:</span>2019-07-30, 12:45:43</p>
+        <p><span>最后更新:</span>2019-08-01, 10:30:44</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/07/24/mysql01/" title="mysql01">https://x-ljy.github.io/2019/07/24/mysql01/</a>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/24/mysql01/" title="">https://x-ljy.github.io/2019/07/24/mysql01/</a>
             <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/24/mysql01/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -297,15 +396,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/07/24/k8s001/">
-                    k8s学习(一)----k8s集群部署
+                <a href="/2019/07/26/docker03/">
+                    docker学习(三)----Docker 网络详解
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/07/23/docker02/">
-                    docker学习(二)----Docker基础命令
+                <a href="/2019/07/24/k8s001/">
+                    k8s学习(一)----k8s集群部署
                 </a>
             </div>
         
@@ -317,7 +416,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#description-Talk-is-cheap-Show-me-the-code"><span class="toc-number">1.</span> <span class="toc-text">description: Talk is cheap. Show me the code.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#串数据类型"><span class="toc-number">2.</span> <span class="toc-text">串数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数值数据类型"><span class="toc-number">3.</span> <span class="toc-text">数值数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日期和时间数据类型"><span class="toc-number">4.</span> <span class="toc-text">日期和时间数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二进制数据"><span class="toc-number">5.</span> <span class="toc-text">二进制数据</span></a></li></ol>
         
     </div>
     <style>
@@ -353,7 +452,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"mysql01　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -373,7 +472,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/07/24/k8s001/" title="上一篇: k8s学习(一)----k8s集群部署">
+            <a href="/2019/07/26/docker03/" title="上一篇: docker学习(三)----Docker 网络详解">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -381,13 +480,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/07/23/docker02/" title="下一篇: docker学习(二)----Docker基础命令">
+            <a href="/2019/07/24/k8s001/" title="下一篇: k8s学习(一)----k8s集群部署">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/29/springboot-shiro01/">springboot-shiro01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/docker04/">docker学习(四)----docker-compose.yml V3.x 指令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/docker03/">docker学习(三)----Docker 网络详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/k8s001/">k8s学习(一)----k8s集群部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/mysql01/">mysql01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/23/docker02/">docker学习(二)----Docker基础命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/jvm2/">JVM系列(二)----JVM内存结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/jvm1/">JVM系列(一)----JVM基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/docker01/">docker学习(一)----Dockerfile基础指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/29/springboot-shiro01/">springboot-shiro01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/docker04/">docker学习(四)----docker-compose.yml V3.x 指令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/docker03/">docker学习(三)----Docker 网络详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/mysql01/">mysql01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/k8s001/">k8s学习(一)----k8s集群部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/23/docker02/">docker学习(二)----Docker基础命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/jvm2/">JVM系列(二)----JVM内存结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/jvm1/">JVM系列(一)----JVM基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/docker01/">docker学习(一)----Dockerfile基础指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
 
 
 
