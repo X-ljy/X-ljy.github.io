@@ -4,23 +4,73 @@
   
     
     <entry>
-      <title>jvm3</title>
-      <link href="/2019/08/01/jvm3/"/>
-      <url>/2019/08/01/jvm3/</url>
+      <title>mysql必知必会（一）---- Mysql命令汇总</title>
+      <link href="/2019/08/02/mysql02/"/>
+      <url>/2019/08/02/mysql02/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h2 id="一、连接数据库"><a href="#一、连接数据库" class="headerlink" title="一、连接数据库"></a>一、连接数据库</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql -u<span class="string">"用户名"</span> -p -h<span class="string">"server地址"</span> -P端口</span><br><span class="line"></span><br><span class="line">mysql -uroot -p -hlocalhost -P3306</span><br></pre></td></tr></table></figure><h2 id="二、数据库和表的基本操作"><a href="#二、数据库和表的基本操作" class="headerlink" title="二、数据库和表的基本操作"></a>二、数据库和表的基本操作</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取数据库列表</span></span><br><span class="line">SHOW DATABASES;</span><br></pre></td></tr></table></figure><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用数据库</span></span><br><span class="line">USE 数据库名称;</span><br></pre></td></tr></table></figure><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取数据库内的表的列表</span></span><br><span class="line">SHOW TABLES;</span><br></pre></td></tr></table></figure><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取表的字段详细数据</span></span><br><span class="line">SHOW COLUMNS FROM 表名;</span><br><span class="line"></span><br><span class="line">DESCRIBE 表名;</span><br><span class="line"></span><br><span class="line">DESC 表名;</span><br></pre></td></tr></table></figure><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示广泛的服务器状态信息；</span></span><br><span class="line">SHOW STATUS;</span><br></pre></td></tr></table></figure><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示授予用户（所有用户或特定用户）的安全权限；</span></span><br><span class="line">SHOW GRANTS;</span><br></pre></td></tr></table></figure><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示服务器错误或警告消息</span></span><br><span class="line">SHOW ERRORS;</span><br><span class="line"></span><br><span class="line">SHOW WARNINGS;</span><br></pre></td></tr></table></figure><h2 id="三、检索数据"><a href="#三、检索数据" class="headerlink" title="三、检索数据"></a>三、检索数据</h2><p><strong>基本检索：</strong></p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#检索单个列</span></span><br><span class="line">SELECT 列字段名 FROM 表名;</span><br></pre></td></tr></table></figure><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#检索多个列</span></span><br><span class="line">SELECT 列字段名，列字段名，列字段名...  FROM 表名 ;</span><br></pre></td></tr></table></figure><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#检索所有列</span></span><br><span class="line">SELECT * FROM 表名;</span><br></pre></td></tr></table></figure><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检索出不同的行，相同数据不展示，在列字段前加上 DISTINCT 关键字；</span></span><br><span class="line">SELECT DISTINCT 列字段名...  FROM 表名;</span><br></pre></td></tr></table></figure><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 限制结果输出,加上 LIMIT 子句</span></span><br><span class="line"></span><br><span class="line">SELECT * FROM 表名 LIMIT 5;</span><br><span class="line"><span class="comment">#返回的结果不多于5行</span></span><br><span class="line"></span><br><span class="line">SELECT * FROM 表名 LIMIT 5,5 ;</span><br><span class="line"><span class="comment"># 返回从行5（Mysql是从行0开始记得）开始的五行。</span></span><br></pre></td></tr></table></figure><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用完全限定的表名</span></span><br><span class="line">SELECT 表名.字段名  FROM 数据库.表名 ;</span><br></pre></td></tr></table></figure><p><strong>排序检索：</strong>  </p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 排序数据</span></span><br><span class="line">SELECT * FROM 表名 ORDER BY 需要进行排序的字段;</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果需要进行倒序排序，则在字段后面加上 DESC</span></span><br><span class="line"><span class="comment">#如果排序多个字段，则字段之间 ， 号隔开，并且按照书写顺序进行培训</span></span><br></pre></td></tr></table></figure><p><strong>过滤数据：</strong>  </p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
           
-          <category> 分类 </category>
+          <category> 数据库 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 标签 </tag>
+            <tag> Mysql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>designpattern01</title>
+      <link href="/2019/08/01/designpattern01/"/>
+      <url>/2019/08/01/designpattern01/</url>
+      
+        <content type="html"><![CDATA[<h2 id="行为型模式—-迭代器模式（Iterator模式）"><a href="#行为型模式—-迭代器模式（Iterator模式）" class="headerlink" title="行为型模式—-迭代器模式（Iterator模式）"></a>行为型模式—-迭代器模式（Iterator模式）</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 设计模式 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 设计模式 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>jvm3</title>
+      <link href="/2019/08/01/jvm3/"/>
+      <url>/2019/08/01/jvm3/</url>
+      
+        <content type="html"><![CDATA[<h2 id="JVM中对象实例化"><a href="#JVM中对象实例化" class="headerlink" title="JVM中对象实例化"></a>JVM中对象实例化</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JVM </tag>
             
         </tags>
       
@@ -106,6 +156,31 @@
     
     
     <entry>
+      <title>mysql必知必会（一）----常用的数据类型</title>
+      <link href="/2019/07/24/mysql01/"/>
+      <url>/2019/07/24/mysql01/</url>
+      
+        <content type="html"><![CDATA[<h2 id="串数据类型"><a href="#串数据类型" class="headerlink" title="串数据类型"></a>串数据类型</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">CHAR</td><td align="left">1~255个字符的定长串。它的长度必须在创建时指定，否则Mysql假定为CHAR(1)</td></tr><tr><td align="left">ENUM</td><td align="left">接受最多64K个串组成的有个预定义集合的某个串</td></tr><tr><td align="left">LONGTEXT</td><td align="left">与TEXT相同，但最大长度为4GB</td></tr><tr><td align="left">MEDIUMTEXT</td><td align="left">与TEXT相同，但最大长度为16K</td></tr><tr><td align="left">SET</td><td align="left">接受最多64个串组成的一个预定义集合的零个或多个串</td></tr><tr><td align="left">TEXT</td><td align="left">最大长度为64K的变长文本</td></tr><tr><td align="left">TINYTEXT</td><td align="left">与TEXT相同，但最大长度为256字节</td></tr><tr><td align="left">VARCHAR</td><td align="left">长度可变，最多不超过255个字节。如果在创建时指定为VARCHAR(n),则可存储0-n个字符的变长串（其中 n &lt;= 255 ）</td></tr></tbody></table><p><strong>注意：<br>无论使用何种串数据类型，串值都必须在引号内（通常单引号更好）。</strong></p><h2 id="数值数据类型"><a href="#数值数据类型" class="headerlink" title="数值数据类型"></a>数值数据类型</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">BIT</td><td align="left">位字段，1～64位。（在MySQL 5之前，BIT在功能上等价于TINYINT</td></tr><tr><td align="left">BIGINT</td><td align="left">整数值，支持-9223372036854775808～9223372036854775807（如果是UNSIGNED，为0～18446744073709551615）的数</td></tr><tr><td align="left">BOOLEAN（或BOOL）</td><td align="left">布尔标志，或者为0或者为1，主要用于开/关（on/off）标志</td></tr><tr><td align="left">DECIMAL（或DEC）</td><td align="left">精度可变的浮点值</td></tr><tr><td align="left">DOUBLE</td><td align="left">双精度浮点值</td></tr><tr><td align="left">FLOAT</td><td align="left">单精度浮点值</td></tr><tr><td align="left">INT（或INTEGER）</td><td align="left">整数值，支持 -2147483648～2147483647（如果是UNSIGNED为0～4294967295）的数</td></tr><tr><td align="left">MEDIUMINT</td><td align="left">整数值，支持 -8388608～8388607（如果是UNSIGNED，为0～16777215）的数</td></tr><tr><td align="left">REAL</td><td align="left">4字节的浮点值</td></tr><tr><td align="left">SMALLINT</td><td align="left">整数值，支持 -32768～32767（如果是UNSIGNED，为0～65535）的数</td></tr><tr><td align="left">TINYINT</td><td align="left">整数值，支持 -128～127（如果为UNSIGNED，为0～255）的数</td></tr></tbody></table><h2 id="日期和时间数据类型"><a href="#日期和时间数据类型" class="headerlink" title="日期和时间数据类型"></a>日期和时间数据类型</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">DATE</td><td align="left">表示1000-01-01～9999-12-31的日期，格式为YYYY-MM-DD</td></tr><tr><td align="left">DATETIME</td><td align="left">DATE和TIME的组合</td></tr><tr><td align="left">TIMESTAMP</td><td align="left">功能和DATETIME相同（但范围较小）</td></tr><tr><td align="left">TIME</td><td align="left">格式为HH:MM:SS</td></tr><tr><td align="left">YEAR</td><td align="left">用2位数字表示，范围是70（1970年）～69（2069年），用4位数字表示，范围是1901年～2155年</td></tr></tbody></table><h2 id="二进制数据"><a href="#二进制数据" class="headerlink" title="二进制数据"></a>二进制数据</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">BLOB</td><td align="left">Blob最大长度为64 KB</td></tr><tr><td align="left">MEDIUMBLOB</td><td align="left">Blob最大长度为16 MB</td></tr><tr><td align="left">LONGBLOB</td><td align="left">Blob最大长度为4 GB</td></tr><tr><td align="left">TINYBLOB</td><td align="left">Blob最大长度为255字节</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Mysql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>k8s学习(一)----k8s集群部署</title>
       <link href="/2019/07/24/k8s001/"/>
       <url>/2019/07/24/k8s001/</url>
@@ -123,31 +198,6 @@
         <tags>
             
             <tag> Kubernetes </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>mysql必知必会（一）----常用的数据类型</title>
-      <link href="/2019/07/24/mysql01/"/>
-      <url>/2019/07/24/mysql01/</url>
-      
-        <content type="html"><![CDATA[<h2 id="串数据类型"><a href="#串数据类型" class="headerlink" title="串数据类型"></a>串数据类型</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">CHAR</td><td align="left">1~255个字符的定长串。它的长度必须在创建时指定，否则Mysql假定为CHAR(1)</td></tr><tr><td align="left">ENUM</td><td align="left">接受最多64K个串组成的有个预定义集合的某个串</td></tr><tr><td align="left">LONGTEXT</td><td align="left">与TEXT相同，但最大长度为4GB</td></tr><tr><td align="left">MEDIUMTEXT</td><td align="left">与TEXT相同，但最大长度为16K</td></tr><tr><td align="left">SET</td><td align="left">接受最多64个串组成的一个预定义集合的零个或多个串</td></tr><tr><td align="left">TEXT</td><td align="left">最大长度为64K的变长文本</td></tr><tr><td align="left">TINYTEXT</td><td align="left">与TEXT相同，但最大长度为256字节</td></tr><tr><td align="left">VARCHAR</td><td align="left">长度可变，最多不超过255个字节。如果在创建时指定为VARCHAR(n),则可存储0-n个字符的变长串（其中 n &lt;= 255 ）</td></tr></tbody></table><p><strong>注意：<br>无论使用何种串数据类型，串值都必须在引号内（通常单引号更好）。</strong></p><h2 id="数值数据类型"><a href="#数值数据类型" class="headerlink" title="数值数据类型"></a>数值数据类型</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">BIT</td><td align="left">位字段，1～64位。（在MySQL 5之前，BIT在功能上等价于TINYINT</td></tr><tr><td align="left">BIGINT</td><td align="left">整数值，支持-9223372036854775808～9223372036854775807（如果是UNSIGNED，为0～18446744073709551615）的数</td></tr><tr><td align="left">BOOLEAN（或BOOL）</td><td align="left">布尔标志，或者为0或者为1，主要用于开/关（on/off）标志</td></tr><tr><td align="left">DECIMAL（或DEC）</td><td align="left">精度可变的浮点值</td></tr><tr><td align="left">DOUBLE</td><td align="left">双精度浮点值</td></tr><tr><td align="left">FLOAT</td><td align="left">单精度浮点值</td></tr><tr><td align="left">INT（或INTEGER）</td><td align="left">整数值，支持 -2147483648～2147483647（如果是UNSIGNED为0～4294967295）的数</td></tr><tr><td align="left">MEDIUMINT</td><td align="left">整数值，支持 -8388608～8388607（如果是UNSIGNED，为0～16777215）的数</td></tr><tr><td align="left">REAL</td><td align="left">4字节的浮点值</td></tr><tr><td align="left">SMALLINT</td><td align="left">整数值，支持 -32768～32767（如果是UNSIGNED，为0～65535）的数</td></tr><tr><td align="left">TINYINT</td><td align="left">整数值，支持 -128～127（如果为UNSIGNED，为0～255）的数</td></tr></tbody></table><h2 id="日期和时间数据类型"><a href="#日期和时间数据类型" class="headerlink" title="日期和时间数据类型"></a>日期和时间数据类型</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">DATE</td><td align="left">表示1000-01-01～9999-12-31的日期，格式为YYYY-MM-DD</td></tr><tr><td align="left">DATETIME</td><td align="left">DATE和TIME的组合</td></tr><tr><td align="left">TIMESTAMP</td><td align="left">功能和DATETIME相同（但范围较小）</td></tr><tr><td align="left">TIME</td><td align="left">格式为HH:MM:SS</td></tr><tr><td align="left">YEAR</td><td align="left">用2位数字表示，范围是70（1970年）～69（2069年），用4位数字表示，范围是1901年～2155年</td></tr></tbody></table><h2 id="二进制数据"><a href="#二进制数据" class="headerlink" title="二进制数据"></a>二进制数据</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">BLOB</td><td align="left">Blob最大长度为64 KB</td></tr><tr><td align="left">MEDIUMBLOB</td><td align="left">Blob最大长度为16 MB</td></tr><tr><td align="left">LONGBLOB</td><td align="left">Blob最大长度为4 GB</td></tr><tr><td align="left">TINYBLOB</td><td align="left">Blob最大长度为255字节</td></tr></tbody></table>]]></content>
-      
-      
-      <categories>
-          
-          <category> 数据库 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> mysql </tag>
             
         </tags>
       

@@ -2,23 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://x-ljy.github.io/2019/07/14/jvm2/</loc>
+    <loc>https://x-ljy.github.io/2019/08/02/mysql02/</loc>
     
-    <lastmod>2019-08-01T10:20:39.627Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://x-ljy.github.io/2019/08/01/jvm3/</loc>
-    
-    <lastmod>2019-08-01T10:18:25.355Z</lastmod>
+    <lastmod>2019-08-02T02:24:59.332Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://x-ljy.github.io/2019/07/24/mysql01/</loc>
     
-    <lastmod>2019-08-01T02:39:25.831Z</lastmod>
+    <lastmod>2019-08-02T00:22:11.834Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://x-ljy.github.io/2019/08/01/designpattern01/</loc>
+    
+    <lastmod>2019-08-02T00:19:38.253Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://x-ljy.github.io/2019/08/01/jvm3/</loc>
+    
+    <lastmod>2019-08-01T10:24:51.343Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://x-ljy.github.io/2019/07/14/jvm2/</loc>
+    
+    <lastmod>2019-08-01T10:20:39.627Z</lastmod>
     
   </url>
   
