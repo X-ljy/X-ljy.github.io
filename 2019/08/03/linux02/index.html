@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://x-ljy.github.io/2019/08/03/linux02/mmap.png">
 <meta property="og:image" content="https://x-ljy.github.io/2019/08/03/linux02/sendfile.png">
 <meta property="og:image" content="https://x-ljy.github.io/2019/08/03/linux02/DMASendfile.png">
-<meta property="og:updated_time" content="2019-08-03T14:30:46.036Z">
+<meta property="og:updated_time" content="2019-08-03T14:33:52.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux零拷贝技术">
 <meta name="twitter:description" content="Talk is cheap. Show me the code.">
@@ -243,7 +243,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.8k字</span>
+        <span class="post-count">1.9k字</span>
       </span>
     </span>
 
@@ -327,6 +327,9 @@
 <p>flags参数是一个位掩码，它由零个或多个下列值组成：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SPLICE_F_NONBLOCK：   splice 操作不会被阻塞。然而，如果文件描述符没有被设置为不可被阻塞方式的 I/O</span><br><span class="line">                     ，那么调用 splice 有可能仍然被阻塞。</span><br><span class="line"></span><br><span class="line">SPLICE_F_MORE：       告知操作系统内核下一个 splice 系统调用将会有更多的数据传来。</span><br><span class="line"></span><br><span class="line">SPLICE_F_MOVE：       如果输出是文件，这个值则会使得操作系统内核尝试从输入管道缓冲区直接将数据读入</span><br><span class="line">                      到输出地址空间，这个数据传输过程没有任何数据拷贝操作发生。如果内核不能从pipe</span><br><span class="line">                      移动数据或者pipe的缓存不是一个整页面，仍然需要拷贝数据。</span><br></pre></td></tr></table></figure>
 
+<p><strong>splice() 和 sendfile() 的区别与联系</strong>  </p>
+<p>联系：用户应用进程必须拥有两个已经打开的文件描述符，一个用于表示输入设备，一个用于表示输出设备。  </p>
+<p>区别：<br>    1. splice() 允许任意两个文件之间互相连接<br>    2. sendfile()只适用于文件到 socket 进行数据传输。</p>
 
       
     </div>
@@ -338,7 +341,7 @@
         <p><span>本文标题:</span><a href="/2019/08/03/linux02/">linux零拷贝技术</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-08-03, 21:26:54</p>
-        <p><span>最后更新:</span>2019-08-03, 22:30:46</p>
+        <p><span>最后更新:</span>2019-08-03, 22:33:52</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/08/03/linux02/" title="linux零拷贝技术">https://x-ljy.github.io/2019/08/03/linux02/</a>
             <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/08/03/linux02/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
