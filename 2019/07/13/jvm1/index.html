@@ -19,16 +19,16 @@
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM系列(一)----JVM基本概念">
-<meta property="og:url" content="http://x-ljy.gitee.io/hexoblog/2019/07/13/jvm1/index.html">
+<meta property="og:url" content="https://x-ljy.github.io/2019/07/13/jvm1/index.html">
 <meta property="og:site_name" content="夕的博客">
 <meta property="og:description" content="世界上并没有完美的程序，但我们并不因此而沮丧，因为写程序本来就是一个不断追求完美的过程。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://x-ljy.gitee.io/hexoblog//x-ljy.gitee.io/hexoblog/2019/07/13/jvm1/jvm1.png">
+<meta property="og:image" content="https://x-ljy.github.io/2019/07/13/jvm1/jvm1.png">
 <meta property="og:updated_time" content="2019-07-30T04:41:16.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM系列(一)----JVM基本概念">
 <meta name="twitter:description" content="世界上并没有完美的程序，但我们并不因此而沮丧，因为写程序本来就是一个不断追求完美的过程。">
-<meta name="twitter:image" content="http://x-ljy.gitee.io/hexoblog//x-ljy.gitee.io/hexoblog/2019/07/13/jvm1/jvm1.png">
+<meta name="twitter:image" content="https://x-ljy.github.io/2019/07/13/jvm1/jvm1.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -53,7 +53,7 @@
     <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
 
 
-<link rel="stylesheet" href="/hexoblog/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
 
 
@@ -99,11 +99,11 @@
     <div class="overlay"></div>
 <div class="intrude-less">
     <header id="header" class="inner">
-        <a href="/hexoblog/" class="profilepic">
+        <a href="/" class="profilepic">
             <img src="/img/avatar.png" class="animated zoomIn">
         </a>
         <hgroup>
-          <h1 class="header-author"><a href="/hexoblog/">夕</a></h1>
+          <h1 class="header-author"><a href="/">夕</a></h1>
         </hgroup>
 
         
@@ -126,13 +126,13 @@
                     <nav class="header-menu">
                         <ul>
                         
-                            <li><a href="/hexoblog/">主页</a></li>
+                            <li><a href="/">主页</a></li>
                         
-                            <li><a href="/hexoblog/archives/">所有文章</a></li>
+                            <li><a href="/archives/">所有文章</a></li>
                         
-                            <li><a href="/hexoblog/tags/">标签云</a></li>
+                            <li><a href="/tags/">标签云</a></li>
                         
-                            <li><a href="/hexoblog/about/">关于我</a></li>
+                            <li><a href="/about/">关于我</a></li>
                         
                         </ul>
                     </nav>
@@ -171,23 +171,23 @@
       </div>
     <div class="intrude-less">
         <header id="header" class="inner">
-            <a href="/hexoblog/" class="profilepic">
+            <a href="/" class="profilepic">
                 <img src="/img/avatar.png" class="animated zoomIn">
             </a>
             <hgroup>
-              <h1 class="header-author"><a href="/hexoblog/" title="回到主页">夕</a></h1>
+              <h1 class="header-author"><a href="/" title="回到主页">夕</a></h1>
             </hgroup>
             
             <nav class="header-menu">
                 <ul>
                 
-                    <li><a href="/hexoblog/">主页</a></li>
+                    <li><a href="/">主页</a></li>
                 
-                    <li><a href="/hexoblog/archives/">所有文章</a></li>
+                    <li><a href="/archives/">所有文章</a></li>
                 
-                    <li><a href="/hexoblog/tags/">标签云</a></li>
+                    <li><a href="/tags/">标签云</a></li>
                 
-                    <li><a href="/hexoblog/about/">关于我</a></li>
+                    <li><a href="/about/">关于我</a></li>
                 
                 <div class="clearfix"></div>
                 </ul>
@@ -210,7 +210,7 @@
   
     <div class="article-meta">
       
-<a href="/hexoblog/2019/07/13/jvm1/" class="article-date">
+<a href="/2019/07/13/jvm1/" class="article-date">
       <time datetime="2019-07-13T07:29:14.000Z" itemprop="datePublished">2019-07-13</time>
 </a>
 
@@ -256,13 +256,13 @@
       <div class="article-entry article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/hexoblog/categories/Java/">Java</a>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexoblog/tags/JVM/">JVM</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -281,7 +281,7 @@
 <p><strong>JVM（Java Virtual Machine， Java虚拟机）</strong> 是JRE的一部分。JVM主要工作是解释自己的指令集（即字节码）并映射到本地的CPU指令集和OS的系统调用。Java语言是跨平台运行的，不同的操作系统会有不同的JVM映射规则，使之与操作系统无关，完成跨平台性。</p>
 <p><strong>三、JVM基本概念</strong></p>
 <p>jvm基本结构如下:  </p>
-<p> <img src="/hexoblog//x-ljy.gitee.io/hexoblog/2019/07/13/jvm1/jvm1.png" alt="jvm基本结构"></p>
+<p> <img src="//x-ljy.github.io/2019/07/13/jvm1/jvm1.png" alt="jvm基本结构"></p>
 <p> <strong>说明：</strong> 方法区：线程共享的，用于存放被虚拟机加载的类的元数据信息：如常量、静态变量、即时编译器编译后的代码。也称之为永久代，有一个别名叫做Non-Heap（非堆）。  </p>
 <p>在JDK8中，永久代已经被移除，被一个称为“元数据区”（元空间）的区域取代。元空间的本质和永久代类似，都是对jvm规范中方法区的实现。不过元空间与永久代之间最大的区别在于：元空间并不在于虚拟机中，而是使用本地内存。因此，默认情况下，元空间的大小仅受本地内存限制。类的元数据放入元空间，字符串和类的静态变量放入java堆中，这样可以加载多少类的元数据就不再由MaxPermSize控制，而由系统实际可用空间控制。</p>
 <p><strong>采用元空间代替永久代的原因：</strong>  </p>
@@ -311,13 +311,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/hexoblog/2019/07/13/jvm1/">JVM系列(一)----JVM基本概念</a></p>
+        <p><span>本文标题:</span><a href="/2019/07/13/jvm1/">JVM系列(一)----JVM基本概念</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-07-13, 15:29:14</p>
         <p><span>最后更新:</span>2019-07-30, 12:41:16</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/hexoblog/2019/07/13/jvm1/" title="JVM系列(一)----JVM基本概念">http://x-ljy.gitee.io/hexoblog/2019/07/13/jvm1/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://x-ljy.gitee.io/hexoblog/2019/07/13/jvm1/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/13/jvm1/" title="JVM系列(一)----JVM基本概念">https://x-ljy.github.io/2019/07/13/jvm1/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/07/13/jvm1/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -330,14 +330,14 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/hexoblog/2019/07/14/jvm2/">
+                <a href="/2019/07/14/jvm2/">
                     JVM系列(二)----JVM内存结构
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/hexoblog/2019/07/06/docker01/">
+                <a href="/2019/07/06/docker01/">
                     docker学习(一)----Dockerfile基础指令
                 </a>
             </div>
@@ -406,7 +406,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/hexoblog/2019/07/14/jvm2/" title="上一篇: JVM系列(二)----JVM内存结构">
+            <a href="/2019/07/14/jvm2/" title="上一篇: JVM系列(二)----JVM内存结构">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -414,13 +414,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/hexoblog/2019/07/06/docker01/" title="下一篇: docker学习(一)----Dockerfile基础指令">
+            <a href="/2019/07/06/docker01/" title="下一篇: docker学习(一)----Dockerfile基础指令">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/05/java03/">Java集合框架</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/04/java02/">Java异常处理</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/03/linux02/">linux零拷贝技术</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/03/linux01/">Linux网络IO模型</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/03/Java01/">Java String 对象的分析</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/02/mysql02/">mysql必知必会（一）---- Mysql命令汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/01/designpattern01/">designpattern01</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/01/jvm3/">jvm3</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/29/springboot-shiro01/">springboot-shiro01</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/28/docker04/">docker学习(四)----docker-compose.yml V3.x 指令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/26/docker03/">docker学习(三)----Docker 网络详解</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/24/k8s001/">k8s学习(一)----k8s集群部署</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/24/mysql01/">mysql必知必会（一）----常用的数据类型</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/23/docker02/">docker学习(二)----Docker基础命令</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/14/jvm2/">JVM系列(二)----JVM内存结构</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/13/jvm1/">JVM系列(一)----JVM基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/06/docker01/">docker学习(一)----Dockerfile基础指令</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/08/05/java03/">Java集合框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/java02/">Java异常处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/03/linux02/">linux零拷贝技术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/03/linux01/">Linux网络IO模型</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/03/Java01/">Java String 对象的分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/02/mysql02/">mysql必知必会（一）---- Mysql命令汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/designpattern01/">designpattern01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/jvm3/">jvm3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/29/springboot-shiro01/">springboot-shiro01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/docker04/">docker学习(四)----docker-compose.yml V3.x 指令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/docker03/">docker学习(三)----Docker 网络详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/k8s001/">k8s学习(一)----k8s集群部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/mysql01/">mysql必知必会（一）----常用的数据类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/23/docker02/">docker学习(二)----Docker基础命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/jvm2/">JVM系列(二)----JVM内存结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/jvm1/">JVM系列(一)----JVM基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/docker01/">docker学习(一)----Dockerfile基础指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
 
 
 
@@ -505,7 +505,7 @@
 </footer>
     </div>
     
-<script data-main="/hexoblog/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
 
 
 
@@ -541,5 +541,5 @@
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
   </div>
-<script src="/hexoblog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/hexoblog/live2dw/assets/haruto.model.json"},"display":{"superSample":2,"width":150,"height":320,"position":"left","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"superSample":2,"width":150,"height":320,"position":"left","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"tagMode":false});</script></body>
 </html>
