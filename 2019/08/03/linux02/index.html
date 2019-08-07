@@ -19,19 +19,19 @@
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux零拷贝技术">
-<meta property="og:url" content="https://x-ljy.github.io/2019/08/03/linux02/index.html">
+<meta property="og:url" content="https://x-ljy.github.io,http://x-ljy.gitee.io/hexoblog/2019/08/03/linux02/index.html">
 <meta property="og:site_name" content="夕的博客">
 <meta property="og:description" content="Talk is cheap. Show me the code.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://x-ljy.github.io/2019/08/03/linux02/01.png">
-<meta property="og:image" content="https://x-ljy.github.io/2019/08/03/linux02/mmap.png">
-<meta property="og:image" content="https://x-ljy.github.io/2019/08/03/linux02/sendfile.png">
-<meta property="og:image" content="https://x-ljy.github.io/2019/08/03/linux02/DMASendfile.png">
+<meta property="og:image" content="https://x-ljy.github.io/,http//x-ljy.gitee.io/hexoblog/2019/08/03/linux02/01.png">
+<meta property="og:image" content="https://x-ljy.github.io/,http//x-ljy.gitee.io/hexoblog/2019/08/03/linux02/mmap.png">
+<meta property="og:image" content="https://x-ljy.github.io/,http//x-ljy.gitee.io/hexoblog/2019/08/03/linux02/sendfile.png">
+<meta property="og:image" content="https://x-ljy.github.io/,http//x-ljy.gitee.io/hexoblog/2019/08/03/linux02/DMASendfile.png">
 <meta property="og:updated_time" content="2019-08-03T14:36:04.712Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux零拷贝技术">
 <meta name="twitter:description" content="Talk is cheap. Show me the code.">
-<meta name="twitter:image" content="https://x-ljy.github.io/2019/08/03/linux02/01.png">
+<meta name="twitter:image" content="https://x-ljy.github.io/,http//x-ljy.gitee.io/hexoblog/2019/08/03/linux02/01.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -283,14 +283,14 @@
 <p>零复制（英语：Zero-copy；也译零拷贝）技术是指计算机执行操作时，CPU不需要先将数据从某处内存复制到另一个特定区域。这种技术通常用于通过网络传输文件时节省CPU周期和内存带宽。</p>
 </blockquote>
 <p>零拷贝操作减少了在用户空间与内核空间之间切换模式的次数。</p>
-<p><img src="//x-ljy.github.io/2019/08/03/linux02/01.png" alt></p>
+<p><img src="//x-ljy.github.io,http://x-ljy.gitee.io/hexoblog/2019/08/03/linux02/01.png" alt></p>
 <p><strong>传统的I/O操作进行了4次用户空间与内核空间的上下文切换，以及4次数据拷贝。其中4次数据拷贝中包括了2次DMA拷贝和2次CPU拷贝。</strong></p>
 <h2 id="Linux-中零拷贝技术的实现方向"><a href="#Linux-中零拷贝技术的实现方向" class="headerlink" title="Linux 中零拷贝技术的实现方向"></a>Linux 中零拷贝技术的实现方向</h2><h3 id="一、直接-I-O"><a href="#一、直接-I-O" class="headerlink" title="一、直接 I/O"></a>一、直接 I/O</h3><p>对于这种数据传输方式来说，应用程序可以直接访问硬件存储，操作系统内核只是辅助数据传输。这种方式依旧存在用户空间和内核空间的上下文切换，但是硬件上的数据不会拷贝一份到内核空间，而是直接拷贝至了用户空间，因此直接I/O不存在内核空间缓冲区和用户空间缓冲区之间的数据拷贝。</p>
 <h3 id="二、copy-on-write-写时复制技术"><a href="#二、copy-on-write-写时复制技术" class="headerlink" title="二、copy-on-write(写时复制技术)"></a>二、copy-on-write(写时复制技术)</h3><p>在某些情况下，Linux操作系统的内核空间缓冲区可能被多个应用程序所共享，操作系统有可能会将用户空间缓冲区地址映射到内核空间缓存区中。当应用程序需要对共享的数据进行修改的时候，才需要真正地拷贝数据到应用程序的用户空间缓冲区中，并且对自己用户空间的缓冲区的数据进行修改不会影响到其他共享数据的应用程序。所以，如果应用程序不需要对数据进行任何修改的话，就不会存在数据从系统内核空间缓冲区拷贝到用户空间缓冲区的操作。</p>
 <h3 id="三、数据传输不经过用户进程地址空间"><a href="#三、数据传输不经过用户进程地址空间" class="headerlink" title="三、数据传输不经过用户进程地址空间"></a>三、数据传输不经过用户进程地址空间</h3><p>在数据传输的过程中，避免数据在操作系统内核地址空间的缓冲区和用户应用程序地址空间的缓冲区之间进行拷贝。有的时候，应用程序在数据进行传输的过程中不需要对数据进行访问，那么，将数据从 Linux 的页缓存拷贝到用户进程的缓冲区中就可以完全避免，传输的数据在页缓存中就可以得到处理。在某些特殊的情况下，这种零拷贝技术可以获得较好的性能。Linux 中提供类似的系统调用主要有 mmap()，sendfile() 以及 splice()。</p>
 <h4 id="mmap"><a href="#mmap" class="headerlink" title="mmap()"></a>mmap()</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">buf = mmap(diskfd, len);</span><br><span class="line">write(sockfd, buf, len);</span><br></pre></td></tr></table></figure>
 
-<p><img src="//x-ljy.github.io/2019/08/03/linux02/mmap.png" alt></p>
+<p><img src="//x-ljy.github.io,http://x-ljy.gitee.io/hexoblog/2019/08/03/linux02/mmap.png" alt></p>
 <p><strong>过程：</strong></p>
 <ol>
 <li><p>应用进程调用了 mmap() 之后，数据会先通过 DMA 拷贝到操作系统内核缓冲区中去。接着，应用进程跟操作系统共享这个缓冲区。这样，操作系统内核和应用进程存储空间就不需要再进行任何的数据拷贝操作。</p>
@@ -304,7 +304,7 @@
 <h4 id="sendfile"><a href="#sendfile" class="headerlink" title="sendfile()"></a>sendfile()</h4><p>为了简化用户接口，同时减少 CPU 的拷贝次数，Linux 在版本 2.1 中引入了 sendfile() 这个系统调用。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ssize_t</span> sendfile(<span class="keyword">int</span> out_fd, <span class="keyword">int</span> in_fd, <span class="keyword">off_t</span> *offset, <span class="keyword">size_t</span> count);</span><br></pre></td></tr></table></figure>
 
-<p><img src="//x-ljy.github.io/2019/08/03/linux02/sendfile.png" alt></p>
+<p><img src="//x-ljy.github.io,http://x-ljy.gitee.io/hexoblog/2019/08/03/linux02/sendfile.png" alt></p>
 <p><strong>过程：</strong></p>
 <ol>
 <li><p>sendfile() 系统调用利用 DMA 引擎将文件中的数据拷贝到操作系统内核缓冲区中。</p>
@@ -317,7 +317,7 @@
 <p>sendfile() 系统调用不需要将数据拷贝或者映射到应用程序地址空间中去，所以 sendfile() 只是适用于应用程序地址空间不需要对所访问数据进行处理的情况。相对于 mmap() 方法来说，因为 sendfile 传输的数据没有越过用户应用程序 / 操作系统内核的边界线，所以 sendfile () 也极大地减少了存储管理的开销。</p>
 <p>现在，已经减少了数据拷贝的次数，但是仍然存在一次CPU拷贝，就是页缓存到socket缓存的拷贝。  </p>
 <p>借助于硬件的帮助，可以把这个拷贝省略掉。即：</p>
-<p><img src="//x-ljy.github.io/2019/08/03/linux02/DMASendfile.png" alt></p>
+<p><img src="//x-ljy.github.io,http://x-ljy.gitee.io/hexoblog/2019/08/03/linux02/DMASendfile.png" alt></p>
 <p><strong>sendfile系统调用利用DMA引擎将文件内容拷贝到内核缓冲区去，然后将带有文件位置和长度信息的缓冲区描述符添加socket缓冲区去，这一步不会将内核中的数据拷贝到socket缓冲区中，DMA引擎会将内核缓冲区的数据拷贝到协议引擎中去，避免了最后一次拷贝。</strong></p>
 <h4 id="splice"><a href="#splice" class="headerlink" title="splice()"></a>splice()</h4><p>splice() 可以被看成是类似于基于流的管道的实现，管道可以使得两个文件描述符相互连接，splice 的调用者则可以控制两个设备（或者协议栈）在操作系统内核中的相互连接。  </p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ssize_t</span> splice(<span class="keyword">int</span> fd_in, <span class="keyword">loff_t</span> *off_in, <span class="keyword">int</span> fd_out, <span class="keyword">loff_t</span> *off_out, <span class="keyword">size_t</span> len, <span class="keyword">unsigned</span> <span class="keyword">int</span> flags);</span><br></pre></td></tr></table></figure>
@@ -342,8 +342,8 @@
         <p><span>发布时间:</span>2019-08-03, 21:26:54</p>
         <p><span>最后更新:</span>2019-08-03, 22:36:04</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/08/03/linux02/" title="linux零拷贝技术">https://x-ljy.github.io/2019/08/03/linux02/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io/2019/08/03/linux02/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/08/03/linux02/" title="linux零拷贝技术">https://x-ljy.github.io,http://x-ljy.gitee.io/hexoblog/2019/08/03/linux02/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://x-ljy.github.io,http://x-ljy.gitee.io/hexoblog/2019/08/03/linux02/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
