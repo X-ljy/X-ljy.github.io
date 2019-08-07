@@ -23,17 +23,17 @@
 <meta property="og:site_name" content="夕的博客">
 <meta property="og:description" content="Talk is cheap. Show me the code.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://x-ljy.gitee.io/hexoblog/2019/08/03/linux01/blockingIO.png">
-<meta property="og:image" content="http://x-ljy.gitee.io/hexoblog/2019/08/03/linux01/nonblockingIO.png">
-<meta property="og:image" content="http://x-ljy.gitee.io/hexoblog/2019/08/03/linux01/IOmultiplexing.png">
-<meta property="og:image" content="http://x-ljy.gitee.io/hexoblog/2019/08/03/linux01/signaldrivenIO.png">
-<meta property="og:image" content="http://x-ljy.gitee.io/hexoblog/2019/08/03/linux01/asynchronousIO.png">
-<meta property="og:image" content="http://x-ljy.gitee.io/hexoblog/2019/08/03/linux01/io.png">
+<meta property="og:image" content="http://x-ljy.gitee.io/hexoblog//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/blockingIO.png">
+<meta property="og:image" content="http://x-ljy.gitee.io/hexoblog//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/nonblockingIO.png">
+<meta property="og:image" content="http://x-ljy.gitee.io/hexoblog//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/IOmultiplexing.png">
+<meta property="og:image" content="http://x-ljy.gitee.io/hexoblog//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/signaldrivenIO.png">
+<meta property="og:image" content="http://x-ljy.gitee.io/hexoblog//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/asynchronousIO.png">
+<meta property="og:image" content="http://x-ljy.gitee.io/hexoblog//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/io.png">
 <meta property="og:updated_time" content="2019-08-03T08:51:06.367Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux网络IO模型">
 <meta name="twitter:description" content="Talk is cheap. Show me the code.">
-<meta name="twitter:image" content="http://x-ljy.gitee.io/hexoblog/2019/08/03/linux01/blockingIO.png">
+<meta name="twitter:image" content="http://x-ljy.gitee.io/hexoblog//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/blockingIO.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -58,7 +58,7 @@
     <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
 
 
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/hexoblog/css/style.css">
 
 
 
@@ -104,11 +104,11 @@
     <div class="overlay"></div>
 <div class="intrude-less">
     <header id="header" class="inner">
-        <a href="/" class="profilepic">
+        <a href="/hexoblog/" class="profilepic">
             <img src="/img/avatar.png" class="animated zoomIn">
         </a>
         <hgroup>
-          <h1 class="header-author"><a href="/">夕</a></h1>
+          <h1 class="header-author"><a href="/hexoblog/">夕</a></h1>
         </hgroup>
 
         
@@ -131,13 +131,13 @@
                     <nav class="header-menu">
                         <ul>
                         
-                            <li><a href="/">主页</a></li>
+                            <li><a href="/hexoblog/">主页</a></li>
                         
-                            <li><a href="/archives/">所有文章</a></li>
+                            <li><a href="/hexoblog/archives/">所有文章</a></li>
                         
-                            <li><a href="/tags/">标签云</a></li>
+                            <li><a href="/hexoblog/tags/">标签云</a></li>
                         
-                            <li><a href="/about/">关于我</a></li>
+                            <li><a href="/hexoblog/about/">关于我</a></li>
                         
                         </ul>
                     </nav>
@@ -176,23 +176,23 @@
       </div>
     <div class="intrude-less">
         <header id="header" class="inner">
-            <a href="/" class="profilepic">
+            <a href="/hexoblog/" class="profilepic">
                 <img src="/img/avatar.png" class="animated zoomIn">
             </a>
             <hgroup>
-              <h1 class="header-author"><a href="/" title="回到主页">夕</a></h1>
+              <h1 class="header-author"><a href="/hexoblog/" title="回到主页">夕</a></h1>
             </hgroup>
             
             <nav class="header-menu">
                 <ul>
                 
-                    <li><a href="/">主页</a></li>
+                    <li><a href="/hexoblog/">主页</a></li>
                 
-                    <li><a href="/archives/">所有文章</a></li>
+                    <li><a href="/hexoblog/archives/">所有文章</a></li>
                 
-                    <li><a href="/tags/">标签云</a></li>
+                    <li><a href="/hexoblog/tags/">标签云</a></li>
                 
-                    <li><a href="/about/">关于我</a></li>
+                    <li><a href="/hexoblog/about/">关于我</a></li>
                 
                 <div class="clearfix"></div>
                 </ul>
@@ -219,7 +219,7 @@
   
     <div class="article-meta">
       
-<a href="/2019/08/03/linux01/" class="article-date">
+<a href="/hexoblog/2019/08/03/linux01/" class="article-date">
       <time datetime="2019-08-03T07:14:39.000Z" itemprop="datePublished">2019-08-03</time>
 </a>
 
@@ -265,13 +265,13 @@
       <div class="article-entry article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    <a class="article-category-link" href="/hexoblog/categories/Linux/">Linux</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexoblog/tags/Linux/">Linux</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -307,25 +307,25 @@
 <li>异步 I/O（asynchronous IO）</li>
 </ul>
 <p><strong>1.  阻塞 I/O（blocking IO）</strong>  </p>
-<p><img src="//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/blockingIO.png" alt>  </p>
+<p><img src="/hexoblog//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/blockingIO.png" alt>  </p>
 <p>当用户进程调用了recvfrom这个系统调用，kernel就开始了IO的第一个阶段：准备数据（对于网络IO来说，很多时候数据在一开始还没有到达。比如，还没有收到一个完整的UDP包。这个时候kernel就要等待足够的数据到来）。这个过程需要等待，也就是说数据被拷贝到操作系统内核的缓冲区中是需要一个过程的。而在用户进程这边，整个进程会被阻塞（当然，是进程自己选择的阻塞）。当kernel一直等到数据准备好了，它就会将数据从kernel中拷贝到用户内存，然后kernel返回结果，用户进程才解除block的状态，重新运行起来。(IO执行的两个阶段都被block了)  </p>
 <p><strong>2. 非阻塞 I/O（nonblocking IO）</strong>  </p>
-<p><img src="//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/nonblockingIO.png" alt>  </p>
+<p><img src="/hexoblog//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/nonblockingIO.png" alt>  </p>
 <p>当用户进程发出read操作时，如果kernel中的数据还没有准备好，那么它并不会block用户进程，而是立刻返回一个error。从用户进程角度讲 ，它发起一个read操作后，并不需要等待，而是马上就得到了一个结果。用户进程判断结果是一个error时，它就知道数据还没有准备好，于是它可以再次发送read操作。一旦kernel中的数据准备好了，并且又再次收到了用户进程的system call，那么它马上就将数据拷贝到了用户内存，然后返回。</p>
 <p>当一个应用进程像这样对一个非阻塞描述字循环调用recvfrom时，我们称之为轮询（polling）。应用进程持续轮询内核，以查看某个操作是否就绪。这么做往往耗费大量CPU时间，不过这种模型偶尔也会遇到，通常是在只专门提供某种功能的系统中才有。</p>
 <p><strong>3. I/O 多路复用（ IO multiplexing）</strong>  </p>
-<p><img src="//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/IOmultiplexing.png" alt></p>
+<p><img src="/hexoblog//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/IOmultiplexing.png" alt></p>
 <p>IO multiplexing就是我们说的select，poll，epoll，有些地方也称这种IO方式为event driven IO。select/epoll的好处就在于单个process就可以同时处理多个网络连接的IO。它的基本原理就是select，poll，epoll这个function会不断的轮询所负责的所有socket，当某个socket有数据到达了，就通知用户进程。  </p>
 <p>当用户进程调用了select，那么整个进程会被block，而同时，kernel会“监视”所有select负责的socket，当任何一个socket中的数据准备好了，select就会返回。这个时候用户进程再调用read操作，将数据从kernel拷贝到用户进程。  </p>
 <p>整个用户的process其实是一直被block的。只不过process是被select这个函数block，而不是被socket IO给block。</p>
 <p><strong>4. 信号驱动 I/O（ signal driven IO）</strong>  </p>
-<p><img src="//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/signaldrivenIO.png" alt>  </p>
+<p><img src="/hexoblog//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/signaldrivenIO.png" alt>  </p>
 <p>首先开启套接口的信号驱动I/O功能，并通过sigaction系统调用安装一个信号处理函数。该系统调用立即返回，我们的进程继续工作，也就是说它没有被阻塞。当数据报准备好读取时，内核就为该进程产生一个SIGIO信号。我们随后既可以在信号处理函数中调用recvfrom读取数据报，并通知主循环数据已准备好待处理，也可以立即通知主循环，让它读取数据报。</p>
 <p>无论如何处理SIGIO信号，这种模型的优势在于等待数据报到达期间，进程不被阻塞。主循环可以继续执行，只要不时等待来自信号处理函数的通知：既可以是数据已准备好被处理，也可以是数据报已准备好被读取。  </p>
 <p><strong>5. 异步 I/O（asynchronous IO）</strong>  </p>
-<p><img src="//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/asynchronousIO.png" alt></p>
+<p><img src="/hexoblog//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/asynchronousIO.png" alt></p>
 <p>异步I/O（asynchronous I/O）由POSIX规范定义。一般地说，这些函数的工作机制是：告知内核启动某个操作，并让内核在整个操作（包括将数据从内核拷贝到我们自己的缓冲区）完成后通知我们。</p>
-<h2 id="各种模型的比较"><a href="#各种模型的比较" class="headerlink" title="各种模型的比较"></a>各种模型的比较</h2><p><img src="//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/io.png" alt>  </p>
+<h2 id="各种模型的比较"><a href="#各种模型的比较" class="headerlink" title="各种模型的比较"></a>各种模型的比较</h2><p><img src="/hexoblog//x-ljy.gitee.io/hexoblog/2019/08/03/linux01/io.png" alt>  </p>
 
       
     </div>
@@ -334,12 +334,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/08/03/linux01/">Linux网络IO模型</a></p>
+        <p><span>本文标题:</span><a href="/hexoblog/2019/08/03/linux01/">Linux网络IO模型</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-08-03, 15:14:39</p>
         <p><span>最后更新:</span>2019-08-03, 16:51:06</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/08/03/linux01/" title="Linux网络IO模型">http://x-ljy.gitee.io/hexoblog/2019/08/03/linux01/</a>
+            <span>原始链接:</span><a class="post-url" href="/hexoblog/2019/08/03/linux01/" title="Linux网络IO模型">http://x-ljy.gitee.io/hexoblog/2019/08/03/linux01/</a>
             <span class="copy-path" data-clipboard-text="原文: http://x-ljy.gitee.io/hexoblog/2019/08/03/linux01/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -353,14 +353,14 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/08/03/linux02/">
+                <a href="/hexoblog/2019/08/03/linux02/">
                     linux零拷贝技术
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/08/03/Java01/">
+                <a href="/hexoblog/2019/08/03/Java01/">
                     Java String 对象的分析
                 </a>
             </div>
@@ -429,7 +429,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/08/03/linux02/" title="上一篇: linux零拷贝技术">
+            <a href="/hexoblog/2019/08/03/linux02/" title="上一篇: linux零拷贝技术">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -437,13 +437,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/08/03/Java01/" title="下一篇: Java String 对象的分析">
+            <a href="/hexoblog/2019/08/03/Java01/" title="下一篇: Java String 对象的分析">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/08/05/java03/">Java集合框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/java02/">Java异常处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/03/linux02/">linux零拷贝技术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/03/linux01/">Linux网络IO模型</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/03/Java01/">Java String 对象的分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/02/mysql02/">mysql必知必会（一）---- Mysql命令汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/designpattern01/">designpattern01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/jvm3/">jvm3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/29/springboot-shiro01/">springboot-shiro01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/docker04/">docker学习(四)----docker-compose.yml V3.x 指令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/docker03/">docker学习(三)----Docker 网络详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/k8s001/">k8s学习(一)----k8s集群部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/mysql01/">mysql必知必会（一）----常用的数据类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/23/docker02/">docker学习(二)----Docker基础命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/jvm2/">JVM系列(二)----JVM内存结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/jvm1/">JVM系列(一)----JVM基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/docker01/">docker学习(一)----Dockerfile基础指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/05/java03/">Java集合框架</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/04/java02/">Java异常处理</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/03/linux02/">linux零拷贝技术</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/03/linux01/">Linux网络IO模型</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/03/Java01/">Java String 对象的分析</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/02/mysql02/">mysql必知必会（一）---- Mysql命令汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/01/designpattern01/">designpattern01</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/01/jvm3/">jvm3</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/29/springboot-shiro01/">springboot-shiro01</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/28/docker04/">docker学习(四)----docker-compose.yml V3.x 指令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/26/docker03/">docker学习(三)----Docker 网络详解</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/24/k8s001/">k8s学习(一)----k8s集群部署</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/24/mysql01/">mysql必知必会（一）----常用的数据类型</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/23/docker02/">docker学习(二)----Docker基础命令</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/14/jvm2/">JVM系列(二)----JVM内存结构</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/13/jvm1/">JVM系列(一)----JVM基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/06/docker01/">docker学习(一)----Dockerfile基础指令</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
 
 
 
@@ -528,7 +528,7 @@
 </footer>
     </div>
     
-<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script data-main="/hexoblog/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
 
 
 
@@ -564,5 +564,5 @@
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
   </div>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"superSample":2,"width":150,"height":320,"position":"left","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"tagMode":false});</script></body>
+<script src="/hexoblog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/hexoblog/live2dw/assets/haruto.model.json"},"display":{"superSample":2,"width":150,"height":320,"position":"left","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"tagMode":false});</script></body>
 </html>

@@ -23,12 +23,12 @@
 <meta property="og:site_name" content="夕的博客">
 <meta property="og:description" content="生命太短暂,不要去做一些根本没有人想要的东西。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://x-ljy.gitee.io/hexoblog/2019/07/24/k8s001/k8s01.png">
+<meta property="og:image" content="http://x-ljy.gitee.io/hexoblog//x-ljy.gitee.io/hexoblog/2019/07/24/k8s001/k8s01.png">
 <meta property="og:updated_time" content="2019-07-30T04:41:06.031Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="k8s学习(一)----k8s集群部署">
 <meta name="twitter:description" content="生命太短暂,不要去做一些根本没有人想要的东西。">
-<meta name="twitter:image" content="http://x-ljy.gitee.io/hexoblog/2019/07/24/k8s001/k8s01.png">
+<meta name="twitter:image" content="http://x-ljy.gitee.io/hexoblog//x-ljy.gitee.io/hexoblog/2019/07/24/k8s001/k8s01.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -53,7 +53,7 @@
     <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
 
 
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/hexoblog/css/style.css">
 
 
 
@@ -99,11 +99,11 @@
     <div class="overlay"></div>
 <div class="intrude-less">
     <header id="header" class="inner">
-        <a href="/" class="profilepic">
+        <a href="/hexoblog/" class="profilepic">
             <img src="/img/avatar.png" class="animated zoomIn">
         </a>
         <hgroup>
-          <h1 class="header-author"><a href="/">夕</a></h1>
+          <h1 class="header-author"><a href="/hexoblog/">夕</a></h1>
         </hgroup>
 
         
@@ -126,13 +126,13 @@
                     <nav class="header-menu">
                         <ul>
                         
-                            <li><a href="/">主页</a></li>
+                            <li><a href="/hexoblog/">主页</a></li>
                         
-                            <li><a href="/archives/">所有文章</a></li>
+                            <li><a href="/hexoblog/archives/">所有文章</a></li>
                         
-                            <li><a href="/tags/">标签云</a></li>
+                            <li><a href="/hexoblog/tags/">标签云</a></li>
                         
-                            <li><a href="/about/">关于我</a></li>
+                            <li><a href="/hexoblog/about/">关于我</a></li>
                         
                         </ul>
                     </nav>
@@ -171,23 +171,23 @@
       </div>
     <div class="intrude-less">
         <header id="header" class="inner">
-            <a href="/" class="profilepic">
+            <a href="/hexoblog/" class="profilepic">
                 <img src="/img/avatar.png" class="animated zoomIn">
             </a>
             <hgroup>
-              <h1 class="header-author"><a href="/" title="回到主页">夕</a></h1>
+              <h1 class="header-author"><a href="/hexoblog/" title="回到主页">夕</a></h1>
             </hgroup>
             
             <nav class="header-menu">
                 <ul>
                 
-                    <li><a href="/">主页</a></li>
+                    <li><a href="/hexoblog/">主页</a></li>
                 
-                    <li><a href="/archives/">所有文章</a></li>
+                    <li><a href="/hexoblog/archives/">所有文章</a></li>
                 
-                    <li><a href="/tags/">标签云</a></li>
+                    <li><a href="/hexoblog/tags/">标签云</a></li>
                 
-                    <li><a href="/about/">关于我</a></li>
+                    <li><a href="/hexoblog/about/">关于我</a></li>
                 
                 <div class="clearfix"></div>
                 </ul>
@@ -214,7 +214,7 @@
   
     <div class="article-meta">
       
-<a href="/2019/07/24/k8s001/" class="article-date">
+<a href="/hexoblog/2019/07/24/k8s001/" class="article-date">
       <time datetime="2019-07-24T04:38:26.000Z" itemprop="datePublished">2019-07-24</time>
 </a>
 
@@ -260,13 +260,13 @@
       <div class="article-entry article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Kubernetes/">Kubernetes</a>
+    <a class="article-category-link" href="/hexoblog/categories/Kubernetes/">Kubernetes</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kubernetes/">Kubernetes</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexoblog/tags/Kubernetes/">Kubernetes</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -337,7 +337,7 @@
 </ol>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看所需镜像列表</span></span><br><span class="line">kubeadm config images list --config kubeadm.yml</span><br><span class="line"><span class="comment"># 拉取镜像</span></span><br><span class="line">kubeadm config images pull --config kubeadm.yml</span><br></pre></td></tr></table></figure>
 
-<p><img src="//x-ljy.gitee.io/hexoblog/2019/07/24/k8s001/k8s01.png" alt>  </p>
+<p><img src="/hexoblog//x-ljy.gitee.io/hexoblog/2019/07/24/k8s001/k8s01.png" alt>  </p>
 <h2 id="安装-kubernetes-主节点"><a href="#安装-kubernetes-主节点" class="headerlink" title="安装 kubernetes 主节点"></a>安装 kubernetes 主节点</h2><p>执行以下命令初始化主节点，该命令指定了初始化时需要使用的配置文件，其中添加 –experimental-upload-certs 参数可以在后续执行加入节点时自动分发证书文件。追加的 tee kubeadm-init.log 用以输出日志。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init --config=kubeadm.yml --experimental-upload-certs | tee kubeadm-init.log</span><br><span class="line"></span><br><span class="line">Flag --experimental-upload-certs has been deprecated, use --upload-certs instead</span><br><span class="line">[init] Using Kubernetes version: v1.15.1</span><br><span class="line">[preflight] Running pre-flight checks</span><br><span class="line">	[WARNING Hostname]: hostname <span class="string">"k8s-master3"</span> could not be reached</span><br><span class="line">	[WARNING Hostname]: hostname <span class="string">"k8s-master3"</span>: lookup k8s-master3 on 202.198.176.1:53: server misbehaving</span><br><span class="line">[preflight] Pulling images required <span class="keyword">for</span> setting up a Kubernetes cluster</span><br><span class="line">[preflight] This might take a minute or two, depending on the speed of your internet connection</span><br><span class="line">[preflight] You can also perform this action <span class="keyword">in</span> beforehand using <span class="string">'kubeadm config images pull'</span></span><br><span class="line">[kubelet-start] Writing kubelet environment file with flags to file <span class="string">"/var/lib/kubelet/kubeadm-flags.env"</span></span><br><span class="line">[kubelet-start] Writing kubelet configuration to file <span class="string">"/var/lib/kubelet/config.yaml"</span></span><br><span class="line">[kubelet-start] Activating the kubelet service</span><br><span class="line">[certs] Using certificateDir folder <span class="string">"/etc/kubernetes/pki"</span></span><br><span class="line">[certs] Generating <span class="string">"ca"</span> certificate and key</span><br><span class="line">[certs] Generating <span class="string">"apiserver-kubelet-client"</span> certificate and key</span><br><span class="line">[certs] Generating <span class="string">"apiserver"</span> certificate and key</span><br><span class="line">[certs] apiserver serving cert is signed <span class="keyword">for</span> DNS names [k8s-master3 kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 10.10.44.123]</span><br><span class="line">[certs] Generating <span class="string">"front-proxy-ca"</span> certificate and key</span><br><span class="line">[certs] Generating <span class="string">"front-proxy-client"</span> certificate and key</span><br><span class="line">[certs] Generating <span class="string">"etcd/ca"</span> certificate and key</span><br><span class="line">[certs] Generating <span class="string">"apiserver-etcd-client"</span> certificate and key</span><br><span class="line">[certs] Generating <span class="string">"etcd/peer"</span> certificate and key</span><br><span class="line">[certs] etcd/peer serving cert is signed <span class="keyword">for</span> DNS names [k8s-master3 localhost] and IPs [10.10.44.123 127.0.0.1 ::1]</span><br><span class="line">[certs] Generating <span class="string">"etcd/healthcheck-client"</span> certificate and key</span><br><span class="line">[certs] Generating <span class="string">"etcd/server"</span> certificate and key</span><br><span class="line">[certs] etcd/server serving cert is signed <span class="keyword">for</span> DNS names [k8s-master3 localhost] and IPs [10.10.44.123 127.0.0.1 ::1]</span><br><span class="line">[certs] Generating <span class="string">"sa"</span> key and public key</span><br><span class="line">[kubeconfig] Using kubeconfig folder <span class="string">"/etc/kubernetes"</span></span><br><span class="line">[kubeconfig] Writing <span class="string">"admin.conf"</span> kubeconfig file</span><br><span class="line">[kubeconfig] Writing <span class="string">"kubelet.conf"</span> kubeconfig file</span><br><span class="line">[kubeconfig] Writing <span class="string">"controller-manager.conf"</span> kubeconfig file</span><br><span class="line">[kubeconfig] Writing <span class="string">"scheduler.conf"</span> kubeconfig file</span><br><span class="line">[control-plane] Using manifest folder <span class="string">"/etc/kubernetes/manifests"</span></span><br><span class="line">[control-plane] Creating static Pod manifest <span class="keyword">for</span> <span class="string">"kube-apiserver"</span></span><br><span class="line">[control-plane] Creating static Pod manifest <span class="keyword">for</span> <span class="string">"kube-controller-manager"</span></span><br><span class="line">[control-plane] Creating static Pod manifest <span class="keyword">for</span> <span class="string">"kube-scheduler"</span></span><br><span class="line">[etcd] Creating static Pod manifest <span class="keyword">for</span> <span class="built_in">local</span> etcd <span class="keyword">in</span> <span class="string">"/etc/kubernetes/manifests"</span></span><br><span class="line">[<span class="built_in">wait</span>-control-plane] Waiting <span class="keyword">for</span> the kubelet to boot up the control plane as static Pods from directory <span class="string">"/etc/kubernetes/manifests"</span>. This can take up to 4m0s</span><br><span class="line">[apiclient] All control plane components are healthy after 35.504680 seconds</span><br><span class="line">[upload-config] Storing the configuration used <span class="keyword">in</span> ConfigMap <span class="string">"kubeadm-config"</span> <span class="keyword">in</span> the <span class="string">"kube-system"</span> Namespace</span><br><span class="line">[kubelet] Creating a ConfigMap <span class="string">"kubelet-config-1.15"</span> <span class="keyword">in</span> namespace kube-system with the configuration <span class="keyword">for</span> the kubelets <span class="keyword">in</span> the cluster</span><br><span class="line">[upload-certs] Storing the certificates <span class="keyword">in</span> Secret <span class="string">"kubeadm-certs"</span> <span class="keyword">in</span> the <span class="string">"kube-system"</span> Namespace</span><br><span class="line">[upload-certs] Using certificate key:</span><br><span class="line">7c96a0027e3c3ef4da2869ea68094f98f593f16b42526f706ef0450dab94f723</span><br><span class="line">[mark-control-plane] Marking the node k8s-master3 as control-plane by adding the label <span class="string">"node-role.kubernetes.io/master=''"</span></span><br><span class="line">[mark-control-plane] Marking the node k8s-master3 as control-plane by adding the taints [node-role.kubernetes.io/master:NoSchedule]</span><br><span class="line">[bootstrap-token] Using token: abcdef.0123456789abcdef</span><br><span class="line">[bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles</span><br><span class="line">[bootstrap-token] configured RBAC rules to allow Node Bootstrap tokens to post CSRs <span class="keyword">in</span> order <span class="keyword">for</span> nodes to get long term certificate credentials</span><br><span class="line">[bootstrap-token] configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token</span><br><span class="line">[bootstrap-token] configured RBAC rules to allow certificate rotation <span class="keyword">for</span> all node client certificates <span class="keyword">in</span> the cluster</span><br><span class="line">[bootstrap-token] Creating the <span class="string">"cluster-info"</span> ConfigMap <span class="keyword">in</span> the <span class="string">"kube-public"</span> namespace</span><br><span class="line">[addons] Applied essential addon: CoreDNS</span><br><span class="line">[addons] Applied essential addon: kube-proxy</span><br><span class="line"></span><br><span class="line">Your Kubernetes control-plane has initialized successfully!</span><br><span class="line"></span><br><span class="line">To start using your cluster, you need to run the following as a regular user:</span><br><span class="line"></span><br><span class="line">  mkdir -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">  sudo cp -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">  sudo chown $(id -u):$(id -g) <span class="variable">$HOME</span>/.kube/config</span><br><span class="line"></span><br><span class="line">You should now deploy a pod network to the cluster.</span><br><span class="line">Run <span class="string">"kubectl apply -f [podnetwork].yaml"</span> with one of the options listed at:</span><br><span class="line">  https://kubernetes.io/docs/concepts/cluster-administration/addons/</span><br><span class="line"></span><br><span class="line">Then you can join any number of worker nodes by running the following on each as root:</span><br><span class="line"></span><br><span class="line">kubeadm join 10.10.44.123:6443 --token abcdef.0123456789abcdef \</span><br><span class="line">    --discovery-token-ca-cert-hash sha256:39ddf7bea129f622b444d3257a9e93b5868240683e62596f6ad22c030cd9f8ee</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"><span class="comment">## 使用 kubeadm 配置 slave 节点  </span></span><br><span class="line"></span><br><span class="line">将 slave 节点加入到集群中很简单，只需要在 slave 服务器上安装 kubeadm，kubectl，kubelet 三个工具，然后使用 kubeadm join 命令加入即可.</span><br><span class="line"></span><br><span class="line">```sh</span><br><span class="line"><span class="comment">#上一节中日志最后部分已经给出加入集群的命令</span></span><br><span class="line">kubeadm join 10.10.44.123:6443 --token abcdef.0123456789abcdef \</span><br><span class="line">    --discovery-token-ca-cert-hash sha256:39ddf7bea129f622b444d3257a9e93b5868240683e62596f6ad22c030cd9f8ee</span><br></pre></td></tr></table></figure>
 
@@ -360,12 +360,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/07/24/k8s001/">k8s学习(一)----k8s集群部署</a></p>
+        <p><span>本文标题:</span><a href="/hexoblog/2019/07/24/k8s001/">k8s学习(一)----k8s集群部署</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
         <p><span>发布时间:</span>2019-07-24, 12:38:26</p>
         <p><span>最后更新:</span>2019-07-30, 12:41:06</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/07/24/k8s001/" title="k8s学习(一)----k8s集群部署">http://x-ljy.gitee.io/hexoblog/2019/07/24/k8s001/</a>
+            <span>原始链接:</span><a class="post-url" href="/hexoblog/2019/07/24/k8s001/" title="k8s学习(一)----k8s集群部署">http://x-ljy.gitee.io/hexoblog/2019/07/24/k8s001/</a>
             <span class="copy-path" data-clipboard-text="原文: http://x-ljy.gitee.io/hexoblog/2019/07/24/k8s001/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -379,14 +379,14 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/07/24/mysql01/">
+                <a href="/hexoblog/2019/07/24/mysql01/">
                     mysql必知必会（一）----常用的数据类型
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/07/23/docker02/">
+                <a href="/hexoblog/2019/07/23/docker02/">
                     docker学习(二)----Docker基础命令
                 </a>
             </div>
@@ -455,7 +455,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/07/24/mysql01/" title="上一篇: mysql必知必会（一）----常用的数据类型">
+            <a href="/hexoblog/2019/07/24/mysql01/" title="上一篇: mysql必知必会（一）----常用的数据类型">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -463,13 +463,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/07/23/docker02/" title="下一篇: docker学习(二)----Docker基础命令">
+            <a href="/hexoblog/2019/07/23/docker02/" title="下一篇: docker学习(二)----Docker基础命令">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/08/05/java03/">Java集合框架</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/java02/">Java异常处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/03/linux02/">linux零拷贝技术</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/03/linux01/">Linux网络IO模型</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/03/Java01/">Java String 对象的分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/02/mysql02/">mysql必知必会（一）---- Mysql命令汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/designpattern01/">designpattern01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/jvm3/">jvm3</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/29/springboot-shiro01/">springboot-shiro01</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/28/docker04/">docker学习(四)----docker-compose.yml V3.x 指令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/docker03/">docker学习(三)----Docker 网络详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/k8s001/">k8s学习(一)----k8s集群部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/24/mysql01/">mysql必知必会（一）----常用的数据类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/23/docker02/">docker学习(二)----Docker基础命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/14/jvm2/">JVM系列(二)----JVM内存结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/13/jvm1/">JVM系列(一)----JVM基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/06/docker01/">docker学习(一)----Dockerfile基础指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/05/java03/">Java集合框架</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/04/java02/">Java异常处理</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/03/linux02/">linux零拷贝技术</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/03/linux01/">Linux网络IO模型</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/03/Java01/">Java String 对象的分析</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/02/mysql02/">mysql必知必会（一）---- Mysql命令汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/01/designpattern01/">designpattern01</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/08/01/jvm3/">jvm3</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/29/springboot-shiro01/">springboot-shiro01</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/28/docker04/">docker学习(四)----docker-compose.yml V3.x 指令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/26/docker03/">docker学习(三)----Docker 网络详解</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/24/k8s001/">k8s学习(一)----k8s集群部署</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/24/mysql01/">mysql必知必会（一）----常用的数据类型</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/23/docker02/">docker学习(二)----Docker基础命令</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/20/git/">Git基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/14/jvm2/">JVM系列(二)----JVM内存结构</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/13/jvm1/">JVM系列(一)----JVM基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/06/docker01/">docker学习(一)----Dockerfile基础指令</a></li><li class="post-list-item"><a class="post-list-link" href="/hexoblog/2019/07/05/markdown1/">MarkDown的基本使用</a></li></ul>
 
 
 
@@ -554,7 +554,7 @@
 </footer>
     </div>
     
-<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script data-main="/hexoblog/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
 
 
 
@@ -590,5 +590,5 @@
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
   </div>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"superSample":2,"width":150,"height":320,"position":"left","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"tagMode":false});</script></body>
+<script src="/hexoblog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/hexoblog/live2dw/assets/haruto.model.json"},"display":{"superSample":2,"width":150,"height":320,"position":"left","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"tagMode":false});</script></body>
 </html>
