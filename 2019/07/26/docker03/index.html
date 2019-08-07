@@ -19,16 +19,16 @@
 <meta name="keywords" content="Docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker学习(三)----Docker 网络详解">
-<meta property="og:url" content="http://www.qx-ljy.cn/2019/07/26/docker03/index.html">
+<meta property="og:url" content="http://qx-ljy.cn/2019/07/26/docker03/index.html">
 <meta property="og:site_name" content="夕的博客">
 <meta property="og:description" content="Talk is cheap. Show me the code.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://www.qx-ljy.cn/2019/07/26/docker03/nginx.png">
+<meta property="og:image" content="http://qx-ljy.cn/2019/07/26/docker03/nginx.png">
 <meta property="og:updated_time" content="2019-07-30T04:45:22.406Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker学习(三)----Docker 网络详解">
 <meta name="twitter:description" content="Talk is cheap. Show me the code.">
-<meta name="twitter:image" content="http://www.qx-ljy.cn/2019/07/26/docker03/nginx.png">
+<meta name="twitter:image" content="http://qx-ljy.cn/2019/07/26/docker03/nginx.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -300,7 +300,7 @@
 
 <h2 id="Host（开放式网络模式）"><a href="#Host（开放式网络模式）" class="headerlink" title="Host（开放式网络模式）"></a>Host（开放式网络模式）</h2><p>Host模式使用是在容器启动时候指明–network host，此时容器共享宿主机的Network Namespace，容器内启动的端口直接是宿主机的端口，并且容器不会创建网卡和IP，直接使用宿主机的网卡和IP，但是容器内的其他资源是隔离的，如文件系统、用户和用户组。这种模式的好处就是效率高，因为不需要额外的网络开始，直接使用宿主机网络。</p>
 <pre><code class="sh">docker run -d --name nginx --network host nginx:latest</code></pre>
-<p><img src="//www.qx-ljy.cn/2019/07/26/docker03/nginx.png" alt></p>
+<p><img src="//qx-ljy.cn/2019/07/26/docker03/nginx.png" alt></p>
 <h2 id="Container-联合挂载式网络模式"><a href="#Container-联合挂载式网络模式" class="headerlink" title="Container(联合挂载式网络模式)"></a>Container(联合挂载式网络模式)</h2><p>这个模式指定新创建的容器和已经存在的一个容器共享一个 Network Namespace，而不是和宿主机共享。新创建的容器不会创建自己的网卡，配置自己的 IP，而是和一个指定的容器共享 IP、端口范围等。同样，两个容器除了网络方面，其他的如文件系统、进程列表等还是隔离的。两个容器的进程可以通过 lo回环 通信。同样，kubernetes中的pod的话，pod内的网络也是靠这样的共享方式来实现的。</p>
 <h2 id="None（封闭式网络模式）"><a href="#None（封闭式网络模式）" class="headerlink" title="None（封闭式网络模式）"></a>None（封闭式网络模式）</h2><p>使用–network none选项指定其网络模式，在该模式下虽然容器有着自己的Network Namespace，但是容器内没有网卡、IP、路由信息，只有一个lo回环接口。如果需要网络配置则需要用户手动进行配置网卡、ip以及路由信息，通常这样的容器用于承担某些无需网络介入的工作，如离线任务、备份等。</p>
 
@@ -316,8 +316,8 @@
         <p><span>发布时间:</span>2019-07-26, 10:50:58</p>
         <p><span>最后更新:</span>2019-07-30, 12:45:22</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/07/26/docker03/" title="docker学习(三)----Docker 网络详解">http://www.qx-ljy.cn/2019/07/26/docker03/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://www.qx-ljy.cn/2019/07/26/docker03/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/26/docker03/" title="docker学习(三)----Docker 网络详解">http://qx-ljy.cn/2019/07/26/docker03/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://qx-ljy.cn/2019/07/26/docker03/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -337,8 +337,8 @@
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/07/24/k8s001/">
-                    k8s学习(一)----k8s集群部署
+                <a href="/2019/07/24/mysql01/">
+                    mysql必知必会（一）----常用的数据类型
                 </a>
             </div>
         
@@ -414,7 +414,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/07/24/k8s001/" title="下一篇: k8s学习(一)----k8s集群部署">
+            <a href="/2019/07/24/mysql01/" title="下一篇: mysql必知必会（一）----常用的数据类型">
                 <i class="fa fa-angle-right"></i>
             </a>
         

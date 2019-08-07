@@ -19,16 +19,16 @@
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM系列(二)----JVM内存结构">
-<meta property="og:url" content="http://www.qx-ljy.cn/2019/07/14/jvm2/index.html">
+<meta property="og:url" content="http://qx-ljy.cn/2019/07/14/jvm2/index.html">
 <meta property="og:site_name" content="夕的博客">
 <meta property="og:description" content="世界上并没有完美的程序，但我们并不因此而沮丧，因为写程序本来就是一个不断追求完美的过程。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://www.qx-ljy.cn/2019/07/14/jvm2/jvm2.png">
+<meta property="og:image" content="http://qx-ljy.cn/2019/07/14/jvm2/jvm2.png">
 <meta property="og:updated_time" content="2019-08-01T10:20:39.627Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM系列(二)----JVM内存结构">
 <meta name="twitter:description" content="世界上并没有完美的程序，但我们并不因此而沮丧，因为写程序本来就是一个不断追求完美的过程。">
-<meta name="twitter:image" content="http://www.qx-ljy.cn/2019/07/14/jvm2/jvm2.png">
+<meta name="twitter:image" content="http://qx-ljy.cn/2019/07/14/jvm2/jvm2.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -273,7 +273,7 @@
       
           
         <p><strong>经典JVM内存布局（JDK8以上）</strong>  </p>
-<p><img src="//www.qx-ljy.cn/2019/07/14/jvm2/jvm2.png" alt></p>
+<p><img src="//qx-ljy.cn/2019/07/14/jvm2/jvm2.png" alt></p>
 <h2 id="一、Heap（堆区）"><a href="#一、Heap（堆区）" class="headerlink" title="一、Heap（堆区）"></a>一、Heap（堆区）</h2><p><strong>Heap存储着几乎所有的实例对象，堆由垃圾收集器自动回收，堆区由各个子线程共享使用。</strong> 通常情况下，它占用的空间是所有内存区域中最大的，同时也是OOM（Out Of Memory）故障最主要的发源地。  </p>
 <p>堆的内存空间既可以固定大小，也可以在运行时动态地调整。  </p>
 <p>通过如下参数设置初始值和最大值，比如-Xms256M -Xmx1024M （-X表示它是JVM运行参数，ms是memory start（最小堆容量）的简称，mx是memory max（最大堆容量）的简称）。由于服务器在不断运行过程中，堆空间不断地扩容与回缩，势必形成不必要的系统压力，所以在线上生产环境中，JVM的Xms Xmx 设置成一样大小，避免在GC调整堆大小时带来的额外压力。</p>
@@ -348,8 +348,8 @@
         <p><span>发布时间:</span>2019-07-14, 16:39:22</p>
         <p><span>最后更新:</span>2019-08-01, 18:20:39</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/07/14/jvm2/" title="JVM系列(二)----JVM内存结构">http://www.qx-ljy.cn/2019/07/14/jvm2/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://www.qx-ljy.cn/2019/07/14/jvm2/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/14/jvm2/" title="JVM系列(二)----JVM内存结构">http://qx-ljy.cn/2019/07/14/jvm2/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://qx-ljy.cn/2019/07/14/jvm2/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
