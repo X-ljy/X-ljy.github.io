@@ -16,16 +16,16 @@
 
 
 <meta name="description" content="Talk is cheap. Show me the code.">
-<meta name="keywords" content="git">
+<meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git基本操作">
-<meta property="og:url" content="http://qx-ljy.cn/2019/07/20/git/index.html">
+<meta property="og:title" content="职责链模式">
+<meta property="og:url" content="http://qx-ljy.cn/2019/08/09/designpattern03/index.html">
 <meta property="og:site_name" content="夕的博客">
 <meta property="og:description" content="Talk is cheap. Show me the code.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-30T04:45:29.464Z">
+<meta property="og:updated_time" content="2019-08-09T07:59:20.461Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git基本操作">
+<meta name="twitter:title" content="职责链模式">
 <meta name="twitter:description" content="Talk is cheap. Show me the code.">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Git基本操作 | 夕的博客</title>
+<title>职责链模式 | 夕的博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -204,12 +204,16 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
-<article id="post-git" class="article article-type-post" itemscope itemprop="blogPost">
+  <i class="fa fa-thumb-tack"></i>
+  <font color=7D26CD>置顶</font>
+  <span class="post-meta-divider">|</span>
+
+<article id="post-designpattern03" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       
-<a href="/2019/07/20/git/" class="article-date">
-      <time datetime="2019-07-20T02:41:53.000Z" itemprop="datePublished">2019-07-20</time>
+<a href="/2019/08/09/designpattern03/" class="article-date">
+      <time datetime="2019-08-09T06:53:08.000Z" itemprop="datePublished">2019-08-09</time>
 </a>
 
 
@@ -224,7 +228,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Git基本操作
+      职责链模式
     </h1>
   
 
@@ -243,7 +247,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count">2分</span>
       </span>
     </span>
 </div>
@@ -254,13 +258,13 @@
       <div class="article-entry article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Git/">Git</a>
+    <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -270,58 +274,23 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong>1. 仓库操作</strong></p>
-<ul>
-<li>git init   (创建一个Git仓库)</li>
-<li>git clone [url]  （拷贝一个git仓库到本地）</li>
-</ul>
-<blockquote>
-<p>工作流 ：<br>本地仓库由git维护的三棵“树”组成。第一个是你的工作目录，它持有实际文件；第二个是缓存区（Index）,它像个缓存区域，临时保存你的改动；最后是HEAD，指向你最近一次提交后的结果。  </p>
-</blockquote>
-<p><strong>2. 将文件添加到缓存区</strong></p>
-<ul>
-<li><p>git add [filename]  </p>
+        <h2 id="职责链模式（Chain-of-Responsibility-Pattern）"><a href="#职责链模式（Chain-of-Responsibility-Pattern）" class="headerlink" title="职责链模式（Chain of Responsibility Pattern）"></a>职责链模式（Chain of Responsibility Pattern）</h2><ol>
+<li><p>职责链模式又叫责任链模式，为请求创建一个接受者对象的链。这种模式对请求的发送者和接受者进行解耦</p>
 </li>
-<li><p>git add .  </p>
-<p>不加参数默认为将修改操作的文件和未跟踪新添加的文件添加到git系统的暂存区，注意不包括删除</p>
+<li><p>职责链模式通常每个接受者都包含另一个接受者的引用。如果一个对象不能处理该请求，那么它会把相同的请求传给下一个接受者，以此类推</p>
 </li>
-<li><p>git add -u .  </p>
-<p>-u  == –update ，表示将已跟踪文件中的修改和删除的文件添加到暂存区，不包括新增加的文件，注意这些被删除的文件被加入到暂存区再被提交并推送到服务器的版本库之后这个文件就会从git系统中消失了。</p>
+<li><p>属于行为型模式</p>
 </li>
-<li><p>git add -A .  </p>
-<p>-A == –all  ， 表示将所有的已跟踪的文件的修改与删除和新增的未跟踪的文件都添加到暂存区。  </p>
-</li>
-</ul>
-<p><strong>3. 将改动提交到 HEAD，但是不到远端仓库</strong>  </p>
-<ul>
-<li>git commit -m “代码提交信息”</li>
-</ul>
-<p><strong>4. 推送改动</strong></p>
-<ul>
-<li><p>git push origin master  </p>
-<p>git commit 之后，你的改动已经在本地仓库的HEAD中了，执行此上命令，可提交至远端仓库，master 可换成你想推送的任何分支。</p>
-</li>
-<li><p>git remote add origin [url]  </p>
-<p>使用此命令可将你的仓库连接到某个远程服务器，此后你就可以将改动推送到添加的服务器中了。</p>
-</li>
-</ul>
-<p><strong>5. 分支</strong></p>
-<ul>
-<li><p>git checkout -b [分支名称]  </p>
-<p>新建分支并切换到该分支</p>
-</li>
-<li><p>git checkout master<br>切换到指定分支  </p>
-</li>
-<li><p>git branch -d [分支命称]<br>将新建分支删掉  </p>
-</li>
-</ul>
-<p><strong>6. 更新与合并</strong>  </p>
-<ul>
-<li><p>git pull<br>按照git branch 设置的默认跟踪的服务器和分支来拉取  </p>
-</li>
-<li><p>git pull origin master<br>拉取远程服务器origin 的master分支  </p>
-</li>
-</ul>
+</ol>
+<p><strong>应用实例：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ljy.learn.responsibilitychain;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 夕</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2019/8/9</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PurchaseRequest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> type = <span class="number">0</span>;<span class="comment">//请求类型</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> price = <span class="number">0.0f</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PurchaseRequest</span><span class="params">(<span class="keyword">int</span> id, <span class="keyword">int</span> type, <span class="keyword">float</span> price)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">        <span class="keyword">this</span>.type = type;</span><br><span class="line">        <span class="keyword">this</span>.price = price;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> type;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getPrice</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> price;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ljy.learn.responsibilitychain;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 夕</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2019/8/9</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Approver</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Approver approver; <span class="comment">//下一个处理者</span></span><br><span class="line">    String name; <span class="comment">//名字</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Approver</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//下一个处理者</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setApprover</span><span class="params">(Approver approver)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.approver = approver;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//处理请求的方法，处理是子类完成，所以该方法设置成抽象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">processRequest</span><span class="params">(PurchaseRequest purchaseRequest)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ljy.learn.responsibilitychain;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 夕</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2019/8/9</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="comment">//其他角色的处理与之类似，这里不再详述</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DepartmentApprover</span> <span class="keyword">extends</span> <span class="title">Approver</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DepartmentApprover</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processRequest</span><span class="params">(PurchaseRequest purchaseRequest)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (purchaseRequest.getPrice() &lt;= <span class="number">5000</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"请求编号id = "</span> + purchaseRequest.getId() + <span class="string">" 被 "</span> + <span class="keyword">this</span>.name + <span class="string">" 处理"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            approver.processRequest(purchaseRequest);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ljy.learn.responsibilitychain;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 夕</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2019/8/9</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建请求</span></span><br><span class="line">        PurchaseRequest purchaseRequest = <span class="keyword">new</span> PurchaseRequest(<span class="number">1</span>, <span class="number">1</span>, <span class="number">31000</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建审批人</span></span><br><span class="line">        DepartmentApprover departmentApprover = <span class="keyword">new</span> DepartmentApprover(<span class="string">"主任"</span>);</span><br><span class="line">        CollegeApprover collegeApprover = <span class="keyword">new</span> CollegeApprover(<span class="string">"院长"</span>);</span><br><span class="line">        ViceSchoolMasterApprover viceSchoolMasterApprover = <span class="keyword">new</span> ViceSchoolMasterApprover(<span class="string">"副校长"</span>);</span><br><span class="line">        SchoolMasterApprover schoolMasterApprover = <span class="keyword">new</span> SchoolMasterApprover(<span class="string">"校长"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//将各级别审批下一个指向设置，即设置责任链</span></span><br><span class="line">        <span class="comment">// (处理人构成环形：可以从任意一个处理方进行调用；不设置成环形：必须从最开始进行调用)</span></span><br><span class="line">        departmentApprover.setApprover(collegeApprover);</span><br><span class="line">        collegeApprover.setApprover(viceSchoolMasterApprover);</span><br><span class="line">        viceSchoolMasterApprover.setApprover(schoolMasterApprover);</span><br><span class="line">        schoolMasterApprover.setApprover(departmentApprover);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//调用</span></span><br><span class="line">        departmentApprover.processRequest(purchaseRequest);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -330,13 +299,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/07/20/git/">Git基本操作</a></p>
+        <p><span>本文标题:</span><a href="/2019/08/09/designpattern03/">职责链模式</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">夕</a></p>
-        <p><span>发布时间:</span>2019-07-20, 10:41:53</p>
-        <p><span>最后更新:</span>2019-07-30, 12:45:29</p>
+        <p><span>发布时间:</span>2019-08-09, 14:53:08</p>
+        <p><span>最后更新:</span>2019-08-09, 15:59:20</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/07/20/git/" title="Git基本操作">http://qx-ljy.cn/2019/07/20/git/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://qx-ljy.cn/2019/07/20/git/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/08/09/designpattern03/" title="职责链模式">http://qx-ljy.cn/2019/08/09/designpattern03/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://qx-ljy.cn/2019/08/09/designpattern03/　　作者: 夕" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -349,15 +318,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/07/23/docker02/">
-                    docker学习(二)----Docker基础命令
+                <a href="/2019/08/09/designpattern04/">
+                    designpattern04
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/07/14/jvm2/">
-                    JVM系列(二)----JVM内存结构
+                <a href="/2019/08/09/designpattern02/">
+                    适配器模式
                 </a>
             </div>
         
@@ -369,7 +338,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#职责链模式（Chain-of-Responsibility-Pattern）"><span class="toc-number">1.</span> <span class="toc-text">职责链模式（Chain of Responsibility Pattern）</span></a></li></ol>
         
     </div>
     <style>
@@ -405,7 +374,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Git基本操作　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"职责链模式　| 夕的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -425,7 +394,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/07/23/docker02/" title="上一篇: docker学习(二)----Docker基础命令">
+            <a href="/2019/08/09/designpattern04/" title="上一篇: designpattern04">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -433,7 +402,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/07/14/jvm2/" title="下一篇: JVM系列(二)----JVM内存结构">
+            <a href="/2019/08/09/designpattern02/" title="下一篇: 适配器模式">
                 <i class="fa fa-angle-right"></i>
             </a>
         
