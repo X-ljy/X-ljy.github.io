@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://qx-ljy.cn/2019/07/20/git/</loc>
+    <lastmod>2019-08-09</lastmod>
+  </url>  <url>
+    <loc>http://qx-ljy.cn/2019/08/02/mysql02/</loc>
+    <lastmod>2019-08-09</lastmod>
+  </url>  <url>
     <loc>http://qx-ljy.cn/2019/08/09/designpattern04/</loc>
     <lastmod>2019-08-09</lastmod>
   </url>  <url>
@@ -28,9 +34,6 @@
     <loc>http://qx-ljy.cn/2019/08/03/Java01/</loc>
     <lastmod>2019-08-03</lastmod>
   </url>  <url>
-    <loc>http://qx-ljy.cn/2019/08/02/mysql02/</loc>
-    <lastmod>2019-08-02</lastmod>
-  </url>  <url>
     <loc>http://qx-ljy.cn/2019/07/24/mysql01/</loc>
     <lastmod>2019-08-02</lastmod>
   </url>  <url>
@@ -44,9 +47,6 @@
     <lastmod>2019-07-30</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2019/07/05/markdown1/</loc>
-    <lastmod>2019-07-30</lastmod>
-  </url>  <url>
-    <loc>http://qx-ljy.cn/2019/07/20/git/</loc>
     <lastmod>2019-07-30</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2019/07/28/docker04/</loc>
