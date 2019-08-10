@@ -1994,7 +1994,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff81df;
+  background: #bd6712;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3310,8 +3310,8 @@ body {
 }
 .main-inner {
   background: #fff;
-  opacity: 0.95;
+  opacity: 0.99;
 }
 .header-inner {
-  opacity: 0.9;
+  opacity: 0.99;
 }
