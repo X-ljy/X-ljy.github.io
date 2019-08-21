@@ -89,10 +89,12 @@
 <meta property="og:site_name" content="青夕的博客">
 <meta property="og:description" content="Talk is cheap. Show me the code.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-10T03:43:19.735Z">
+<meta property="og:image" content="http://qx-ljy.cn/2019/08/02/mysql02/01.png">
+<meta property="og:updated_time" content="2019-08-21T06:46:53.340Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql必知必会（一）---- Mysql命令汇总">
 <meta name="twitter:description" content="Talk is cheap. Show me the code.">
+<meta name="twitter:image" content="http://qx-ljy.cn/2019/08/02/mysql02/01.png">
 
 
 
@@ -373,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  408
+                  658
                 </span>
               
 
@@ -389,7 +391,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -430,8 +432,7 @@
 
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示服务器错误或警告消息</span></span><br><span class="line">SHOW ERRORS;</span><br><span class="line"></span><br><span class="line">SHOW WARNINGS;</span><br></pre></td></tr></table></figure>
 
-<h2 id="三、检索数据"><a href="#三、检索数据" class="headerlink" title="三、检索数据"></a>三、检索数据</h2><p><strong>基本检索：</strong></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#检索单个列</span></span><br><span class="line">SELECT 列字段名 FROM 表名;</span><br></pre></td></tr></table></figure>
+<h2 id="三、基本检索"><a href="#三、基本检索" class="headerlink" title="三、基本检索"></a>三、基本检索</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#检索单个列</span></span><br><span class="line">SELECT 列字段名 FROM 表名;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#检索多个列</span></span><br><span class="line">SELECT 列字段名，列字段名，列字段名...  FROM 表名 ;</span><br></pre></td></tr></table></figure>
 
@@ -443,11 +444,16 @@
 
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用完全限定的表名</span></span><br><span class="line">SELECT 表名.字段名  FROM 数据库.表名 ;</span><br></pre></td></tr></table></figure>
 
-<p><strong>排序检索数据：</strong>  </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 排序数据</span></span><br><span class="line">SELECT * FROM 表名 ORDER BY 需要进行排序的字段;</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果需要进行倒序排序，则在字段后面加上 DESC</span></span><br><span class="line"><span class="comment">#如果排序多个字段，则字段之间 ， 号隔开，并且按照书写顺序进行排序</span></span><br></pre></td></tr></table></figure>
+<h2 id="四、排序检索数据"><a href="#四、排序检索数据" class="headerlink" title="四、排序检索数据"></a>四、排序检索数据</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 排序数据</span></span><br><span class="line">SELECT * FROM 表名 ORDER BY 需要进行排序的字段;</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果需要进行倒序排序，则在字段后面加上 DESC</span></span><br><span class="line"><span class="comment">#如果排序多个字段，则字段之间 ， 号隔开，并且按照书写顺序进行排序</span></span><br></pre></td></tr></table></figure>
 
-<p><strong>过滤数据：</strong>  </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在同时使用 ORDER BY 和 WHERE 子句时，应该让ORDER BY位于WHERE</span></span><br></pre></td></tr></table></figure>
+<h2 id="五、过滤数据"><a href="#五、过滤数据" class="headerlink" title="五、过滤数据"></a>五、过滤数据</h2><p><img src="//qx-ljy.cn/2019/08/02/mysql02/01.png" alt></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在同时使用 ORDER BY 和 WHERE 子句时，应该让ORDER BY位于WHERE之后，否则会产生错误</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#检查单个值</span></span><br><span class="line">SELECT 字段名 FROM 表名 WHERE 字段名 = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#范围检查</span></span><br><span class="line">SELECT 字段名 FROM 表名 WHERE 字段名  BETWEEN 值1 AND 值2 ;</span><br><span class="line"></span><br><span class="line"><span class="comment">#空值检查</span></span><br><span class="line">SELECT 字段名 FROM 表名 WHERE 字段名 IS NULL;</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、数据过滤"><a href="#六、数据过滤" class="headerlink" title="六、数据过滤"></a>六、数据过滤</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># AND 操作符</span></span><br><span class="line">SELECT 字段名 FROM 表名 WHERE 条件1 AND 条件2 ;</span><br><span class="line"></span><br><span class="line"><span class="comment"># OR 操作符</span></span><br><span class="line">SELECT 字段名 FROM 表名 WHERE 条件1 OR 条件2 ;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果AND OR 连用可以在条件外加上 （） ，来表达计算次序</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># IN 操作符</span></span><br><span class="line">SELECT 字段名 FROM 表名 WHERE 字段名 IN (值1，值2) ;</span><br><span class="line"></span><br><span class="line"><span class="comment"># NOT 操作符  支持对 IN BETEWWN EXISTS 子句取反</span></span><br><span class="line">SELECT 字段名 FROM 表名 WHERE 字段名 NOT IN (值1，值2) ;</span><br></pre></td></tr></table></figure>
+
+<h2 id="七、通配符进行过滤"><a href="#七、通配符进行过滤" class="headerlink" title="七、通配符进行过滤"></a>七、通配符进行过滤</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  % 代表任何字符出现任意次数</span></span><br><span class="line"><span class="comment">#  _ 代表匹配单个任意字符</span></span><br><span class="line"></span><br><span class="line">SELECT 字段名 FROM 表名 WHERE 字段名 LIKE %abc_ ;</span><br></pre></td></tr></table></figure>
+
+<h2 id="八、用正则表达式进行搜索"><a href="#八、用正则表达式进行搜索" class="headerlink" title="八、用正则表达式进行搜索"></a>八、用正则表达式进行搜索</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT 字段名 FROM 表名 WHERE 字段名 REGEXP 正则表达式 ;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -468,7 +474,7 @@
   <p><span>本文标题:</span><a href="/2019/08/02/mysql02/">mysql必知必会（一）---- Mysql命令汇总</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 青夕 的个人博客">青夕</a></p>
   <p><span>发布时间:</span>2019年08月02日 - 08:08</p>
-  <p><span>最后更新:</span>2019年08月10日 - 11:08</p>
+  <p><span>最后更新:</span>2019年08月21日 - 14:08</p>
   <p><span>原始链接:</span><a href="/2019/08/02/mysql02/" title="mysql必知必会（一）---- Mysql命令汇总">http://qx-ljy.cn/2019/08/02/mysql02/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://qx-ljy.cn/2019/08/02/mysql02/" aria-label="复制成功！"></i></span>
   </p>
@@ -646,7 +652,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -657,7 +663,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -690,7 +696,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、连接数据库"><span class="nav-number">1.</span> <span class="nav-text">一、连接数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、数据库和表的基本操作"><span class="nav-number">2.</span> <span class="nav-text">二、数据库和表的基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、检索数据"><span class="nav-number">3.</span> <span class="nav-text">三、检索数据</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、连接数据库"><span class="nav-number">1.</span> <span class="nav-text">一、连接数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、数据库和表的基本操作"><span class="nav-number">2.</span> <span class="nav-text">二、数据库和表的基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、基本检索"><span class="nav-number">3.</span> <span class="nav-text">三、基本检索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、排序检索数据"><span class="nav-number">4.</span> <span class="nav-text">四、排序检索数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、过滤数据"><span class="nav-number">5.</span> <span class="nav-text">五、过滤数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、数据过滤"><span class="nav-number">6.</span> <span class="nav-text">六、数据过滤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、通配符进行过滤"><span class="nav-number">7.</span> <span class="nav-text">七、通配符进行过滤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、用正则表达式进行搜索"><span class="nav-number">8.</span> <span class="nav-text">八、用正则表达式进行搜索</span></a></li></ol></div>
             
 
           </div>
@@ -707,7 +713,7 @@
 			<h3 class="widget-title">Tag Cloud</h3>
 			<div id="myCanvasContainer" class="widget tagcloud">
 			<canvas width="250" height="250" id="resCanvas" style="width=100%">
-				<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shiro/">shiro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签/">标签</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">3</span></li></ul>
+				<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shiro/">shiro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">4</span></li></ul>
 			</canvas>
 		</div>
 		</div>
