@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>leetcode3</title>
+      <link href="/2019/09/02/leetcode3/"/>
+      <url>/2019/09/02/leetcode3/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> leetcode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 夕</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2019/9/2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Leetcode3</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 示例 1:</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 输入: "abcabcbb"</span></span><br><span class="line"><span class="comment">     * 输出: 3</span></span><br><span class="line"><span class="comment">     * 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。</span></span><br><span class="line"><span class="comment">     * 示例 2:</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 输入: "bbbbb"</span></span><br><span class="line"><span class="comment">     * 输出: 1</span></span><br><span class="line"><span class="comment">     * 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。</span></span><br><span class="line"><span class="comment">     * 示例 3:</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 输入: "pwwkew"</span></span><br><span class="line"><span class="comment">     * 输出: 3</span></span><br><span class="line"><span class="comment">     * 解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。</span></span><br><span class="line"><span class="comment">     *      请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 来源：力扣（LeetCode）</span></span><br><span class="line"><span class="comment">     * 链接：https://leetcode-cn.com/problems/longest-substring-without-repeating-characters</span></span><br><span class="line"><span class="comment">     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 定义一个 map 数据结构存储（k,v）key值为字符，value值字符位置 +1 ，+1 表示从字符位置 后一个才开始不重复</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = s.length(), ans = <span class="number">0</span>;</span><br><span class="line">        Map&lt;Character, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> end = <span class="number">0</span>, start = <span class="number">0</span>; end &lt; n; end++) &#123;</span><br><span class="line">            <span class="keyword">char</span> alpha = s.charAt(end);</span><br><span class="line">            <span class="comment">//如果map中包含end位置的字符，则重置start</span></span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(alpha)) &#123;</span><br><span class="line">                start = Math.max(map.get(alpha), start);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 进行比较更新，得到此时最大子串的长度</span></span><br><span class="line">            ans = Math.max(ans, end - start + <span class="number">1</span>);</span><br><span class="line">            <span class="comment">// 将 end 位置的字符加入map</span></span><br><span class="line">            map.put(s.charAt(end), end + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> LeetCode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>leetcode2</title>
       <link href="/2019/09/02/leetcode2/"/>
       <url>/2019/09/02/leetcode2/</url>
@@ -13,14 +38,14 @@
       
       <categories>
           
-          <category> ；leetc </category>
+          <category> LeetCode </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> leetco </tag>
+            <tag> LeetCode </tag>
             
         </tags>
       
