@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://qx-ljy.cn/2019/09/08/netty01/</loc>
+    <lastmod>2019-09-08</lastmod>
+  </url>  <url>
+    <loc>http://qx-ljy.cn/2019/09/08/tdengine01/</loc>
+    <lastmod>2019-09-08</lastmod>
+  </url>  <url>
+    <loc>http://qx-ljy.cn/2019/08/03/linux01/</loc>
+    <lastmod>2019-09-07</lastmod>
+  </url>  <url>
+    <loc>http://qx-ljy.cn/2019/08/03/linux02/</loc>
+    <lastmod>2019-09-07</lastmod>
+  </url>  <url>
+    <loc>http://qx-ljy.cn/2019/09/07/linux03/</loc>
+    <lastmod>2019-09-07</lastmod>
+  </url>  <url>
     <loc>http://qx-ljy.cn/2019/09/07/internet01/</loc>
     <lastmod>2019-09-07</lastmod>
   </url>  <url>
@@ -62,12 +77,6 @@
     <lastmod>2019-08-10</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2019/07/05/markdown1/</loc>
-    <lastmod>2019-08-10</lastmod>
-  </url>  <url>
-    <loc>http://qx-ljy.cn/2019/08/03/linux02/</loc>
-    <lastmod>2019-08-10</lastmod>
-  </url>  <url>
-    <loc>http://qx-ljy.cn/2019/08/03/linux01/</loc>
     <lastmod>2019-08-10</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2019/07/14/jvm2/</loc>
