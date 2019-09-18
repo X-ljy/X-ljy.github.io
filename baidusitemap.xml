@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://qx-ljy.cn/2019/08/01/jvm3/</loc>
+    <lastmod>2019-09-18</lastmod>
+  </url>  <url>
+    <loc>http://qx-ljy.cn/2019/09/16/datastructure01/</loc>
+    <lastmod>2019-09-17</lastmod>
+  </url>  <url>
     <loc>http://qx-ljy.cn/2019/09/08/netty01/</loc>
     <lastmod>2019-09-08</lastmod>
   </url>  <url>
@@ -23,9 +29,6 @@
     <lastmod>2019-09-05</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2019/08/02/mysql02/</loc>
-    <lastmod>2019-09-05</lastmod>
-  </url>  <url>
-    <loc>http://qx-ljy.cn/2019/08/01/jvm3/</loc>
     <lastmod>2019-09-05</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2019/08/05/java03/</loc>

@@ -84,15 +84,17 @@
 <meta name="description" content="Talk is cheap. Show me the code.">
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jvm3">
+<meta property="og:title" content="JVM----类加载机制">
 <meta property="og:url" content="http://qx-ljy.cn/2019/08/01/jvm3/index.html">
 <meta property="og:site_name" content="青夕的博客">
 <meta property="og:description" content="Talk is cheap. Show me the code.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-05T23:59:29.119Z">
+<meta property="og:image" content="http://qx-ljy.cn/2019/08/01/jvm3/01.png">
+<meta property="og:updated_time" content="2019-09-18T09:54:00.176Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jvm3">
+<meta name="twitter:title" content="JVM----类加载机制">
 <meta name="twitter:description" content="Talk is cheap. Show me the code.">
+<meta name="twitter:image" content="http://qx-ljy.cn/2019/08/01/jvm3/01.png">
 
 
 
@@ -128,7 +130,7 @@
 
 
 
-  <title>jvm3 | 青夕的博客</title>
+  <title>JVM----类加载机制 | 青夕的博客</title>
   
 
 
@@ -301,7 +303,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">jvm3</h1>
+          <h1 class="post-title" itemprop="name headline">JVM----类加载机制</h1>
         
 
         <div class="post-meta">
@@ -338,8 +340,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
                   </a>
                 </span>
 
@@ -369,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  7
+                  1k
                 </span>
               
 
@@ -385,7 +387,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  3
                 </span>
               
             </div>
@@ -410,7 +412,33 @@
       
 
       
-        <h2 id="JVM中对象实例化"><a href="#JVM中对象实例化" class="headerlink" title="JVM中对象实例化"></a>JVM中对象实例化</h2>
+        <h2 id="类的生命周期"><a href="#类的生命周期" class="headerlink" title="类的生命周期"></a>类的生命周期</h2><p><strong>类的生命周期:</strong></p>
+<p><img src="//qx-ljy.cn/2019/08/01/jvm3/01.png" alt></p>
+<ol>
+<li>加载，验证，准备，初始化，卸载 这五个阶段先后顺序是确定的。但是解析阶段不一定：它在某些情况下可以在初始化阶段之后再开始，这是为了支持Java语言的运行时绑定（动态绑定或晚期绑定）。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">静态绑定：在程序执行前方法已经被绑定（也就是说在编译过程中就已经知道这个方法到底是哪个类中的方法），此时由编译器或其它连接程序实现。  </span><br><span class="line"></span><br><span class="line">所有私有方法、静态方法、构造器及初始化方法&lt;clinit&gt;都是采用静态绑定机制。在编译器阶段就已经指明了调用方法在常量池中的符号引用，JVM运行的时候只需要进行一次常量池解析即可。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">动态绑定：动态绑定（后期绑定）是指：在程序运行过程中，根据具体的实例对象才能具体确定是哪个方法。</span><br><span class="line"></span><br><span class="line">通俗的是指，对象在调用方法的时候能够自己判断该调用谁的方法。所以动态绑定一般发生在继承、方法重载时。  </span><br><span class="line"></span><br><span class="line">假设，对象o是类C1的实例，其中C1是C2的子类，C2是C3的子类，那么o也是C2，C3的实例。如果对象o调用一个方法p，JVM会依次在类C1，C2，C3中查找方法p的实现，直到找到为止。</span><br><span class="line"></span><br><span class="line">类对象方法的调用必须在运行过程中采用动态绑定机制：</span><br><span class="line"></span><br><span class="line">         首先，根据对象的声明类型(对象引用的类型)找到“合适”的方法。具体步骤如下：</span><br><span class="line"></span><br><span class="line">         ① 如果能在声明类型中匹配到方法签名完全一样(参数类型一致)的方法，那么这个方法是最合适的。</span><br><span class="line"></span><br><span class="line">         ② 在第①条不能满足的情况下，寻找可以“凑合”的方法。标准就是通过将参数类型进行自动转型之后再进行匹配。如果匹配到多个自动转型后的方法签名f(A)和f(B)，则用下面的标准来确定合适的方法：传递给f(A)方法的参数都可以传递给f(B)，则f(A)最合适。反之f(B)最合适 。</span><br><span class="line"></span><br><span class="line">         ③ 如果仍然在声明类型中找不到“合适”的方法，则编译阶段就无法通过。</span><br><span class="line"></span><br><span class="line">         然后，根据在堆中创建对象的实际类型找到对应的方法表，从中确定具体的方法在内存中的位置。</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>JVM规范没有强制约束 <strong>加载</strong> 过程何时开始，这部分可以由虚拟机的具体实现自由把握。但是对于初始化阶段，虚拟机规范严格规定了<strong>有且只有</strong> <strong>5种情况</strong> 必须立即对类进行初始化操作（加载 验证 准备自然要在此之前开始）。</p>
+<ol>
+<li><p>遇到new、getstatic、putstatic、invokestatic四条字节码指令时，如果类没有进行初始化，则必须先触发其初始化操作。</p>
+</li>
+<li><p>使用java.lang.reflect包的方法对类进行反射调用的时候，如果类没有进行过初始化，则需要先触发初始化操作。</p>
+</li>
+<li><p>当初始化一个类的时候，如果发现其父类还没有进行过初始化，则需要先触发其父类的初始化。但是接口在初始化时，并不要求其父接口全部完成了初始化，只有在真正使用到父接口的时候（如引用接口中定义的常量）才会初始化。</p>
+</li>
+<li><p>虚拟机启动时，用户需要制定一个要执行的主类，虚拟机会先初始化这个主类</p>
+</li>
+<li><p>当使用JDK1.7 的动态语言支持时，如果一个java.lang.invoke.MethodHandle实例最后的解析结果REF_getStatic,REF_putStatic,REF_invokeStatic的方法句柄时，并且这个句柄对应的类没有进行初始化，虚拟机需要先触发其初始化操作。</p>
+</li>
+</ol>
+</li>
+<li></li>
+</ol>
+
       
     </div>
     
@@ -426,11 +454,11 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2019/08/01/jvm3/">jvm3</a></p>
+  <p><span>本文标题:</span><a href="/2019/08/01/jvm3/">JVM----类加载机制</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 青夕 的个人博客">青夕</a></p>
   <p><span>发布时间:</span>2019年08月01日 - 18:08</p>
-  <p><span>最后更新:</span>2019年09月06日 - 07:09</p>
-  <p><span>原始链接:</span><a href="/2019/08/01/jvm3/" title="jvm3">http://qx-ljy.cn/2019/08/01/jvm3/</a>
+  <p><span>最后更新:</span>2019年09月18日 - 17:09</p>
+  <p><span>原始链接:</span><a href="/2019/08/01/jvm3/" title="JVM----类加载机制">http://qx-ljy.cn/2019/08/01/jvm3/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://qx-ljy.cn/2019/08/01/jvm3/" aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
@@ -596,7 +624,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -607,7 +635,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -618,7 +646,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -651,7 +679,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM中对象实例化"><span class="nav-number">1.</span> <span class="nav-text">JVM中对象实例化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#类的生命周期"><span class="nav-number">1.</span> <span class="nav-text">类的生命周期</span></a></li></ol></div>
             
 
           </div>
@@ -668,7 +696,7 @@
 			<h3 class="widget-title">Tag Cloud</h3>
 			<div id="myCanvasContainer" class="widget tagcloud">
 			<canvas width="250" height="250" id="resCanvas" style="width=100%">
-				<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/">LeetCode</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TDengine/">TDengine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netty/">netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shiro/">shiro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签/">标签</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络协议/">网络协议</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">4</span></li></ul>
+				<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/">LeetCode</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TDengine/">TDengine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netty/">netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shiro/">shiro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签/">标签</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络协议/">网络协议</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">4</span></li></ul>
 			</canvas>
 		</div>
 		</div>
