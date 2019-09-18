@@ -90,7 +90,8 @@
 <meta property="og:description" content="Talk is cheap. Show me the code.">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://qx-ljy.cn/2019/08/01/jvm3/01.png">
-<meta property="og:updated_time" content="2019-09-18T10:10:36.319Z">
+<meta property="og:image" content="http://qx-ljy.cn/2019/08/01/jvm3/02.png">
+<meta property="og:updated_time" content="2019-09-18T12:42:06.206Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM----类加载机制">
 <meta name="twitter:description" content="Talk is cheap. Show me the code.">
@@ -371,7 +372,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k
+                  3.6k
                 </span>
               
 
@@ -387,7 +388,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  12
                 </span>
               
             </div>
@@ -412,8 +413,7 @@
       
 
       
-        <h2 id="类的生命周期"><a href="#类的生命周期" class="headerlink" title="类的生命周期"></a>类的生命周期</h2><p><strong>类的生命周期:</strong></p>
-<p><img src="//qx-ljy.cn/2019/08/01/jvm3/01.png" alt></p>
+        <h2 id="类的生命周期"><a href="#类的生命周期" class="headerlink" title="类的生命周期"></a>类的生命周期</h2><p><img src="//qx-ljy.cn/2019/08/01/jvm3/01.png" alt></p>
 <ol>
 <li>加载，验证，准备，初始化，卸载 这五个阶段先后顺序是确定的。但是解析阶段不一定：它在某些情况下可以在初始化阶段之后再开始，这是为了支持Java语言的运行时绑定（动态绑定或晚期绑定）。</li>
 </ol>
@@ -436,8 +436,101 @@
 </li>
 </ol>
 </li>
-<li></li>
 </ol>
+<h2 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h2><h3 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h3><p><strong>加载阶段虚拟机需要完成以下3件事情：</strong>  </p>
+<ol>
+<li><p>通过一个类的全限定名来获取定义此类的二进制字节流</p>
+</li>
+<li><p>将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构</p>
+</li>
+<li><p>在内存中生成一个代表这个类的java.lang.Class对象，作为方法区这个类的各种数据访问入口</p>
+</li>
+</ol>
+<p>对于数组类而言，情况就有所不同，数组本身不通过类加载器创建，它是由虚拟机直接创建的。但是数组类和类加载器仍有密切联系，因为数组类的元素类型最终是要靠类加载器去创建的。</p>
+<p><strong>数组类创建规则：</strong>  </p>
+<ol>
+<li><p>如果数组的元素类型是引用类型，那就使用系统提供的或者用户自定义的类加载器去加载。该数组将在 加载数组元素类型 的类加载器 的类命名空间上被标识。（一个类必须与类加载器一起确定唯一性）</p>
+</li>
+<li><p>如果数组的元素类型不是引用类型（如 int[] 数组），虚拟机会把该数组标记为与引导类加载器关联。</p>
+</li>
+<li><p>数组类的可见性和数组元素类型可见性一致，如果元素类型不是引用类型，那么可见性默认为public。  </p>
+</li>
+</ol>
+<p><strong>加载完成后：</strong></p>
+<p>虚拟机将外部二进制字节流按照虚拟机所需的格式存储在方法区之中，方法区的数据存储格式由虚拟机自行实现。然后在内存中实例化一个java.lang.Class对象（Class对象比较特殊，它虽然是对象，但是存放在方法区中），这个对象将作为程序访问方法区中类型数据的外部接口。</p>
+<p>加载阶段和连接阶段的部分内容（如一部分字节码文件格式验证动作）是交叉进行的，加载阶段尚未完成，连接阶段可能已经开始，但这些夹在加载阶段进行的动作，仍属于连接阶段的内容。</p>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>验证是连接阶段的第一步，这一阶段是为了确保Class文件的字节流中包含的信息符合当前虚拟机得到要求，不会危害虚拟机自身的安全。</p>
+<p><strong>验证阶段大致会完成4个阶段的动作：</strong>  </p>
+<ol>
+<li><p>文件格式验证</p>
+<ul>
+<li>是否以魔数0xCAFEBABE开头</li>
+<li>主次版本号是否在当前虚拟机处理范围之内</li>
+<li>常量池的常量中是否有不被支持的常量类型<br>。。。。。</li>
+</ul>
+<p>验证点还有很多，这里不一一列举。该验证阶段主要保证输入的字节流能正确地解析并存储于方法区之内，格式上符合一个描述Java类型信息的要求。</p>
+<p>这阶段的验证是基于二进制字节流进行的，只有通过了这个阶段的验证后，字节流才会进入内存的方法区进行存储，后面的验证阶段全部是基于方法区的存储结构进行的，不会再直接操作部字节流。</p>
+</li>
+<li><p>元数据验证</p>
+<p>此阶段是对类的元数据信息进行语义分析，以保证其描述的信息符合Java语言规范的要求。</p>
+<p>此阶段部分验证点如下：</p>
+<ul>
+<li><p>这个类是否有父类（除了java.lang.Object之外，所有的类都应当有父类）</p>
+</li>
+<li><p>这个类的父类是否继承了不允许被继承的类（被final修饰的类）</p>
+</li>
+<li><p>如果这个类不是抽象类，是否实现了其父类或接口中要求实现的所有方法</p>
+<p>。。。。。</p>
+</li>
+</ul>
+</li>
+<li><p>字节码验证  </p>
+<p>此阶段是验证阶段最复杂的一个阶，主要目的是通过数据流和控制流分析，确定程序语义是合法的，符合逻辑的。此阶段对类的方法体进行校验分析，保证校验的类在运行时不会做出危害虚拟机安全的事件。</p>
+</li>
+</ol>
+<p>在JDK1.7之后，对于主版本号大于50的Class文件，使用类型检查来完成数据流分析校验则是唯一选择，不允许退回类型推导的校验方式。</p>
+<ol start="4">
+<li><p>符号引用验证</p>
+<p>此阶段的验证发生在虚拟机将符号引用转化为直接引用的时候，这个转化动作将在连接的第三阶段—-解析阶段中发生。符号引用验证可以看做是对类自身以外（常量池中的各种符号引用）的信息进行匹配性校验。</p>
+<p>符号引用验证的目的是确保解析动作能正常执行，如果无法通过符号引用验证，将抛出java.lang.IncompatibleClassChangeError异常的子类。</p>
+</li>
+</ol>
+<p>对于虚拟机来说，验证阶段是一个非常重要，但不是一定必要的阶段。如果运行的代码经过反复使用和验证，那么在实施阶段可以考虑使用 <strong>-Xverify:none</strong> 参数来关闭大部分的验证措施，缩短类加载时间。</p>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>准备阶段是正式为类变量分配内存并设置类变量初始值的阶段，这些变量所使用的的内存在方法区中被分配。</p>
+<p>此阶段进行内存分配的仅包括类变量（static修饰），而不包括实例变量，实例变量将会在对象实例化时分配在堆中。此外，这里的初始值是数据类型的零值。但是被 final修饰的类变量 会直接用程序中定义的值进行值初始化。</p>
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>解析阶段是虚拟机将常量池内的符号引用替换为直接引用的过程。其中解析过程在某些情况下可以在初始化阶段之后再开始，这是为了支持 Java 的动态绑定。</p>
+<ul>
+<li><p>符号引用：符号引用以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要能够使用时能无歧义地定位到目标即可。</p>
+</li>
+<li><p>直接引用：直接引用是可以直接指向目标的指针，相对偏移量或是一个能间接定位到目标的句柄。</p>
+</li>
+</ul>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>  初始化阶段是执行类构造器&lt;clinit()&gt;方法的过程</p>
+<ol>
+<li><p>&lt;clinit()&gt;方法是由编译器自动收集类中所有类变量的赋值动作和静态语句块（static{}）中的语句结合并产生的。编译器收集顺序是由语句在源代码中出现的顺序决定的，静态语句块中只能访问到定义静态语句块之前的变量。定义在它之后的变量，静态语句块可以赋值，但不能访问。</p>
+</li>
+<li><p>&lt;clinit()&gt;方法和类的构造函数（实例构造器&lt;init()&gt;）不同,它不需要显示地调用父类构造器，虚拟机会保证子类的&lt;clinit()&gt;方法执行之前，父类的&lt;clinit()&gt;方法已经执行完毕。所以虚拟机第一个执行的&lt;clinit()&gt;方法肯定是java.lang.Object。</p>
+</li>
+<li><p>&lt;clinit()&gt;方法对于类或接口来说并不是必需的，如果一个类中没有静态语句块，也没有对变量的赋值操作，那么编译器可以不为这个类生成&lt;clinit()&gt;方法。</p>
+</li>
+<li><p>接口中不能使用静态语句块，但仍然有变量初始化的赋值操作，因此接口和类一样都会生成&lt;clinit()&gt;方法。但是接口与类不同，执行接口的&lt;clinit()&gt;方法不需要先执行父接口的&lt;clinit()&gt;方法。只有当父接口中定义的变量使用时，父接口才会初始化。另外，接口的实现类在初始化时也一样不会执行接口的&lt;clinit()&gt;方法。</p>
+</li>
+<li><p>虚拟机会保证一个类的&lt;clinit()&gt;方法在多线程环境中被正确地加锁、同步，如果多个线程同时初始化一个类，那么只会有一个线程去执行类的&lt;clinit()&gt;方法，其他线程需要阻塞等待。</p>
+</li>
+</ol>
+<h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><p>对于任意一个类，都需要由加载它的类加载器和这个类本身一同确立其在虚拟机中的唯一性，每个类加载器都有一个独立的命名空间。</p>
+<p>比较两个类是否相等：只有这两个类是由同一个类加载器加载的前提下才有意义。</p>
+<h3 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h3><p><img src="//qx-ljy.cn/2019/08/01/jvm3/02.png" alt></p>
+<ol>
+<li><p>启动类加载器（Bootstrap ClassLoader）：这个类负责将存放在<java_home>\lib 目录中的，或者被 -Xbootclasspath 参数所指定的路径中的，并且是虚拟机识别的类库加载到虚拟机内存中。启动类加载器无法直接被Java程序引用，如果需要把加载请求委派给引导类加载器，直接使用null代替即可。</java_home></p>
+</li>
+<li><p>扩展类加载器（Extension ClassLoader）：这个类加载器是由 ExtClassLoader（sun.misc.Launcher$ExtClassLoader）实现的。它负责将 <java_home>/lib/ext 或者被 java.ext.dir 系统变量所指定路径中的所有类库加载到内存中，开发者可以直接使用扩展类加载器。</java_home></p>
+</li>
+<li><p>应用程序加载器（Application ClassLoader）：这个类加载器是由 AppClassLoader（sun.misc.Launcher$AppClassLoader）实现的。由于这个类加载器是 ClassLoader 中的 getSystemClassLoader() 方法的返回值，因此一般称为系统类加载器。它负责加载用户类路径（ClassPath）上所指定的类库，开发者可以直接使用这个类加载器，如果应用程序中没有自定义过自己的类加载器，一般情况下这个就是程序中默认的类加载器。</p>
+</li>
+</ol>
+<p><strong>工作过程：</strong>  </p>
+<p>一个类加载器首先将类加载请求转发到父类加载器，只有当父类加载器无法完成时才尝试自己加载。</p>
 
       
     </div>
@@ -457,7 +550,7 @@
   <p><span>本文标题:</span><a href="/2019/08/01/jvm3/">JVM----类加载机制</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 青夕 的个人博客">青夕</a></p>
   <p><span>发布时间:</span>2019年08月01日 - 18:08</p>
-  <p><span>最后更新:</span>2019年09月18日 - 18:09</p>
+  <p><span>最后更新:</span>2019年09月18日 - 20:09</p>
   <p><span>原始链接:</span><a href="/2019/08/01/jvm3/" title="JVM----类加载机制">http://qx-ljy.cn/2019/08/01/jvm3/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://qx-ljy.cn/2019/08/01/jvm3/" aria-label="复制成功！"></i></span>
   </p>
@@ -679,7 +772,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#类的生命周期"><span class="nav-number">1.</span> <span class="nav-text">类的生命周期</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#类的生命周期"><span class="nav-number">1.</span> <span class="nav-text">类的生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载过程"><span class="nav-number">2.</span> <span class="nav-text">类加载过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加载"><span class="nav-number">2.1.</span> <span class="nav-text">加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证"><span class="nav-number">2.2.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备"><span class="nav-number">2.3.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">2.4.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">2.5.</span> <span class="nav-text">初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载器"><span class="nav-number">3.</span> <span class="nav-text">类加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#双亲委派模型"><span class="nav-number">3.1.</span> <span class="nav-text">双亲委派模型</span></a></li></ol></li></ol></div>
             
 
           </div>
