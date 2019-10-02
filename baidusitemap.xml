@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://qx-ljy.cn/2019/10/02/designpattern/</loc>
+    <lastmod>2019-10-02</lastmod>
+  </url>  <url>
     <loc>http://qx-ljy.cn/2019/10/02/NIO/</loc>
     <lastmod>2019-10-02</lastmod>
   </url>  <url>
@@ -56,18 +59,6 @@
     <lastmod>2019-09-05</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2019/07/28/docker04/</loc>
-    <lastmod>2019-09-05</lastmod>
-  </url>  <url>
-    <loc>http://qx-ljy.cn/2019/08/09/designpattern03/</loc>
-    <lastmod>2019-09-05</lastmod>
-  </url>  <url>
-    <loc>http://qx-ljy.cn/2019/08/09/designpattern04/</loc>
-    <lastmod>2019-09-05</lastmod>
-  </url>  <url>
-    <loc>http://qx-ljy.cn/2019/08/09/designpattern02/</loc>
-    <lastmod>2019-09-05</lastmod>
-  </url>  <url>
-    <loc>http://qx-ljy.cn/2019/08/01/designpattern01/</loc>
     <lastmod>2019-09-05</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2019/07/24/k8s001/</loc>
