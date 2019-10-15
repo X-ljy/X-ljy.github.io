@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://qx-ljy.cn/2019/10/15/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/</loc>
+    <lastmod>2019-10-15</lastmod>
+  </url>  <url>
+    <loc>http://qx-ljy.cn/2019/09/07/%E7%BD%91%E7%BB%9C%E5%B1%82/</loc>
+    <lastmod>2019-10-15</lastmod>
+  </url>  <url>
+    <loc>http://qx-ljy.cn/2019/10/04/jvm4/</loc>
+    <lastmod>2019-10-04</lastmod>
+  </url>  <url>
     <loc>http://qx-ljy.cn/2019/10/02/designpattern/</loc>
     <lastmod>2019-10-02</lastmod>
   </url>  <url>
@@ -17,9 +26,6 @@
     <lastmod>2019-10-02</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2019/09/20/JUC01/</loc>
-    <lastmod>2019-09-20</lastmod>
-  </url>  <url>
-    <loc>http://qx-ljy.cn/2019/09/19/jmm01/</loc>
     <lastmod>2019-09-20</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2019/08/01/jvm3/</loc>
@@ -41,9 +47,6 @@
     <lastmod>2019-09-07</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2019/09/07/linux03/</loc>
-    <lastmod>2019-09-07</lastmod>
-  </url>  <url>
-    <loc>http://qx-ljy.cn/2019/09/07/internet01/</loc>
     <lastmod>2019-09-07</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2019/08/02/mysql02/</loc>
