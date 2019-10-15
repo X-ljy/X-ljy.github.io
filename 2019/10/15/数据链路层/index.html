@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://qx-ljy.cn/2019/10/15/数据链路层/01.png">
 <meta property="og:image" content="http://qx-ljy.cn/2019/10/15/数据链路层/02.png">
-<meta property="og:updated_time" content="2019-10-15T12:52:09.795Z">
+<meta property="og:updated_time" content="2019-10-15T12:56:31.994Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据链路层">
 <meta name="twitter:description" content="Talk is cheap. Show me the code.">
@@ -311,10 +311,6 @@
 
           <span class="post-time">
 		  					
-				<i class="fa fa-thumb-tack"></i>
-				<font color="green">置顶</font>
-				<span class="post-meta-divider">|</span>
-			
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -431,7 +427,9 @@
 <ol>
 <li><strong>封装成帧</strong> ：将网络层传下来的数据分组添加首部和尾部，用于标记帧的开始和结束。每一种链路层协议都规定了所能传送 <strong>帧的数据部分</strong> 长度上限—-最大传输单元 MTU。</li>
 </ol>
+<blockquote>
 <p>以太网（Ethernet）协议：1500字节<br>Point-to-Point：4470字节<br>PPPoE（ADSL）协议：1492字节<br>X.25协议（Dial Up/Modem）：576字节<br>FDDI协议：4352字节</p>
+</blockquote>
 <ol start="2">
 <li><p><strong>透明传输</strong> ：帧使用首部和尾部进行定界，如果帧的数据部分含有和首部尾部相同的内容，那么帧开始结束的地方就会错误地被判定。（在数据部分出现首部尾部相同的内容前面加上转义字符（“ESC”，16进制编码是 1B，二进制是 00011011）。如果数据部分出现转义字符，那就在转义字符前面再加上一个转义字符。接受端进行处理后可以还原出原始数据。这个过程透明传输的内容是转义字符，用户察觉不到转义字符的存在）</p>
 </li>
