@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="青夕的博客">
 <meta property="og:description" content="Talk is cheap. Show me the code.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-25T08:12:22.518Z">
+<meta property="og:updated_time" content="2019-10-30T11:38:37.420Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM系列(三)----垃圾回收算法和垃圾收集器">
 <meta name="twitter:description" content="Talk is cheap. Show me the code.">
@@ -369,7 +369,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.9k
+                  2.4k
                 </span>
               
 
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  8
                 </span>
               
             </div>
@@ -484,7 +484,52 @@
 <p>对于新生代，回收频率很高，但每次GC耗时很短，而老年代频率低，但会消耗更长的时间。为了支持高频率的新生代回收，虚拟机使用一种叫做卡表的数据结构。卡表为一个比特位集合，每一个比特位可以用来表示老年代的某一区域中的所有对象是否持有新生代对象的引用。</p>
 <p>这样在新生代GC时，可以不用耗大量时间扫描所有老年代对象，来确定引用关系，可以先扫描卡表，卡表位为1时，才包含新生代引用，在新生代GC时，只需扫描卡表位为1所在的老年代空间,这样可大大加快新生代回收速度。</p>
 <h3 id="分区算法"><a href="#分区算法" class="headerlink" title="分区算法"></a>分区算法</h3><p>分区算法将整个堆空间划分成连续的小区间。每个小区间都独立使用，独立回收。这种做法的好处是可以控制一次回收多少个小区间，从而很好的控制GC产生的停顿时间。</p>
-<h2 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h2>
+<h2 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h2><h3 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h3><p>新生代串行回收器：</p>
+<ol>
+<li><p>它只使用单线程进行垃圾回收</p>
+</li>
+<li><p>它是独占式的垃圾回收</p>
+</li>
+</ol>
+<p>由于串行收集器只使用单线程回收，所以在垃圾回收时会出现“Stop The World”。这样会造成很槽糕的用户体验，在实时性要求较高的场景不适应。</p>
+<p>由于新生代串行收集器使用复制算法，实现相对简单，逻辑处理特别高效，而且没有线程切换开销。在单CPU处理器等硬件平台不是特别优越的场合，它的性能可以超过并行回收器和并发回收器。  </p>
+<h3 id="Serial-Old-收集器"><a href="#Serial-Old-收集器" class="headerlink" title="Serial Old 收集器"></a>Serial Old 收集器</h3><p>老年代串行回收器：</p>
+<ol>
+<li><p>使用的是标记-整理算法</p>
+</li>
+<li><p>串行的，它是独占式的</p>
+</li>
+</ol>
+<p>可以作为CMS回收器的备用回收器  </p>
+<h3 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h3><p>新生代并发回收器</p>
+<ol>
+<li><p>回收策略，算法，参数和新生代串行回收器一样</p>
+</li>
+<li><p>回收过程进行了多线程化，但是回收过程应用程序依旧会全部暂停</p>
+</li>
+</ol>
+<h3 id="Parallel-Scavenge-收集器"><a href="#Parallel-Scavenge-收集器" class="headerlink" title="Parallel Scavenge 收集器"></a>Parallel Scavenge 收集器</h3><p>同样也是新生代并发收集器，但是它却注重系统吞吐量。</p>
+<h3 id="Parallel-Old-收集器"><a href="#Parallel-Old-收集器" class="headerlink" title="Parallel Old 收集器"></a>Parallel Old 收集器</h3><p>老年代并发回收器，使用标记-清除算法</p>
+<ol>
+<li>多线程并发收集器，也是一种关注吞吐量的收集器</li>
+</ol>
+<h3 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h3><p>老年代并发收集器，主要关注于系统停顿时间。</p>
+<ol>
+<li><p>初始标记： STW（Stop The World）标记根对象</p>
+</li>
+<li><p>并发标记：标记所有对象</p>
+</li>
+<li><p>预清理：清理前准备以及控制停顿时间</p>
+</li>
+<li><p>重新标记：STW，修正并发标记数据</p>
+</li>
+<li><p>并发清理：清理垃圾</p>
+</li>
+<li><p>并发重置</p>
+</li>
+</ol>
+<p>初始标记和重新标记是独占系统资源的，而预清理、并发标记、并发清除和并发重置是可以和用户线程一起执行的。</p>
+<h3 id="G1收集器"><a href="#G1收集器" class="headerlink" title="G1收集器"></a>G1收集器</h3>
       
     </div>
     
@@ -503,7 +548,7 @@
   <p><span>本文标题:</span><a href="/2019/10/04/jvm4/">JVM系列(三)----垃圾回收算法和垃圾收集器</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 青夕 的个人博客">青夕</a></p>
   <p><span>发布时间:</span>2019年10月04日 - 17:10</p>
-  <p><span>最后更新:</span>2019年10月25日 - 16:10</p>
+  <p><span>最后更新:</span>2019年10月30日 - 19:10</p>
   <p><span>原始链接:</span><a href="/2019/10/04/jvm4/" title="JVM系列(三)----垃圾回收算法和垃圾收集器">http://qx-ljy.cn/2019/10/04/jvm4/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://qx-ljy.cn/2019/10/04/jvm4/" aria-label="复制成功！"></i></span>
   </p>
@@ -670,7 +715,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -681,7 +726,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -725,7 +770,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象是否可被回收"><span class="nav-number">1.</span> <span class="nav-text">对象是否可被回收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引用计数法"><span class="nav-number">1.1.</span> <span class="nav-text">引用计数法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可达性分析法"><span class="nav-number">1.2.</span> <span class="nav-text">可达性分析法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断可触及性"><span class="nav-number">1.3.</span> <span class="nav-text">判断可触及性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用级别"><span class="nav-number">1.4.</span> <span class="nav-text">引用级别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾回收算法"><span class="nav-number">2.</span> <span class="nav-text">垃圾回收算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标记清除算法"><span class="nav-number">2.1.</span> <span class="nav-text">标记清除算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制算法"><span class="nav-number">2.2.</span> <span class="nav-text">复制算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标记整理算法"><span class="nav-number">2.3.</span> <span class="nav-text">标记整理算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分代收集算法"><span class="nav-number">2.4.</span> <span class="nav-text">分代收集算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区算法"><span class="nav-number">2.5.</span> <span class="nav-text">分区算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾回收器"><span class="nav-number">3.</span> <span class="nav-text">垃圾回收器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象是否可被回收"><span class="nav-number">1.</span> <span class="nav-text">对象是否可被回收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引用计数法"><span class="nav-number">1.1.</span> <span class="nav-text">引用计数法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可达性分析法"><span class="nav-number">1.2.</span> <span class="nav-text">可达性分析法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断可触及性"><span class="nav-number">1.3.</span> <span class="nav-text">判断可触及性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用级别"><span class="nav-number">1.4.</span> <span class="nav-text">引用级别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾回收算法"><span class="nav-number">2.</span> <span class="nav-text">垃圾回收算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标记清除算法"><span class="nav-number">2.1.</span> <span class="nav-text">标记清除算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制算法"><span class="nav-number">2.2.</span> <span class="nav-text">复制算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标记整理算法"><span class="nav-number">2.3.</span> <span class="nav-text">标记整理算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分代收集算法"><span class="nav-number">2.4.</span> <span class="nav-text">分代收集算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区算法"><span class="nav-number">2.5.</span> <span class="nav-text">分区算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾回收器"><span class="nav-number">3.</span> <span class="nav-text">垃圾回收器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Serial收集器"><span class="nav-number">3.1.</span> <span class="nav-text">Serial收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Serial-Old-收集器"><span class="nav-number">3.2.</span> <span class="nav-text">Serial Old 收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ParNew收集器"><span class="nav-number">3.3.</span> <span class="nav-text">ParNew收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Scavenge-收集器"><span class="nav-number">3.4.</span> <span class="nav-text">Parallel Scavenge 收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Old-收集器"><span class="nav-number">3.5.</span> <span class="nav-text">Parallel Old 收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMS收集器"><span class="nav-number">3.6.</span> <span class="nav-text">CMS收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G1收集器"><span class="nav-number">3.7.</span> <span class="nav-text">G1收集器</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -742,7 +787,7 @@
 			<h3 class="widget-title">Tag Cloud</h3>
 			<div id="myCanvasContainer" class="widget tagcloud">
 			<canvas width="250" height="250" id="resCanvas" style="width=100%">
-				<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/">JUC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/">LeetCode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/">NIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TDengine/">TDengine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netty/">netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li></ul>
+				<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/">JUC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/">LeetCode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/">NIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TDengine/">TDengine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netty/">netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li></ul>
 			</canvas>
 		</div>
 		</div>
