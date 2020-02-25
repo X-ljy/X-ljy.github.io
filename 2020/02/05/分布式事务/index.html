@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/avatar.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="标签,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Talk is cheap. Show me the code.">
+<meta name="keywords" content="标签">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式事务">
+<meta property="og:url" content="http://qx-ljy.cn/2020/02/05/分布式事务/index.html">
+<meta property="og:site_name" content="青夕的博客">
+<meta property="og:description" content="Talk is cheap. Show me the code.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://oscimg.oschina.net/oscnet/d77f2f61803f1f2db92551c4af6a3dc9bf0.jpg">
+<meta property="og:updated_time" content="2020-02-13T07:26:46.980Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="分布式事务">
+<meta name="twitter:description" content="Talk is cheap. Show me the code.">
+<meta name="twitter:image" content="https://oscimg.oschina.net/oscnet/d77f2f61803f1f2db92551c4af6a3dc9bf0.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qx-ljy.cn/2020/02/05/分布式事务/">
+
+
+
+
+
+  <title>分布式事务 | 青夕的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+<div class="bg_content">
+  <canvas id="canvas"></canvas>
+</div>
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	<a href="https://github.com/X-ljy" class="github-corner" aria-label="View source on GitHub">
+	<svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; 
+	top: 0; border: 0; right: 0;" aria-hidden="true">
+	<path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+	</path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,
+	72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/>
+	<path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,
+	98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,
+	40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,
+	77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,
+	112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,
+	141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+	<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes 
+	octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}
+	@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner 
+	.octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">青夕的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://qx-ljy.cn/2020/02/05/分布式事务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="青夕">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="青夕的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">分布式事务</h1>
+        
+
+        <div class="post-meta">
+
+          <span class="post-time">
+		  					
+				<i class="fa fa-thumb-tack"></i>
+				<font color="green">置顶</font>
+				<span class="post-meta-divider">|</span>
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-05T15:09:19+08:00">
+                2020-02-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/分类/" itemprop="url" rel="index">
+                    <span itemprop="name">分类</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  Talk is cheap. Show me the code.
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="分布式理论"><a href="#分布式理论" class="headerlink" title="分布式理论"></a>分布式理论</h2><h3 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h3><p>Consistency: 一致性</p>
+<p>Availability: 可用性</p>
+<p>Paritition: 分区容错性</p>
+<p>在保证分区容错性的同时，在可用性和一致性之间做取舍。</p>
+<h3 id="BASE"><a href="#BASE" class="headerlink" title="BASE"></a>BASE</h3><p>Basically Available: 基本可用  —- 当系统故障时，保证核心可用，允许损失部分可用性</p>
+<p>Soft State: 软状态 —-  允许系统不同节点的数据副本之间的同步存在时延</p>
+<p>Eventually Consistent: 最终一致性 —- 系统所有的数据副本，在经过一段时间的同步后，最终能达到一致的状态</p>
+<h3 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h3><h3 id="两阶段提交协议（Two-phase-Commit-，2PC）"><a href="#两阶段提交协议（Two-phase-Commit-，2PC）" class="headerlink" title="两阶段提交协议（Two-phase Commit ，2PC）"></a>两阶段提交协议（Two-phase Commit ，2PC）</h3><p>通过引入协调者来协调参与者的行为，并最终决定这些参与者是否要真正执行事务。</p>
+<p><strong>运行过程</strong></p>
+<ol>
+<li>准备阶段：协调者询问参与者事务是否执行成功，参与者返回事务执行结果</li>
+<li>提交阶段：如果事务在每个参与者上都执行成功，事务协调者发送通知让参与者提交事务；否则，通知参与者回滚事务；</li>
+</ol>
+<p><strong>存在的问题</strong></p>
+<ol>
+<li>同步阻塞：所有的事务参与者在等待其他参与者响应的时候都处于同步阻塞状态，无法进行其他操作。</li>
+<li>单点问题：协调者在2PC中起到非常大的作用，发生故障的时候回造成很大影响。特别是在提交阶段，所有参与者会一直等待，无法完成其他操作。</li>
+<li>数据不一致：在提交阶段，如果协调者只发送了部分Commit消息，然后发生网络异常，那么只有部分参与者接收commit消息，使得数据不一致。</li>
+<li>过于保守：任意一个节点失败都会导致整个事务失败，没有完善的容错机制</li>
+</ol>
+<h3 id="三阶段提交协议（3PC）"><a href="#三阶段提交协议（3PC）" class="headerlink" title="三阶段提交协议（3PC）"></a>三阶段提交协议（3PC）</h3><p>3PC在协调者和参与者中都引入了超时机制，并把两阶段提交协议的第一个阶段拆分成了两步：询问，然后在锁定资源，最后真正提交。</p>
+<ol>
+<li><p>cancommit阶段：协调者向参与者放commit请求，参与者如果可以提交就返回YES响应，否则返回NO</p>
+</li>
+<li><p>precommit阶段：协调者根据commit的反应来决定是否继续precommi操作</p>
+<p> A：如果协调者从所有的参与者获取的commit都是YES响应，那么就会进行事务的预执行（协调者发送预提交请求，并进入prepared阶段）参与者收到precommit请求后，会执行事务操作，并将undo和redo信息记录到事务日志中，如果参与者成功执行事务操作，那么返回ACK响应，同时开始等待最终指令。</p>
+<p> B:   假如有任何一个参与者向协调者发送了NO响应，或者超时等待之后，协调者都没有接受到参与者的响应，那么中断事务。协调者向所有的参与者发送abort请求，中断事务。参与者接收到abort请求（或者超时之后）执行事务的中断。</p>
+</li>
+<li><p>docommit阶段</p>
+<p> A：发送提交请求：协调者接收到参与者发送的ACK响应，那么他将从预提交状态进入到提交状态，并向所有的参与者发送docommit请求</p>
+<p> B:   事务提交：参与者接收到docommit请求后，执行正式的事务提交，并在完成事务提交后释放所有的事务资源。</p>
+<p> C:    响应反馈：事务提交完之后，向协调者发送ACK响应。</p>
+<p> D:    完成事务：协调者接收到所有参与者的ACK响应之后，完成事务。</p>
+<p> 中断事务：协调者没有接受到参与者发送的ACK响应（或者响应超时），那么就会中断事务。</p>
+</li>
+</ol>
+<p><strong>存在问题</strong></p>
+<p>如果进入PreCommit后，Coordinator发出的是abort请求，假设只有一个Cohort收到并进行了abort操作，<br>而其他对于系统状态未知的Cohort会根据3PC选择继续Commit，此时系统状态发生不一致性。</p>
+<p><strong>2PC和3PC的不同</strong></p>
+<p>对于协调者(Coordinator)和参与者(Cohort)都设置了超时机制（在2PC中，只有协调者拥有超时机制，即如果在一定时间内没有收到cohort的消息则默认失败）。<br>在2PC的准备阶段和提交阶段之间，插入预提交阶段，使3PC拥有CanCommit、PreCommit、DoCommit三个阶段。<br>PreCommit是一个缓冲，保证了在最后提交阶段之前各参与节点的状态是一致的。</p>
+<h3 id="Paxos算法"><a href="#Paxos算法" class="headerlink" title="Paxos算法"></a>Paxos算法</h3><p> Paxos算法需要解决的问题就是如何在一个可能发生<strong>机器宕机</strong>或<strong>网络异常</strong>的分布式系统中，快速且正确地在集群内部对<strong>某个数据的值</strong>达成<strong>一致。</strong></p>
+<p>  Paxos由Acceptor、proposer和leaner三种角色组成</p>
+<ul>
+<li>proposer负责提出提案</li>
+<li>acceptor负责对提案裁决</li>
+<li>leaner负责学习得到的提案</li>
+</ul>
+<p>为了避免单点故障，会有一个acceptor集合，proposer向该集合发送提案，acceptor集合中的每个成员都有可能同意该提案并且每个acceptor只能批准一个提案，当有一半以上的成员同意，则同意该提案。</p>
+<p>   Paxos算法分为<strong>两个阶段</strong>。具体如下：</p>
+<ul>
+<li><p><strong>阶段一：</strong></p>
+<p>  <strong>(a)</strong> Proposer选择一个<strong>提案编号N</strong>，然后向<strong>半数以上</strong>的Acceptor发送编号为N的<strong>Prepare请求</strong>。</p>
+<p>  <strong>(b)</strong> 如果一个Acceptor收到一个编号为N的Prepare请求，且N<strong>大于</strong>该Acceptor已经<strong>响应过的</strong>所有<strong>Prepare请求</strong>的编号，那么它就会将它已经<strong>接受过的编号最大的提案（如果有的话）</strong>作为响应反馈给Proposer，同时该Acceptor承诺<strong>不再接受</strong>任何<strong>编号小于N的提案</strong>。</p>
+</li>
+<li><p><strong>阶段二：</strong></p>
+<p>  <strong>(a)</strong> 如果Proposer收到<strong>半数以上</strong>Acceptor对其发出的编号为N的Prepare请求的<strong>响应</strong>，那么它就会发送一个针对<strong>[N,V]提案</strong>的<strong>Accept请求</strong>给<strong>半数以上</strong>的Acceptor。注意：V就是收到的<strong>响应</strong>中<strong>编号最大的提案的value</strong>，如果响应中<strong>不包含任何提案</strong>，那么V就由Proposer<strong>自己决定</strong>。</p>
+<p>  <strong>(b)</strong> 如果Acceptor收到一个针对编号为N的提案的Accept请求，只要该Acceptor<strong>没有</strong>对编号<strong>大于N</strong>的<strong>Prepare请求</strong>做出过<strong>响应</strong>，它就<strong>接受该提案</strong>。</p>
+</li>
+</ul>
+<p>paxos算法是一种基于消息传递的且具有高度容错性的一种算法，解决的问题是一个分布式系统如何就某个值或者某个协议达成一致，该算法的前提是假设不存在拜占庭将军问题。</p>
+<p>在该算法中一共有三种角色：proposer, accpetor和learner。proposer负责提出提案，acceptor负责对该提案做出裁决，learner负责学习得到的提案。为了避免单点故障，会有一个acceptor集合，proposer向该集合发送提案，acceptor集合中的每个成员都有可能同意该提案且每个acceptor只能批准一个提案，当有一半以上的成员同意，则同意该提案。</p>
+<p>它主要分为两个阶段：分别是prepare阶段和accept阶段。首先是prepare阶段，先由proposer提出编号为Mn的提案，向accpetor集合发送prepare请求。Accept做出反馈：保证不会再接受编号比Mn小的提案；如果acceptor已经批准过某提案，会向proposer返回已经批准的编号最大的提案的value值。</p>
+<p>如果acceptor收到一个编号为Mn的请求且编号大于accpetor已经响应的所有prepare请求的编号，则它会将自己已经批准过的编号最大的提案值反馈给proposer，同时acceptor承诺不会再接受编号比Mn小的提案。（优化:忽略编号小于已批准的提案的请求）。</p>
+<p>如果proposer收到了集合至少一半的响应，则会发送一个针对Mn Vn的accept请求给Accpetor。Vn为收到的所有响应中编号最大的提案的值。如果响应不包括值，则可以由proposer选择任意值。</p>
+<p>然后就是accpet阶段，accpet阶段是接受提案的要求。当Acceptor收到accpet请求后，只要未收到任何编号大于Mn的prepare请求，则通过该提案。</p>
+<p>优化：为了避免死循环，比如两个proposer一次提出一系列编号递增的提案，可以产生一个主proposer，提案只能由主proposer负责提出。</p>
+<p><img src="https://oscimg.oschina.net/oscnet/d77f2f61803f1f2db92551c4af6a3dc9bf0.jpg" alt="img"></p>
+<h3 id="raft"><a href="#raft" class="headerlink" title="raft"></a>raft</h3><p>Raft 和 Paxos 类似，但是更容易理解，也更容易实现。</p>
+<p><strong>Raft 主要是用来竞选主节点</strong>。</p>
+<p>在Raft中，节点有三种角色：</p>
+<ul>
+<li>Leader：负责接收客户端的请求，将日志复制到其他节点并告知其他节点何时应用这些日志是安全的</li>
+<li>Candidate：用于选举Leader的一种角色</li>
+<li>Follower：负责响应来自Leader或者Candidate的请求</li>
+</ul>
+<p><strong>单个 Candidate 的竞选</strong></p>
+<p>有三种节点：Follower、Candidate 和 Leader。Leader 会周期性的发送心跳包给 Follower。每个 Follower 都设置了一个随机的竞选超时时间，一般为 150ms~300ms，如果在这个时间内没有收到 Leader 的心跳包，就会变成 Candidate，进入竞选阶段。</p>
+<p>下图表示一个分布式系统的最初阶段，此时只有 Follower，没有 Leader。Follower A 等待一个随机的竞选超时时间之后，没收到 Leader 发来的心跳包，因此进入竞选阶段。</p>
+<p>此时 A 发送投票请求给其它所有节点。</p>
+<p>其它节点会对请求进行回复，如果超过一半的节点回复了，那么该 Candidate 就会变成 Leader。</p>
+<p>之后 Leader 会周期性地发送心跳包给 Follower，Follower 接收到心跳包，会重新开始计时。</p>
+<p><strong>多个 Candidate 竞选</strong></p>
+<p>如果有多个 Follower 成为 Candidate，并且所获得票数相同，那么就需要重新开始投票，例如下图中 Candidate B 和 Candidate D 都获得两票，因此需要重新开始投票。</p>
+<p>当重新开始投票时，由于每个节点设置的<strong>随机竞选超时时间不同</strong>，因此能下一次再次出现多个 Candidate 并获得同样票数的概率很低。</p>
+<p><strong>日志复制</strong></p>
+<p>来自客户端的修改都会被传入 Leader。注意该修改还未被提交，只是写入日志中。</p>
+<p>Leader 会把修改复制到所有 Follower。</p>
+<p>Leader 会等待大多数的 Follower 也进行了修改，然后才将修改提交。</p>
+<p>此时 Leader 会通知的所有 Follower 让它们也提交修改，此时所有节点的值达成一致。</p>
+<h3 id="zookeeper的ZAB算法"><a href="#zookeeper的ZAB算法" class="headerlink" title="zookeeper的ZAB算法"></a>zookeeper的ZAB算法</h3><p><strong>Looking：</strong>选举状态。</p>
+<p><strong>Following：</strong>Follower 节点（从节点）所处的状态。</p>
+<p><strong>Leading：</strong>Leader 节点（主节点）所处状态。</p>
+<p>最大 ZXID 也就是节点本地的最新事务编号，包含 epoch 和计数两部分。epoch 是纪元的意思，相当于 Raft 算法选主时候的 term。</p>
+<p><strong>崩溃恢复流程：</strong></p>
+<p><strong>1.Leader election</strong></p>
+<p>​            选举阶段，此时集群中的节点处于 Looking 状态。它们会各自向其他节点发起投票，投票当中包            含自己的服务器 ID 和最新事务 ID（ZXID）。</p>
+<p>​            接下来，节点会用自身的 ZXID 和从其他节点接收到的 ZXID 做比较，如果发现别人家的 ZXID 比            自己大，也就是数据比自己新，那么就重新发起投票，投票给目前已知最大的 ZXID 所属节点。</p>
+<p>​            每次投票后，服务器都会统计投票数量，判断是否有某个节点得到半数以上的投票。如果存在这            样的节点，该节点将会成为准 Leader，状态变为 Leading。其他节点的状态变为 Following。</p>
+<p><strong>2. Discovery</strong></p>
+<p>​        发现阶段，用于在从节点中发现最新的 ZXID 和事务日志。或许有人会问：既然 Leader 被选为主节        点，已经是集群里数据最新的了，为什么还要从节点中寻找最新事务呢？</p>
+<p>​        这是为了防止某些意外情况，比如因网络原因在上一阶段产生多个 Leader 的情况。</p>
+<p>​        所以这一阶段，Leader 集思广益，接收所有 Follower 发来各自的最新 epoch 值。Leader 从中选        出最大的 epoch，基于此值加 1，生成新的 epoch 分发给各个 Follower。</p>
+<p>​        各个 Follower 收到全新的 epoch 后，返回 ACK 给 Leader，带上各自最大的 ZXID 和历史事务日        志。Leader 选出最大的 ZXID，并更新自身历史日志。</p>
+<p><strong>3. Synchronization</strong></p>
+<p>​        同步阶段，把 Leader 刚才收集得到的最新历史事务日志，同步给集群中所有的 Follower。只有当        半数 Follower 同步成功，这个准 Leader 才能成为正式的 Leader。**</p>
+<p><strong>原子广播</strong></p>
+<ol>
+<li><p>客户端发出写入数据请求给任意Follower。</p>
+</li>
+<li><p>Follower 把写入数据请求转发给 Leader。</p>
+</li>
+<li><p>Leader 采用二阶段提交方式，先发送 Propose 广播给 Follower。</p>
+</li>
+<li><p>Follower 接到 Propose 消息，写入日志成功后，返回 ACK 消息给 Leader。</p>
+</li>
+<li><p>Leader 接到半数以上 ACK 消息，返回成功给客户端，并且广播 Commit 请求给 Follower。</p>
+</li>
+</ol>
+<p>ZAB 协议既不是强一致性，也不是弱一致性，而是处于两者之间的单调一致性。它依靠事务 ID 和版本号，保证了数据的更新和读取是有序的。</p>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/02/05/分布式事务/">分布式事务</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 青夕 的个人博客">青夕</a></p>
+  <p><span>发布时间:</span>2020年02月05日 - 15:02</p>
+  <p><span>最后更新:</span>2020年02月13日 - 15:02</p>
+  <p><span>原始链接:</span><a href="/2020/02/05/分布式事务/" title="分布式事务">http://qx-ljy.cn/2020/02/05/分布式事务/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://qx-ljy.cn/2020/02/05/分布式事务/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+	  $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	    });
+    });  
+</script>
+
+
+      
+	</div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="青夕 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="青夕 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/标签/" rel="tag"># 标签</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/01/网络协议/" rel="next" title="网络协议">
+                <i class="fa fa-chevron-left"></i> 网络协议
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/05/Redis详解/" rel="prev" title="redis详解">
+                redis详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="青夕">
+            
+              <p class="site-author-name" itemprop="name">青夕</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式理论"><span class="nav-number">1.</span> <span class="nav-text">分布式理论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CAP"><span class="nav-number">1.1.</span> <span class="nav-text">CAP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BASE"><span class="nav-number">1.2.</span> <span class="nav-text">BASE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式事务"><span class="nav-number">1.3.</span> <span class="nav-text">分布式事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两阶段提交协议（Two-phase-Commit-，2PC）"><span class="nav-number">1.4.</span> <span class="nav-text">两阶段提交协议（Two-phase Commit ，2PC）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三阶段提交协议（3PC）"><span class="nav-number">1.5.</span> <span class="nav-text">三阶段提交协议（3PC）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Paxos算法"><span class="nav-number">1.6.</span> <span class="nav-text">Paxos算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#raft"><span class="nav-number">1.7.</span> <span class="nav-text">raft</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zookeeper的ZAB算法"><span class="nav-number">1.8.</span> <span class="nav-text">zookeeper的ZAB算法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+	
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+			<h3 class="widget-title">Tag Cloud</h3>
+			<div id="myCanvasContainer" class="widget tagcloud">
+			<canvas width="250" height="250" id="resCanvas" style="width=100%">
+				<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/">JUC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/">LeetCode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/">NIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/">Netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TDengine/">TDengine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netty/">netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/区块链/">区块链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签/">标签</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络协议/">网络协议</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集合框架/">集合框架</a><span class="tag-list-count">1</span></li></ul>
+			</canvas>
+		</div>
+		</div>
+	
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">青夕</span>
+
+  
+</div>
+
+
+
+
+  <span class="post-meta-divider">吉ICP备19004601号|</span>
+
+
+
+
+
+<div class="powered-by">|
+<i class="fa fa-user-md"></i>
+	<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+
+        if(result)$(this).text('复制成功')
+        else $(this).text('复制失败')
+
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+</body>
+<script type="text/javascript" src="/js/src/dynamic_bg.js"></script>
+</html>

@@ -89,10 +89,12 @@
 <meta property="og:site_name" content="青夕的博客">
 <meta property="og:description" content="Talk is cheap. Show me the code.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-28T11:24:21.461Z">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/431521/201906/431521-20190603105337542-1918784356.png">
+<meta property="og:updated_time" content="2020-02-23T12:56:41.306Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux内核设计和实现">
 <meta name="twitter:description" content="Talk is cheap. Show me the code.">
+<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/431521/201906/431521-20190603105337542-1918784356.png">
 
 
 
@@ -369,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  18
+                  1.3k
                 </span>
               
 
@@ -385,7 +387,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  4
                 </span>
               
             </div>
@@ -410,18 +412,36 @@
       
 
       
-        <h2 id="Linux内核简介"><a href="#Linux内核简介" class="headerlink" title="Linux内核简介"></a>Linux内核简介</h2><h3 id="单内核和微内核"><a href="#单内核和微内核" class="headerlink" title="单内核和微内核"></a>单内核和微内核</h3><table>
-<thead>
-<tr>
-<th align="left"></th>
-<th align="left">原理</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">Item One</td>
-<td align="left">Item Two</td>
-</tr>
-</tbody></table>
+        <h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><h2 id="namespace"><a href="#namespace" class="headerlink" title="namespace"></a>namespace</h2><h2 id="用户态和内核态通信的几种方式"><a href="#用户态和内核态通信的几种方式" class="headerlink" title="用户态和内核态通信的几种方式"></a>用户态和内核态通信的几种方式</h2><p>我们平常在写代码时，一般是在用户空间，通过系统调用函数来访问内核空间，这是最常用的一种用户态和内核态通信的方式。</p>
+<p>除此之外，还有以下四种方式：</p>
+<ul>
+<li>procfs(/proc)</li>
+<li>sysctl(/proc/sys)</li>
+<li>sysfs(/sys)</li>
+<li>netlink 套接口</li>
+</ul>
+<p><code>procfs</code> 是 <strong>进程文件系统</strong> 的缩写，它本质上是一个伪文件系统，为什么说是 <strong>伪</strong> 文件系统呢？因为它不占用外部存储空间，只是占用少量的内存，通常是挂载在 <code>/proc</code> 目录下。</p>
+<p>我们在该目录下看到的一个文件，实际上是一个内核变量。内核就是通过这个目录，以文件的形式展现自己的内部信息，相当于 <code>/proc</code> 目录为用户态和内核态之间的交互搭建了一个桥梁，用户态读写 <code>/proc</code> 下的文件，就是读写内核相关的配置参数。</p>
+<p>比如常见的 <code>/proc/cpuinfo</code>、<code>/proc/meminfo</code> 和 <code>/proc/net</code> 就分别提供了 CPU、内存、网络的相关参数。</p>
+<p>综上，内核通过一个个的文件来暴露自己的系统配置信息，这些文件，有些是只读的，有些是可写的，有些是动态变化的，比如进程文件，当应用程序读取某个 <code>/proc/</code> 文件时，内核才会去注册这个文件，然后再调用一组内核函数来处理，将相应的内核参数拷贝到用户态空间，这样用户读这个文件就可以获取到内核的信息。</p>
+<p><img src="https://img2018.cnblogs.com/blog/431521/201906/431521-20190603105337542-1918784356.png" alt="img"></p>
+<h3 id="sysctl"><a href="#sysctl" class="headerlink" title="sysctl"></a>sysctl</h3><p>我们熟悉的 sysctl 是一个 Linux 命令，<code>man sysctl</code> 可以看到它的功能和用法。它主要是被用来修改内核的运行时参数，换句话说，它可以在内核运行过程中，动态修改内核参数。</p>
+<p>它本质上还是用到了文件的读写操作，来完成用户态和内核态的通信。它使用的是 <code>/proc</code> 的一个子目录 <code>/proc/sys</code>。和 procfs 的区别在于：</p>
+<p>procfs 主要是输出只读数据，而 sysctl 输出的大部分信息是可写的。</p>
+<p>例如，我们比较常见的是通过 <code>cat /proc/sys/net/ipv4/ip_forward</code> 来获取内核网络层是否允许转发 IP 数据包，通过 <code>echo 1 &gt; /proc/sys/net/ipv4/ip_forward</code> 或者 <code>sysctl -w net.ipv4.ip_forward=1</code> 来设置内核网络层允许转发 IP 数据包。</p>
+<p>同样的操作，Linux 也提供了文件 <code>/etc/sysctl.conf</code> 来让你进行批量修改。</p>
+<h3 id="sysfs"><a href="#sysfs" class="headerlink" title="sysfs"></a>sysfs</h3><p>sysfs 是 Linux 2.6 才引入的一种虚拟文件系统，它的做法也是通过文件 <code>/sys</code> 来完成用户态和内核的通信。和 procfs 不同的是，sysfs 是将一些原本在 procfs 中的，关于设备和驱动的部分，独立出来，以 “设备树” 的形式呈现给用户。</p>
+<p>sysfs 不仅可以从内核空间读取设备和驱动程序的信息，也可以对设备和驱动进行配置。</p>
+<h3 id="netlink"><a href="#netlink" class="headerlink" title="netlink"></a>netlink</h3><p>netlink 是 Linux 用户态与内核态通信最常用的一种方式。Linux kernel 2.6.14 版本才开始支持。它本质上是一种 socket，常规 socket 使用的标准 API，在它身上同样适用。</p>
+<h2 id="虚拟化网络模型"><a href="#虚拟化网络模型" class="headerlink" title="虚拟化网络模型"></a>虚拟化网络模型</h2><ul>
+<li>桥接（Bridge Adapter）</li>
+<li>NAT</li>
+<li>主机（Host-only Adapter）</li>
+<li>内部网络（Internal）</li>
+</ul>
+<p>这也是 <code>VirtualBox</code> 支持的四种模型，对于 <code>VMware</code>，则只有前三种。</p>
+<p><a href="https://www.cnblogs.com/bakari/p/10592421.html" target="_blank" rel="noopener">https://www.cnblogs.com/bakari/p/10592421.html</a></p>
+<h2 id="Docker与虚拟机有何不同"><a href="#Docker与虚拟机有何不同" class="headerlink" title="Docker与虚拟机有何不同"></a>Docker与虚拟机有何不同</h2><p>Docker不是虚拟化方法。它依赖于实际实现基于容器的虚拟化或操作系统级虚拟化的其他工具。为此，Docker最初使用LXC驱动程序，然后移动到libcontainer现在重命名为runc。Docker主要专注于在应用程序容器内自动部署应用程序。应用程序容器旨在打包和运行单个服务，而系统容器则设计为运行多个进程，如虚拟机。因此，Docker被视为容器化系统上的容器管理或应用程序部署工具。<br>A 容器不需要引导操作系统内核，因此可以在不到一秒的时间内创建容器。此功能使基于容器的虚拟化比其他虚拟化方法更加独特和可取。<br>B 由于基于容器的虚拟化为主机增加了很少或没有开销，因此基于容器的虚拟化具有接近本机的性能。<br>C 对于基于容器的虚拟化，与其他虚拟化不同，不需要其他软件。<br>D 主机上的所有容器共享主机的调度程序，从而节省了额外资源的需求。<br>E 与虚拟机映像相比，容器状态（Docker或LXC映像）的大小很小，因此容器映像很容易分发。<br>F 容器中的资源管理是通过cgroup实现的。Cgroups不允许容器消耗比分配给它们更多的资源。虽然主机的所有资源都在虚拟机中可见，但无法使用。这可以通过在容器和主机上同时运行top或htop来实现。所有环境的输出看起来都很相似。</p>
 
       
     </div>
@@ -441,7 +461,7 @@
   <p><span>本文标题:</span><a href="/2019/10/28/Linux内核/">Linux内核设计和实现</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 青夕 的个人博客">青夕</a></p>
   <p><span>发布时间:</span>2019年10月28日 - 19:10</p>
-  <p><span>最后更新:</span>2019年10月28日 - 19:10</p>
+  <p><span>最后更新:</span>2020年02月23日 - 20:02</p>
   <p><span>原始链接:</span><a href="/2019/10/28/Linux内核/" title="Linux内核设计和实现">http://qx-ljy.cn/2019/10/28/Linux内核/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://qx-ljy.cn/2019/10/28/Linux内核/" aria-label="复制成功！"></i></span>
   </p>
@@ -608,7 +628,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -619,7 +639,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -630,7 +650,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -663,7 +683,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux内核简介"><span class="nav-number">1.</span> <span class="nav-text">Linux内核简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单内核和微内核"><span class="nav-number">1.1.</span> <span class="nav-text">单内核和微内核</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理"><span class="nav-number">1.</span> <span class="nav-text">内存管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#namespace"><span class="nav-number">2.</span> <span class="nav-text">namespace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户态和内核态通信的几种方式"><span class="nav-number">3.</span> <span class="nav-text">用户态和内核态通信的几种方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sysctl"><span class="nav-number">3.1.</span> <span class="nav-text">sysctl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sysfs"><span class="nav-number">3.2.</span> <span class="nav-text">sysfs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#netlink"><span class="nav-number">3.3.</span> <span class="nav-text">netlink</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟化网络模型"><span class="nav-number">4.</span> <span class="nav-text">虚拟化网络模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker与虚拟机有何不同"><span class="nav-number">5.</span> <span class="nav-text">Docker与虚拟机有何不同</span></a></li></ol></div>
             
 
           </div>
@@ -680,7 +700,7 @@
 			<h3 class="widget-title">Tag Cloud</h3>
 			<div id="myCanvasContainer" class="widget tagcloud">
 			<canvas width="250" height="250" id="resCanvas" style="width=100%">
-				<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/">JUC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/">LeetCode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/">NIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TDengine/">TDengine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netty/">netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集合框架/">集合框架</a><span class="tag-list-count">1</span></li></ul>
+				<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/">JUC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/">LeetCode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/">NIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/">Netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TDengine/">TDengine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netty/">netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/区块链/">区块链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签/">标签</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络协议/">网络协议</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集合框架/">集合框架</a><span class="tag-list-count">1</span></li></ul>
 			</canvas>
 		</div>
 		</div>
