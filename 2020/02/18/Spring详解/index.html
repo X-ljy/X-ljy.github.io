@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="青夕的博客">
 <meta property="og:description" content="Talk is cheap. Show me the code.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-20T12:36:58.830Z">
+<meta property="og:updated_time" content="2020-02-25T05:05:39.343Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring详解">
 <meta name="twitter:description" content="Talk is cheap. Show me the code.">
@@ -438,7 +438,7 @@
 <p>当Bean不再需要时，会经过清理阶段，如果Bean实现了DisposableBean这个接口，会调用其实现的destroy()方法；</p>
 <p>（8）destroy-method：</p>
 <p>最后，如果这个Bean的Spring配置中配置了destroy-method属性，会自动调用其配置的销毁方法。</p>
-<h3 id="动态代理的实现方式（必考）"><a href="#动态代理的实现方式（必考）" class="headerlink" title="动态代理的实现方式（必考）"></a>动态代理的实现方式（必考）</h3><p><strong>Java领域中，常用的动态代理实现方式有两种，一种是利用JDK反射机制生成代理，另外一种是使用CGLIB代理。</strong></p>
+<h3 id="动态代理的实现方式"><a href="#动态代理的实现方式" class="headerlink" title="动态代理的实现方式"></a>动态代理的实现方式</h3><p><strong>Java领域中，常用的动态代理实现方式有两种，一种是利用JDK反射机制生成代理，另外一种是使用CGLIB代理。</strong></p>
 <p><strong>JDK代理必须要提供接口，而CGLIB则不需要，可以直接代理类。</strong></p>
 <h2 id="BeanFactory和ApplicationContext的联系和区别"><a href="#BeanFactory和ApplicationContext的联系和区别" class="headerlink" title="BeanFactory和ApplicationContext的联系和区别"></a>BeanFactory和ApplicationContext的联系和区别</h2><p><strong>BeanFactory：</strong></p>
 <p>是Spring里面最低层的接口，提供了最简单的容器的功能，只提供了实例化对象和拿对象的功能；</p>
@@ -467,9 +467,9 @@
 </li>
 </ol>
 <ol>
-<li>Spring如何解决循环依赖（三级缓存）（必考）</li>
+<li>Spring如何解决循环依赖（三级缓存）</li>
 <li>Spring的后置处理器</li>
-<li>Spring的@Transactional如何实现的（必考）</li>
+<li>Spring的@Transactional如何实现的</li>
 <li>Spring的事务传播级别</li>
 </ol>
 
@@ -491,7 +491,7 @@
   <p><span>本文标题:</span><a href="/2020/02/18/Spring详解/">Spring详解</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 青夕 的个人博客">青夕</a></p>
   <p><span>发布时间:</span>2020年02月18日 - 16:02</p>
-  <p><span>最后更新:</span>2020年02月20日 - 20:02</p>
+  <p><span>最后更新:</span>2020年02月25日 - 13:02</p>
   <p><span>原始链接:</span><a href="/2020/02/18/Spring详解/" title="Spring详解">http://qx-ljy.cn/2020/02/18/Spring详解/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://qx-ljy.cn/2020/02/18/Spring详解/" aria-label="复制成功！"></i></span>
   </p>
@@ -577,10 +577,6 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/02/20/Tree详解/" rel="prev" title="Tree详解">
-                Tree详解 <i class="fa fa-chevron-right"></i>
-              </a>
-            
           </div>
         </div>
       
@@ -658,7 +654,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -669,7 +665,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -680,7 +676,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -713,7 +709,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Bean的生命周期？"><span class="nav-number">1.</span> <span class="nav-text">Spring Bean的生命周期？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理的实现方式（必考）"><span class="nav-number">1.1.</span> <span class="nav-text">动态代理的实现方式（必考）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BeanFactory和ApplicationContext的联系和区别"><span class="nav-number">2.</span> <span class="nav-text">BeanFactory和ApplicationContext的联系和区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Bean的生命周期？"><span class="nav-number">1.</span> <span class="nav-text">Spring Bean的生命周期？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理的实现方式"><span class="nav-number">1.1.</span> <span class="nav-text">动态代理的实现方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BeanFactory和ApplicationContext的联系和区别"><span class="nav-number">2.</span> <span class="nav-text">BeanFactory和ApplicationContext的联系和区别</span></a></li></ol></div>
             
 
           </div>
@@ -730,7 +726,7 @@
 			<h3 class="widget-title">Tag Cloud</h3>
 			<div id="myCanvasContainer" class="widget tagcloud">
 			<canvas width="250" height="250" id="resCanvas" style="width=100%">
-				<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/">JUC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/">LeetCode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/">NIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/">Netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TDengine/">TDengine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netty/">netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/区块链/">区块链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签/">标签</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络协议/">网络协议</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集合框架/">集合框架</a><span class="tag-list-count">1</span></li></ul>
+				<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/">LeetCode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NIO/">NIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/">Netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TDengine/">TDengine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netty/">netty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/区块链/">区块链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签/">标签</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络协议/">网络协议</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li></ul>
 			</canvas>
 		</div>
 		</div>
