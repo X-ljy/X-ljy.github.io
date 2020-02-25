@@ -4,31 +4,6 @@
   
     
     <entry>
-      <title>Spring详解</title>
-      <link href="/2020/02/18/Spring%E8%AF%A6%E8%A7%A3/"/>
-      <url>/2020/02/18/Spring%E8%AF%A6%E8%A7%A3/</url>
-      
-        <content type="html"><![CDATA[<ol><li>Spring的IOC/AOP的实现（必考）</li></ol><h2 id="Spring-Bean的生命周期？"><a href="#Spring-Bean的生命周期？" class="headerlink" title="Spring Bean的生命周期？"></a>Spring Bean的生命周期？</h2><p>首先说一下Servlet的生命周期：实例化，初始init，接收请求service，销毁destroy；</p><p>Spring上下文中的Bean生命周期也类似，如下：</p><p>（1）实例化Bean：</p><p>对于BeanFactory容器，当客户向容器请求一个尚未初始化的bean时，或初始化bean的时候需要注入另一个尚未初始化的依赖时，容器就会调用createBean进行实例化。对于ApplicationContext容器，当容器启动结束后，通过获取BeanDefinition对象中的信息，实例化所有的bean。</p><p>（2）设置对象属性（依赖注入）：</p><p>实例化后的对象被封装在BeanWrapper对象中，紧接着，Spring根据BeanDefinition中的信息 以及 通过BeanWrapper提供的设置属性的接口完成依赖注入。</p><p>（3）处理Aware接口：</p><p>接着，Spring会检测该对象是否实现了xxxAware接口，并将相关的xxxAware实例注入给Bean：</p><p>①如果这个Bean已经实现了BeanNameAware接口，会调用它实现的setBeanName(String beanId)方法，此处传递的就是Spring配置文件中Bean的id值；</p><p>②如果这个Bean已经实现了BeanFactoryAware接口，会调用它实现的setBeanFactory()方法，传递的是Spring工厂自身。</p><p>③如果这个Bean已经实现了ApplicationContextAware接口，会调用setApplicationContext(ApplicationContext)方法，传入Spring上下文；</p><p>（4）BeanPostProcessor：</p><p>如果想对Bean进行一些自定义的处理，那么可以让Bean实现了BeanPostProcessor接口，那将会调用postProcessBeforeInitialization(Object obj, String s)方法。由于这个方法是在Bean初始化结束时调用的，所以可以被应用于内存或缓存技术；</p><p>（5）InitializingBean 与 init-method：</p><p>如果Bean在Spring配置文件中配置了 init-method 属性，则会自动调用其配置的初始化方法。</p><p>（6）如果这个Bean实现了BeanPostProcessor接口，将会调用postProcessAfterInitialization(Object obj, String s)方法；</p><p>以上几个步骤完成后，Bean就已经被正确创建了，之后就可以使用这个Bean了。</p><p>（7）DisposableBean：</p><p>当Bean不再需要时，会经过清理阶段，如果Bean实现了DisposableBean这个接口，会调用其实现的destroy()方法；</p><p>（8）destroy-method：</p><p>最后，如果这个Bean的Spring配置中配置了destroy-method属性，会自动调用其配置的销毁方法。</p><h3 id="动态代理的实现方式"><a href="#动态代理的实现方式" class="headerlink" title="动态代理的实现方式"></a>动态代理的实现方式</h3><p><strong>Java领域中，常用的动态代理实现方式有两种，一种是利用JDK反射机制生成代理，另外一种是使用CGLIB代理。</strong></p><p><strong>JDK代理必须要提供接口，而CGLIB则不需要，可以直接代理类。</strong></p><h2 id="BeanFactory和ApplicationContext的联系和区别"><a href="#BeanFactory和ApplicationContext的联系和区别" class="headerlink" title="BeanFactory和ApplicationContext的联系和区别"></a>BeanFactory和ApplicationContext的联系和区别</h2><p><strong>BeanFactory：</strong></p><p>是Spring里面最低层的接口，提供了最简单的容器的功能，只提供了实例化对象和拿对象的功能；</p><p><strong>ApplicationContext：</strong></p><p>应用上下文，继承BeanFactory接口，它是Spring的一各更高级的容器，提供了更多的有用的功能；</p><p>1) 国际化（MessageSource）</p><p>2) 访问资源，如URL和文件（ResourceLoader）</p><p>3) 载入多个（有继承关系）上下文 ，使得每一个上下文都专注于一个特定的层次，比如应用的web层  </p><p>4) 消息发送、响应机制（ApplicationEventPublisher）</p><p>5) AOP（拦截器）</p><p><strong>两者装载bean的区别</strong></p><p><strong>BeanFactory：</strong></p><p>BeanFactory在启动的时候不会去实例化Bean，中有从容器中拿Bean的时候才会去实例化；</p><p><strong>ApplicationContext：</strong></p><p>ApplicationContext在启动的时候就把所有的Bean全部实例化了。它还可以为Bean配置lazy-init=true来让Bean延迟实例化； </p><p><strong>我们该用BeanFactory还是ApplicationContent</strong></p><p>延迟实例化的优点：（<strong>BeanFactory</strong>）</p><p>应用启动的时候占用资源很少；对资源要求较高的应用，比较有优势； </p><p>不延迟实例化的优点： （<strong>ApplicationContext</strong>）</p><ol><li><p>所有的Bean在启动的时候都加载，系统运行的速度快； </p></li><li><p>在启动的时候所有的Bean都加载了，我们就能在系统启动的时候，尽早的发现系统中的配置问题 </p></li><li><p>建议web应用，在启动的时候就把所有的Bean都加载了。（把费时的操作放到系统启动中完成） </p></li></ol><ol><li>Spring如何解决循环依赖（三级缓存）</li><li>Spring的后置处理器</li><li>Spring的@Transactional如何实现的</li><li>Spring的事务传播级别</li></ol>]]></content>
-      
-      
-      <categories>
-          
-          <category> 分类 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 标签 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>二分查找详解</title>
       <link href="/2020/02/17/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E8%AF%A6%E8%A7%A3/"/>
       <url>/2020/02/17/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E8%AF%A6%E8%A7%A3/</url>
@@ -271,6 +246,31 @@
         <tags>
             
             <tag> 网络协议 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Spring详解</title>
+      <link href="/2020/01/01/Spring%E8%AF%A6%E8%A7%A3/"/>
+      <url>/2020/01/01/Spring%E8%AF%A6%E8%A7%A3/</url>
+      
+        <content type="html"><![CDATA[<ol><li>Spring的IOC/AOP的实现（必考）</li></ol><h2 id="Spring-Bean的生命周期？"><a href="#Spring-Bean的生命周期？" class="headerlink" title="Spring Bean的生命周期？"></a>Spring Bean的生命周期？</h2><p>首先说一下Servlet的生命周期：实例化，初始init，接收请求service，销毁destroy；</p><p>Spring上下文中的Bean生命周期也类似，如下：</p><p>（1）实例化Bean：</p><p>对于BeanFactory容器，当客户向容器请求一个尚未初始化的bean时，或初始化bean的时候需要注入另一个尚未初始化的依赖时，容器就会调用createBean进行实例化。对于ApplicationContext容器，当容器启动结束后，通过获取BeanDefinition对象中的信息，实例化所有的bean。</p><p>（2）设置对象属性（依赖注入）：</p><p>实例化后的对象被封装在BeanWrapper对象中，紧接着，Spring根据BeanDefinition中的信息 以及 通过BeanWrapper提供的设置属性的接口完成依赖注入。</p><p>（3）处理Aware接口：</p><p>接着，Spring会检测该对象是否实现了xxxAware接口，并将相关的xxxAware实例注入给Bean：</p><p>①如果这个Bean已经实现了BeanNameAware接口，会调用它实现的setBeanName(String beanId)方法，此处传递的就是Spring配置文件中Bean的id值；</p><p>②如果这个Bean已经实现了BeanFactoryAware接口，会调用它实现的setBeanFactory()方法，传递的是Spring工厂自身。</p><p>③如果这个Bean已经实现了ApplicationContextAware接口，会调用setApplicationContext(ApplicationContext)方法，传入Spring上下文；</p><p>（4）BeanPostProcessor：</p><p>如果想对Bean进行一些自定义的处理，那么可以让Bean实现了BeanPostProcessor接口，那将会调用postProcessBeforeInitialization(Object obj, String s)方法。由于这个方法是在Bean初始化结束时调用的，所以可以被应用于内存或缓存技术；</p><p>（5）InitializingBean 与 init-method：</p><p>如果Bean在Spring配置文件中配置了 init-method 属性，则会自动调用其配置的初始化方法。</p><p>（6）如果这个Bean实现了BeanPostProcessor接口，将会调用postProcessAfterInitialization(Object obj, String s)方法；</p><p>以上几个步骤完成后，Bean就已经被正确创建了，之后就可以使用这个Bean了。</p><p>（7）DisposableBean：</p><p>当Bean不再需要时，会经过清理阶段，如果Bean实现了DisposableBean这个接口，会调用其实现的destroy()方法；</p><p>（8）destroy-method：</p><p>最后，如果这个Bean的Spring配置中配置了destroy-method属性，会自动调用其配置的销毁方法。</p><h3 id="动态代理的实现方式"><a href="#动态代理的实现方式" class="headerlink" title="动态代理的实现方式"></a>动态代理的实现方式</h3><p><strong>Java领域中，常用的动态代理实现方式有两种，一种是利用JDK反射机制生成代理，另外一种是使用CGLIB代理。</strong></p><p><strong>JDK代理必须要提供接口，而CGLIB则不需要，可以直接代理类。</strong></p><h2 id="BeanFactory和ApplicationContext的联系和区别"><a href="#BeanFactory和ApplicationContext的联系和区别" class="headerlink" title="BeanFactory和ApplicationContext的联系和区别"></a>BeanFactory和ApplicationContext的联系和区别</h2><p><strong>BeanFactory：</strong></p><p>是Spring里面最低层的接口，提供了最简单的容器的功能，只提供了实例化对象和拿对象的功能；</p><p><strong>ApplicationContext：</strong></p><p>应用上下文，继承BeanFactory接口，它是Spring的一各更高级的容器，提供了更多的有用的功能；</p><p>1) 国际化（MessageSource）</p><p>2) 访问资源，如URL和文件（ResourceLoader）</p><p>3) 载入多个（有继承关系）上下文 ，使得每一个上下文都专注于一个特定的层次，比如应用的web层  </p><p>4) 消息发送、响应机制（ApplicationEventPublisher）</p><p>5) AOP（拦截器）</p><p><strong>两者装载bean的区别</strong></p><p><strong>BeanFactory：</strong></p><p>BeanFactory在启动的时候不会去实例化Bean，中有从容器中拿Bean的时候才会去实例化；</p><p><strong>ApplicationContext：</strong></p><p>ApplicationContext在启动的时候就把所有的Bean全部实例化了。它还可以为Bean配置lazy-init=true来让Bean延迟实例化； </p><p><strong>我们该用BeanFactory还是ApplicationContent</strong></p><p>延迟实例化的优点：（<strong>BeanFactory</strong>）</p><p>应用启动的时候占用资源很少；对资源要求较高的应用，比较有优势； </p><p>不延迟实例化的优点： （<strong>ApplicationContext</strong>）</p><ol><li><p>所有的Bean在启动的时候都加载，系统运行的速度快； </p></li><li><p>在启动的时候所有的Bean都加载了，我们就能在系统启动的时候，尽早的发现系统中的配置问题 </p></li><li><p>建议web应用，在启动的时候就把所有的Bean都加载了。（把费时的操作放到系统启动中完成） </p></li></ol><ol><li>Spring如何解决循环依赖（三级缓存）</li><li>Spring的后置处理器</li><li>Spring的@Transactional如何实现的</li><li>Spring的事务传播级别</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 分类 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 标签 </tag>
             
         </tags>
       
@@ -754,31 +754,6 @@
     
     
     <entry>
-      <title>Mysql数据类型</title>
-      <link href="/2019/07/24/Mysql%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
-      <url>/2019/07/24/Mysql%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
-      
-        <content type="html"><![CDATA[<h2 id="串数据类型"><a href="#串数据类型" class="headerlink" title="串数据类型"></a>串数据类型</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">CHAR</td><td align="left">1~255个字符的定长串。它的长度必须在创建时指定，否则Mysql假定为CHAR(1)</td></tr><tr><td align="left">ENUM</td><td align="left">接受最多64K个串组成的有个预定义集合的某个串</td></tr><tr><td align="left">LONGTEXT</td><td align="left">与TEXT相同，但最大长度为4GB</td></tr><tr><td align="left">MEDIUMTEXT</td><td align="left">与TEXT相同，但最大长度为16K</td></tr><tr><td align="left">SET</td><td align="left">接受最多64个串组成的一个预定义集合的零个或多个串</td></tr><tr><td align="left">TEXT</td><td align="left">最大长度为64K的变长文本</td></tr><tr><td align="left">TINYTEXT</td><td align="left">与TEXT相同，但最大长度为256字节</td></tr><tr><td align="left">VARCHAR</td><td align="left">长度可变，最多不超过255个字节。如果在创建时指定为VARCHAR(n),则可存储0-n个字符的变长串（其中 n &lt;= 255 ）</td></tr></tbody></table><p><strong>注意：<br>无论使用何种串数据类型，串值都必须在引号内（通常单引号更好）。</strong></p><h2 id="数值数据类型"><a href="#数值数据类型" class="headerlink" title="数值数据类型"></a>数值数据类型</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">BIT</td><td align="left">位字段，1～64位。（在MySQL 5之前，BIT在功能上等价于TINYINT</td></tr><tr><td align="left">BIGINT</td><td align="left">整数值，支持-9223372036854775808～9223372036854775807（如果是UNSIGNED，为0～18446744073709551615）的数</td></tr><tr><td align="left">BOOLEAN（或BOOL）</td><td align="left">布尔标志，或者为0或者为1，主要用于开/关（on/off）标志</td></tr><tr><td align="left">DECIMAL（或DEC）</td><td align="left">精度可变的浮点值</td></tr><tr><td align="left">DOUBLE</td><td align="left">双精度浮点值</td></tr><tr><td align="left">FLOAT</td><td align="left">单精度浮点值</td></tr><tr><td align="left">INT（或INTEGER）</td><td align="left">整数值，支持 -2147483648～2147483647（如果是UNSIGNED为0～4294967295）的数</td></tr><tr><td align="left">MEDIUMINT</td><td align="left">整数值，支持 -8388608～8388607（如果是UNSIGNED，为0～16777215）的数</td></tr><tr><td align="left">REAL</td><td align="left">4字节的浮点值</td></tr><tr><td align="left">SMALLINT</td><td align="left">整数值，支持 -32768～32767（如果是UNSIGNED，为0～65535）的数</td></tr><tr><td align="left">TINYINT</td><td align="left">整数值，支持 -128～127（如果为UNSIGNED，为0～255）的数</td></tr></tbody></table><h2 id="日期和时间数据类型"><a href="#日期和时间数据类型" class="headerlink" title="日期和时间数据类型"></a>日期和时间数据类型</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">DATE</td><td align="left">表示1000-01-01～9999-12-31的日期，格式为YYYY-MM-DD</td></tr><tr><td align="left">DATETIME</td><td align="left">DATE和TIME的组合</td></tr><tr><td align="left">TIMESTAMP</td><td align="left">功能和DATETIME相同（但范围较小）</td></tr><tr><td align="left">TIME</td><td align="left">格式为HH:MM:SS</td></tr><tr><td align="left">YEAR</td><td align="left">用2位数字表示，范围是70（1970年）～69（2069年），用4位数字表示，范围是1901年～2155年</td></tr></tbody></table><h2 id="二进制数据"><a href="#二进制数据" class="headerlink" title="二进制数据"></a>二进制数据</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">BLOB</td><td align="left">Blob最大长度为64 KB</td></tr><tr><td align="left">MEDIUMBLOB</td><td align="left">Blob最大长度为16 MB</td></tr><tr><td align="left">LONGBLOB</td><td align="left">Blob最大长度为4 GB</td></tr><tr><td align="left">TINYBLOB</td><td align="left">Blob最大长度为255字节</td></tr></tbody></table>]]></content>
-      
-      
-      <categories>
-          
-          <category> Mysql </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Mysql </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>k8s学习(一)----k8s集群部署</title>
       <link href="/2019/07/24/k8s001/"/>
       <url>/2019/07/24/k8s001/</url>
@@ -796,6 +771,31 @@
         <tags>
             
             <tag> Kubernetes </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mysql数据类型</title>
+      <link href="/2019/07/24/Mysql%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+      <url>/2019/07/24/Mysql%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+      
+        <content type="html"><![CDATA[<h2 id="串数据类型"><a href="#串数据类型" class="headerlink" title="串数据类型"></a>串数据类型</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">CHAR</td><td align="left">1~255个字符的定长串。它的长度必须在创建时指定，否则Mysql假定为CHAR(1)</td></tr><tr><td align="left">ENUM</td><td align="left">接受最多64K个串组成的有个预定义集合的某个串</td></tr><tr><td align="left">LONGTEXT</td><td align="left">与TEXT相同，但最大长度为4GB</td></tr><tr><td align="left">MEDIUMTEXT</td><td align="left">与TEXT相同，但最大长度为16K</td></tr><tr><td align="left">SET</td><td align="left">接受最多64个串组成的一个预定义集合的零个或多个串</td></tr><tr><td align="left">TEXT</td><td align="left">最大长度为64K的变长文本</td></tr><tr><td align="left">TINYTEXT</td><td align="left">与TEXT相同，但最大长度为256字节</td></tr><tr><td align="left">VARCHAR</td><td align="left">长度可变，最多不超过255个字节。如果在创建时指定为VARCHAR(n),则可存储0-n个字符的变长串（其中 n &lt;= 255 ）</td></tr></tbody></table><p><strong>注意：<br>无论使用何种串数据类型，串值都必须在引号内（通常单引号更好）。</strong></p><h2 id="数值数据类型"><a href="#数值数据类型" class="headerlink" title="数值数据类型"></a>数值数据类型</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">BIT</td><td align="left">位字段，1～64位。（在MySQL 5之前，BIT在功能上等价于TINYINT</td></tr><tr><td align="left">BIGINT</td><td align="left">整数值，支持-9223372036854775808～9223372036854775807（如果是UNSIGNED，为0～18446744073709551615）的数</td></tr><tr><td align="left">BOOLEAN（或BOOL）</td><td align="left">布尔标志，或者为0或者为1，主要用于开/关（on/off）标志</td></tr><tr><td align="left">DECIMAL（或DEC）</td><td align="left">精度可变的浮点值</td></tr><tr><td align="left">DOUBLE</td><td align="left">双精度浮点值</td></tr><tr><td align="left">FLOAT</td><td align="left">单精度浮点值</td></tr><tr><td align="left">INT（或INTEGER）</td><td align="left">整数值，支持 -2147483648～2147483647（如果是UNSIGNED为0～4294967295）的数</td></tr><tr><td align="left">MEDIUMINT</td><td align="left">整数值，支持 -8388608～8388607（如果是UNSIGNED，为0～16777215）的数</td></tr><tr><td align="left">REAL</td><td align="left">4字节的浮点值</td></tr><tr><td align="left">SMALLINT</td><td align="left">整数值，支持 -32768～32767（如果是UNSIGNED，为0～65535）的数</td></tr><tr><td align="left">TINYINT</td><td align="left">整数值，支持 -128～127（如果为UNSIGNED，为0～255）的数</td></tr></tbody></table><h2 id="日期和时间数据类型"><a href="#日期和时间数据类型" class="headerlink" title="日期和时间数据类型"></a>日期和时间数据类型</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">DATE</td><td align="left">表示1000-01-01～9999-12-31的日期，格式为YYYY-MM-DD</td></tr><tr><td align="left">DATETIME</td><td align="left">DATE和TIME的组合</td></tr><tr><td align="left">TIMESTAMP</td><td align="left">功能和DATETIME相同（但范围较小）</td></tr><tr><td align="left">TIME</td><td align="left">格式为HH:MM:SS</td></tr><tr><td align="left">YEAR</td><td align="left">用2位数字表示，范围是70（1970年）～69（2069年），用4位数字表示，范围是1901年～2155年</td></tr></tbody></table><h2 id="二进制数据"><a href="#二进制数据" class="headerlink" title="二进制数据"></a>二进制数据</h2><table><thead><tr><th align="left">数据类型</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">BLOB</td><td align="left">Blob最大长度为64 KB</td></tr><tr><td align="left">MEDIUMBLOB</td><td align="left">Blob最大长度为16 MB</td></tr><tr><td align="left">LONGBLOB</td><td align="left">Blob最大长度为4 GB</td></tr><tr><td align="left">TINYBLOB</td><td align="left">Blob最大长度为255字节</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mysql </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Mysql </tag>
             
         </tags>
       
