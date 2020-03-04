@@ -90,7 +90,7 @@
 <meta property="og:description" content="Talk is cheap. Show me the code.">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://oscimg.oschina.net/oscnet/d77f2f61803f1f2db92551c4af6a3dc9bf0.jpg">
-<meta property="og:updated_time" content="2020-02-25T05:02:48.314Z">
+<meta property="og:updated_time" content="2020-03-02T09:34:48.085Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式事务">
 <meta name="twitter:description" content="Talk is cheap. Show me the code.">
@@ -511,16 +511,16 @@
 <p>最大 ZXID 也就是节点本地的最新事务编号，包含 epoch 和计数两部分。epoch 是纪元的意思，相当于 Raft 算法选主时候的 term。</p>
 <p><strong>崩溃恢复流程：</strong></p>
 <p><strong>1.Leader election</strong></p>
-<p>​            选举阶段，此时集群中的节点处于 Looking 状态。它们会各自向其他节点发起投票，投票当中包            含自己的服务器 ID 和最新事务 ID（ZXID）。</p>
-<p>​            接下来，节点会用自身的 ZXID 和从其他节点接收到的 ZXID 做比较，如果发现别人家的 ZXID 比            自己大，也就是数据比自己新，那么就重新发起投票，投票给目前已知最大的 ZXID 所属节点。</p>
-<p>​            每次投票后，服务器都会统计投票数量，判断是否有某个节点得到半数以上的投票。如果存在这            样的节点，该节点将会成为准 Leader，状态变为 Leading。其他节点的状态变为 Following。</p>
+<p>​            选举阶段，此时集群中的节点处于 Looking 状态。它们会各自向其他节点发起投票，投票当中包含自己的服务器 ID 和最新事务 ID（ZXID）。</p>
+<p>​            接下来，节点会用自身的 ZXID 和从其他节点接收到的 ZXID 做比较，如果发现别人家的 ZXID 比自己大，也就是数据比自己新，那么就重新发起投票，投票给目前已知最大的 ZXID 所属节点。</p>
+<p>​            每次投票后，服务器都会统计投票数量，判断是否有某个节点得到半数以上的投票。如果存在这样的节点，该节点将会成为准 Leader，状态变为 Leading。其他节点的状态变为 Following。</p>
 <p><strong>2. Discovery</strong></p>
-<p>​        发现阶段，用于在从节点中发现最新的 ZXID 和事务日志。或许有人会问：既然 Leader 被选为主节        点，已经是集群里数据最新的了，为什么还要从节点中寻找最新事务呢？</p>
+<p>​        发现阶段，用于在从节点中发现最新的 ZXID 和事务日志。或许有人会问：既然 Leader 被选为主节点，已经是集群里数据最新的了，为什么还要从节点中寻找最新事务呢？</p>
 <p>​        这是为了防止某些意外情况，比如因网络原因在上一阶段产生多个 Leader 的情况。</p>
-<p>​        所以这一阶段，Leader 集思广益，接收所有 Follower 发来各自的最新 epoch 值。Leader 从中选        出最大的 epoch，基于此值加 1，生成新的 epoch 分发给各个 Follower。</p>
-<p>​        各个 Follower 收到全新的 epoch 后，返回 ACK 给 Leader，带上各自最大的 ZXID 和历史事务日        志。Leader 选出最大的 ZXID，并更新自身历史日志。</p>
+<p>​        所以这一阶段，Leader 集思广益，接收所有 Follower 发来各自的最新 epoch 值。Leader 从中选出最大的 epoch，基于此值加 1，生成新的 epoch 分发给各个 Follower。</p>
+<p>​        各个 Follower 收到全新的 epoch 后，返回 ACK 给 Leader，带上各自最大的 ZXID 和历史事务日志。Leader 选出最大的 ZXID，并更新自身历史日志。</p>
 <p><strong>3. Synchronization</strong></p>
-<p>​        同步阶段，把 Leader 刚才收集得到的最新历史事务日志，同步给集群中所有的 Follower。只有当        半数 Follower 同步成功，这个准 Leader 才能成为正式的 Leader。**</p>
+<p>​        同步阶段，把 Leader 刚才收集得到的最新历史事务日志，同步给集群中所有的 Follower。只有当半数 Follower 同步成功，这个准 Leader 才能成为正式的 Leader。**</p>
 <p><strong>原子广播</strong></p>
 <ol>
 <li><p>客户端发出写入数据请求给任意Follower。</p>
@@ -554,7 +554,7 @@
   <p><span>本文标题:</span><a href="/2020/02/05/分布式事务/">分布式事务</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 青夕 的个人博客">青夕</a></p>
   <p><span>发布时间:</span>2020年02月05日 - 15:02</p>
-  <p><span>最后更新:</span>2020年02月25日 - 13:02</p>
+  <p><span>最后更新:</span>2020年03月02日 - 17:03</p>
   <p><span>原始链接:</span><a href="/2020/02/05/分布式事务/" title="分布式事务">http://qx-ljy.cn/2020/02/05/分布式事务/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://qx-ljy.cn/2020/02/05/分布式事务/" aria-label="复制成功！"></i></span>
   </p>
