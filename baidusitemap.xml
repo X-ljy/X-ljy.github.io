@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://qx-ljy.cn/2020/02/05/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</loc>
-    <lastmod>2020-03-02</lastmod>
+    <loc>http://qx-ljy.cn/2019/11/17/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2020-03-23</lastmod>
+  </url>  <url>
+    <loc>http://qx-ljy.cn/2020/02/01/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</loc>
+    <lastmod>2020-03-16</lastmod>
+  </url>  <url>
+    <loc>http://qx-ljy.cn/2020/01/01/Spring%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2020-03-16</lastmod>
+  </url>  <url>
+    <loc>http://qx-ljy.cn/2020/02/10/Mysql%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2020-03-15</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2020/02/09/Netty%E8%AF%A6%E8%A7%A3/</loc>
-    <lastmod>2020-03-02</lastmod>
+    <lastmod>2020-03-10</lastmod>
+  </url>  <url>
+    <loc>http://qx-ljy.cn/2020/02/12/Java%E5%B9%B6%E5%8F%91/</loc>
+    <lastmod>2020-03-10</lastmod>
+  </url>  <url>
+    <loc>http://qx-ljy.cn/2020/02/05/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</loc>
+    <lastmod>2020-03-10</lastmod>
+  </url>  <url>
+    <loc>http://qx-ljy.cn/2019/08/03/Java01/</loc>
+    <lastmod>2020-03-05</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2020/02/13/Kafka%E8%AF%A6%E8%A7%A3/</loc>
     <lastmod>2020-02-27</lastmod>
@@ -16,23 +34,8 @@
     <loc>http://qx-ljy.cn/2019/12/10/top100/</loc>
     <lastmod>2020-02-25</lastmod>
   </url>  <url>
-    <loc>http://qx-ljy.cn/2020/01/01/Spring%E8%AF%A6%E8%A7%A3/</loc>
-    <lastmod>2020-02-25</lastmod>
-  </url>  <url>
     <loc>http://qx-ljy.cn/2020/02/17/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E8%AF%A6%E8%A7%A3/</loc>
     <lastmod>2020-02-25</lastmod>
-  </url>  <url>
-    <loc>http://qx-ljy.cn/2019/11/17/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2020-02-23</lastmod>
-  </url>  <url>
-    <loc>http://qx-ljy.cn/2020/02/12/Java%E5%B9%B6%E5%8F%91/</loc>
-    <lastmod>2020-02-20</lastmod>
-  </url>  <url>
-    <loc>http://qx-ljy.cn/2020/02/10/Mysql%E8%AF%A6%E8%A7%A3/</loc>
-    <lastmod>2020-02-19</lastmod>
-  </url>  <url>
-    <loc>http://qx-ljy.cn/2020/02/01/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</loc>
-    <lastmod>2020-02-13</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2020/02/05/Redis%E8%AF%A6%E8%A7%A3/</loc>
     <lastmod>2020-02-11</lastmod>
@@ -89,9 +92,6 @@
     <lastmod>2019-09-07</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2019/08/04/java02/</loc>
-    <lastmod>2019-09-05</lastmod>
-  </url>  <url>
-    <loc>http://qx-ljy.cn/2019/08/03/Java01/</loc>
     <lastmod>2019-09-05</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2019/07/28/docker04/</loc>

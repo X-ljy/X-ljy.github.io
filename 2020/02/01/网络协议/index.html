@@ -89,13 +89,13 @@
 <meta property="og:site_name" content="青夕的博客">
 <meta property="og:description" content="Talk is cheap. Show me the code.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1169376/201910/1169376-20191008172456510-1302410435.png">
-<meta property="og:image" content="http://qx-ljy.cn/2020/02/01/网络协议/C:%5CUsers%5C%E5%A4%95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200209160906951.png">
-<meta property="og:updated_time" content="2020-02-13T08:15:40.425Z">
+<meta property="og:image" content="http://qx-ljy.cn/2020/02/01/网络协议/C:%5CUsers%5C%E5%A4%95%5CDesktop%5Cxblog%5Csource_posts%5C%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%5C1169376-20191008172456510-1302410435.png">
+<meta property="og:image" content="http://qx-ljy.cn/2020/02/01/网络协议/C:%5CUsers%5C%E5%A4%95%5CDesktop%5Cxblog%5Csource_posts%5C%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%5Cimage-20200209160906951.png">
+<meta property="og:updated_time" content="2020-03-16T12:07:54.946Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络协议">
 <meta name="twitter:description" content="Talk is cheap. Show me the code.">
-<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1169376/201910/1169376-20191008172456510-1302410435.png">
+<meta name="twitter:image" content="http://qx-ljy.cn/2020/02/01/网络协议/C:%5CUsers%5C%E5%A4%95%5CDesktop%5Cxblog%5Csource_posts%5C%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%5C1169376-20191008172456510-1302410435.png">
 
 
 
@@ -417,7 +417,9 @@
       
 
       
-        <h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p>第一次握手：客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认； 第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态； 第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。</p>
+        <h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p>第一次握手：客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认； </p>
+<p>第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；</p>
+<p> 第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。</p>
 <p><strong>为什么要三次握手？</strong></p>
 <p>为了防止已失效的连接请求报文段突然又传送到了服务端，因而产生错误。</p>
 <p>具体例子：“已失效的连接请求报文段”的产生在这样一种情况下：client发出的第一个连接请求报文段并没有丢失，而是在某个网络结点长时间的滞留了，以致延误到连接释放以后的某个时间才到达server。本来这是一个早已失效的报文段。但server收到此失效的连接请求报文段后，就误认为是client再次发出的一个新的连接请求。于是就向client发出确认报文段，同意建立连接。假设不采用“三次握手”，那么只要server发出确认，新的连接就建立了。由于现在client并没有发出建立连接的请求，因此不会理睬server的确认，也不会向server发送数据。但server却以为新的运输连接已经建立，并一直等待client发来数据。这样，server的很多资源就白白浪费掉了。采用“三次握手”的办法可以防止上述现象发生。例如刚才那种情况，client不会向server的确认发出确认。server由于收不到确认，就知道client并没有要求建立连接。”</p>
@@ -526,11 +528,11 @@
 <p>  QUIC的ACK是基于offset的，每个offset的包来了，进了缓存，就可以应答，应答后就不会重发，中间的空档会等待到来或者重发，而窗口的起始位置为当前收到的最大offset，从这个offset到当前的stream所能容纳的最大缓存，是真正的窗口的大小，显然，那样更加准确。</p>
 </li>
 </ul>
-<h3 id="https"><a href="#https" class="headerlink" title="https"></a>https</h3><p><img src="https://img2018.cnblogs.com/blog/1169376/201910/1169376-20191008172456510-1302410435.png" alt="img"></p>
+<h3 id="https"><a href="#https" class="headerlink" title="https"></a>https</h3><p><img src="//qx-ljy.cn/2020/02/01/网络协议/C:%5CUsers%5C%E5%A4%95%5CDesktop%5Cxblog%5Csource_posts%5C%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%5C1169376-20191008172456510-1302410435.png" alt="img"></p>
 <p>非对称加密：RSA</p>
 <p>对称加密：AES</p>
 <p>摘要算法：SHA2系列</p>
-<p><img src="//qx-ljy.cn/2020/02/01/网络协议/C:%5CUsers%5C%E5%A4%95%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200209160906951.png" alt="image-20200209160906951"></p>
+<p><img src="//qx-ljy.cn/2020/02/01/网络协议/C:%5CUsers%5C%E5%A4%95%5CDesktop%5Cxblog%5Csource_posts%5C%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%5Cimage-20200209160906951.png" alt="image-20200209160906951"></p>
 <ol>
 <li>客户端使用URL访问web服务器，要求与服务器建立SSL链接（SSL之间的握手协议可以查看其他资料）。</li>
 <li>服务器收到客户端的请求后，会将网站的SSL证书信息（包含公钥）传送一份给客户端。</li>
@@ -653,7 +655,7 @@
   <p><span>本文标题:</span><a href="/2020/02/01/网络协议/">网络协议</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 青夕 的个人博客">青夕</a></p>
   <p><span>发布时间:</span>2020年02月01日 - 15:02</p>
-  <p><span>最后更新:</span>2020年02月13日 - 16:02</p>
+  <p><span>最后更新:</span>2020年03月16日 - 20:03</p>
   <p><span>原始链接:</span><a href="/2020/02/01/网络协议/" title="网络协议">http://qx-ljy.cn/2020/02/01/网络协议/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://qx-ljy.cn/2020/02/01/网络协议/" aria-label="复制成功！"></i></span>
   </p>

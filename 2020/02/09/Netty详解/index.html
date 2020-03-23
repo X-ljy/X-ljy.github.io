@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="青夕的博客">
 <meta property="og:description" content="Talk is cheap. Show me the code.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-02T06:31:47.097Z">
+<meta property="og:updated_time" content="2020-03-10T09:27:18.291Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netty详解">
 <meta name="twitter:description" content="Talk is cheap. Show me the code.">
@@ -373,7 +373,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3k
+                  3.1k
                 </span>
               
 
@@ -463,13 +463,13 @@
 <p>如果fd中仍有未读完的数据，必须调用executeEpollReadRunnable(config)，自己触发EPOLLIN event，否则会因为没有读完数据导致socket不可用。</p>
 <p>总结：<br> Netty为了使每次轮询负载均衡，限制了每次从fd中读取数据的最大值，造成一次读事件处理并不会读完fd中的所有数据。在NioServerSocketChannel中，由于其工作在LT模式下，所以不需要做特殊处理，在处理完一个事件后直接从SelectionKey中移除该事件即可，如果有未读完的数据，下次轮询仍会获得该事件。而在EpollServerSocketChannel中，由于其工作在ET模式下，如果一次事件处理不把数据读完，需要手动地触发一次事件作为补偿，否则下次轮询将不会有触发的事件。</p>
 <h2 id="netty解决nio的空轮训bug"><a href="#netty解决nio的空轮训bug" class="headerlink" title="netty解决nio的空轮训bug"></a>netty解决nio的空轮训bug</h2><ul>
-<li><p>对Selector的select操作周期进行统计，每完成一次空的select操作进行一次计数，</p>
-</li>
-<li><p>若在某个周期内连续发生N次空轮询，则触发了epoll死循环bug。</p>
-</li>
-<li><p>重建Selector，判断是否是其他线程发起的重建请求，若不是则将原SocketChannel从旧的Selector上去除注册，重新注册到新的Selector上，并将原来的Selector关闭。</p>
-</li>
+<li>对Selector的select操作周期进行统计，每完成一次空的select操作进行一次计数，</li>
+<li>若在某个周期内连续发生N次空轮询（默认512 -&gt; SELECTOR_AUTO_REBUILD_THRESHOLD），则触发了空轮训bug。</li>
+<li>重建Selector，判断是否是其他线程发起的重建请求，若不是则将原SocketChannel从旧的Selector上去除注册，重新注册到新的Selector上，并将原来的Selector关闭。</li>
 </ul>
+<p><strong>io.netty.channel.nio.NioEventLoop类当中的select()方法中。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> time = System.nanoTime();</span><br><span class="line"><span class="keyword">if</span> (time - TimeUnit.MILLISECONDS.toNanos(timeoutMillis) &gt;= currentTimeNanos) &#123;</span><br><span class="line">    <span class="comment">// timeoutMillis elapsed without anything selected.</span></span><br><span class="line">    selectCnt = <span class="number">1</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (SELECTOR_AUTO_REBUILD_THRESHOLD &gt; <span class="number">0</span> &amp;&amp;</span><br><span class="line">           selectCnt &gt;= SELECTOR_AUTO_REBUILD_THRESHOLD) &#123;</span><br><span class="line">    <span class="comment">// The code exists in an extra method to ensure the method is not too big to inline as this</span></span><br><span class="line">    <span class="comment">// branch is not very likely to get hit very frequently.</span></span><br><span class="line">    selector = selectRebuildSelector(selectCnt);</span><br><span class="line">    selectCnt = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="netty组件关系"><a href="#netty组件关系" class="headerlink" title="netty组件关系"></a>netty组件关系</h2><ul>
 <li>一个 EventLoopGroup 包含一个或多个 EventLoop。</li>
 <li>一个 EventLoop 在它的生命周期内只能与一个Thread绑定。</li>
@@ -477,7 +477,6 @@
 <li>一个 Channel 在它的生命周期内只能注册与一个 EventLoop。</li>
 <li>一个 EventLoop 可被分配至一个或多个 Channel 。</li>
 <li>每一个新创建的Channel 都将会被分配一个新的ChannelPipeline</li>
-<li></li>
 </ul>
 
       
@@ -498,7 +497,7 @@
   <p><span>本文标题:</span><a href="/2020/02/09/Netty详解/">Netty详解</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 青夕 的个人博客">青夕</a></p>
   <p><span>发布时间:</span>2020年02月09日 - 15:02</p>
-  <p><span>最后更新:</span>2020年03月02日 - 14:03</p>
+  <p><span>最后更新:</span>2020年03月10日 - 17:03</p>
   <p><span>原始链接:</span><a href="/2020/02/09/Netty详解/" title="Netty详解">http://qx-ljy.cn/2020/02/09/Netty详解/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://qx-ljy.cn/2020/02/09/Netty详解/" aria-label="复制成功！"></i></span>
   </p>
