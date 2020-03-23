@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://qx-ljy.cn/2020/02/13/Kafka%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2020-03-23</lastmod>
+  </url>  <url>
     <loc>http://qx-ljy.cn/2019/11/17/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2020-03-23</lastmod>
   </url>  <url>
@@ -24,9 +27,6 @@
   </url>  <url>
     <loc>http://qx-ljy.cn/2019/08/03/Java01/</loc>
     <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>http://qx-ljy.cn/2020/02/13/Kafka%E8%AF%A6%E8%A7%A3/</loc>
-    <lastmod>2020-02-27</lastmod>
   </url>  <url>
     <loc>http://qx-ljy.cn/2020/02/12/Zookeeper%E8%AF%A6%E8%A7%A3/</loc>
     <lastmod>2020-02-26</lastmod>

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://qx-ljy.cn/2020/02/13/Kafka%E8%AF%A6%E8%A7%A3/</loc>
+    
+    <lastmod>2020-03-23T03:42:08.981Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://qx-ljy.cn/2019/11/17/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/</loc>
     
     <lastmod>2020-03-23T02:53:33.807Z</lastmod>
@@ -54,13 +61,6 @@
     <loc>http://qx-ljy.cn/2019/08/03/Java01/</loc>
     
     <lastmod>2020-03-05T11:04:55.456Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://qx-ljy.cn/2020/02/13/Kafka%E8%AF%A6%E8%A7%A3/</loc>
-    
-    <lastmod>2020-02-27T02:54:21.014Z</lastmod>
     
   </url>
   
