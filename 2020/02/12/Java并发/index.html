@@ -90,12 +90,12 @@
 <meta property="og:description" content="Talk is cheap. Show me the code.">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img-blog.csdn.net/20180806100435681?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JveWVsZXZlbg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://oscimg.oschina.net/oscnet/2bcc8161c52eb100d2c7c4c96c70d3c5823.jpg">
+<meta property="og:image" content="http://qx-ljy.cn/2020/02/12/Java并发/C:%5CUsers%5C%E5%A4%95%5CDesktop%5Cxblog%5Csource_posts%5CJava%E5%B9%B6%E5%8F%91%5C2bcc8161c52eb100d2c7c4c96c70d3c5823.jpg">
 <meta property="og:image" content="https://gitee.com/chenssy/blog-home/raw/master/image/sijava/2018120810001.png">
 <meta property="og:image" content="https://gitee.com/chenssy/blog-home/raw/master/image/sijava/2018120811001.png">
 <meta property="og:image" content="https://gitee.com/chenssy/blog-home/raw/master/image/sijava/2018120811002.png">
 <meta property="og:image" content="https://gitee.com/chenssy/blog-home/raw/master/image/sijava/2018120812001.png">
-<meta property="og:updated_time" content="2020-03-10T07:47:06.678Z">
+<meta property="og:updated_time" content="2020-03-31T11:06:59.553Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发">
 <meta name="twitter:description" content="Talk is cheap. Show me the code.">
@@ -441,7 +441,7 @@
 <p><strong>notify方法</strong><br>notify有两个方法notify和notifyAll，前者只能唤醒一个正在等待这个对象的monitor的线程，具体由JVM决定，后者则会唤醒所有正在等待这个对象的monitor的线程</p>
 <p><strong>需要关注的点：</strong></p>
 <p>调用notify方法，并不意味着释放了Monitor，必须要等同步代码块结束后才会释放Monitor<br>在调用notify方法时，必须保证其他线程处于wait状态，否则调用notify没有任何效果，导致之后其他线程永远处于堵塞状态</p>
-<h3 id="synchronized-的锁膨胀过程"><a href="#synchronized-的锁膨胀过程" class="headerlink" title="synchronized 的锁膨胀过程"></a>synchronized 的锁膨胀过程</h3><p><img src="https://oscimg.oschina.net/oscnet/2bcc8161c52eb100d2c7c4c96c70d3c5823.jpg" alt="img"></p>
+<h3 id="synchronized-的锁膨胀过程"><a href="#synchronized-的锁膨胀过程" class="headerlink" title="synchronized 的锁膨胀过程"></a>synchronized 的锁膨胀过程</h3><p><img src="//qx-ljy.cn/2020/02/12/Java并发/C:%5CUsers%5C%E5%A4%95%5CDesktop%5Cxblog%5Csource_posts%5CJava%E5%B9%B6%E5%8F%91%5C2bcc8161c52eb100d2c7c4c96c70d3c5823.jpg" alt="img"></p>
 <ol>
 <li>一个锁对象刚刚开始创建的时候，没有任何线程来访问它，它是可偏向的，它现在认为只可能有一个线程来访问它，所以当第一个线程来访问他的时候，它会偏向这个线程。此时锁状态为无锁状态，锁标志位为 01。</li>
 <li>当一个线程（线程 A）来获取锁的时，会首先检查所标志位，此时锁标志位为 01，然后检查是否为偏向锁，此时不为偏向锁，所以当前线程会修改对象头状态为偏向锁，同时将对象头中的 ThreadID 改成自己的 Thread ID。</li>
@@ -672,7 +672,7 @@
   <p><span>本文标题:</span><a href="/2020/02/12/Java并发/">Java并发</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 青夕 的个人博客">青夕</a></p>
   <p><span>发布时间:</span>2020年02月12日 - 19:02</p>
-  <p><span>最后更新:</span>2020年03月10日 - 15:03</p>
+  <p><span>最后更新:</span>2020年03月31日 - 19:03</p>
   <p><span>原始链接:</span><a href="/2020/02/12/Java并发/" title="Java并发">http://qx-ljy.cn/2020/02/12/Java并发/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://qx-ljy.cn/2020/02/12/Java并发/" aria-label="复制成功！"></i></span>
   </p>
